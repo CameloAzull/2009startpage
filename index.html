@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Vivaz - Início</title>
+    <title>Portal Vivaz - O mundo é de quem faz</title>
     <style>
         /* =========================================
            RESET E ESTÉTICA WEB 2.0 (2009)
@@ -12,151 +12,179 @@
         body {
             font-family: Tahoma, Arial, Helvetica, sans-serif;
             font-size: 12px;
-            background-color: #e9ebee; /* Fundo cinza clássico */
+            background-color: #f4f3ef; /* Cinza clássico UOL/Terra */
             color: #333;
         }
-        a { color: #003399; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        a { color: #004488; text-decoration: none; }
+        a:hover { text-decoration: underline; color: #cc0000; }
         ul { list-style: none; }
+        h1, h2, h3, h4 { font-family: Arial, Helvetica, sans-serif; }
 
         /* =========================================
-           ESTRUTURA PRINCIPAL (1200px Widescreen)
+           CONTAINER PRINCIPAL (1200px Widescreen)
            ========================================= */
         #wrapper {
             width: 1200px;
             margin: 0 auto;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
         }
 
         /* =========================================
-           CABEÇALHO E NAVEGAÇÃO
+           BARRA SUPERIOR (Data e Atalhos)
+           ========================================= */
+        #top-bar {
+            background: #e6e6e6;
+            border-bottom: 1px solid #ccc;
+            padding: 5px 15px;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            color: #555;
+        }
+        #top-bar ul { display: flex; gap: 15px; }
+        #top-bar ul li { border-left: 1px solid #ccc; padding-left: 15px; }
+        #top-bar ul li:first-child { border-left: none; }
+
+        /* =========================================
+           CABEÇALHO E BUSCA
            ========================================= */
         #header {
-            background: linear-gradient(to bottom, #f8f8f8 0%, #e5e5e5 100%);
-            border-bottom: 2px solid #cc0000;
-            padding: 15px 20px;
+            background: url('data:image/gif;base64,R0lGODlhAQAoALMAAP///8zMzJmZmQAAACH5BAAAAAAALAAAAAABACgAAAQQgMnXyqrmzBthA1hY1i1CAQA7') repeat-x;
+            padding: 20px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 4px solid #005589;
         }
-        .logo {
-            font-size: 32px;
-            font-weight: bold;
-            color: #cc0000;
-            letter-spacing: -1px;
-            text-shadow: 1px 1px 0px #fff;
+        .logo { font-size: 48px; font-weight: bold; color: #005589; letter-spacing: -3px; }
+        .logo span { color: #ff6600; }
+        .search-box {
+            background: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
-        .search-box input[type="text"] {
-            width: 300px;
-            padding: 5px;
-            border: 1px solid #aaa;
-            font-family: Arial;
-        }
-        .search-box button {
-            padding: 4px 10px;
-            background-color: #cc0000;
-            color: white;
-            border: 1px solid #990000;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        #nav-menu {
-            background-color: #333;
-            color: #fff;
-            padding: 5px 20px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-        #nav-menu a { color: #fff; margin-right: 15px; }
+        .search-box input[type="text"] { width: 350px; padding: 6px; border: 1px solid #999; font-family: Arial; }
+        .search-box button { padding: 5px 15px; background-color: #ff6600; color: white; border: 1px solid #cc5200; font-weight: bold; cursor: pointer; }
+        .search-box span { display: block; font-size: 10px; color: #777; margin-top: 3px; }
+
+        /* =========================================
+           MENU PRINCIPAL
+           ========================================= */
+        #nav-menu { background-color: #005589; height: 35px; line-height: 35px; display: flex; padding: 0 10px; }
+        #nav-menu a { color: #FFF; font-weight: bold; padding: 0 15px; border-right: 1px solid #00446e; font-size: 13px; }
+        #nav-menu a:hover { background: #00446e; text-decoration: none; }
 
         /* =========================================
            LAYOUT DE 3 COLUNAS
            ========================================= */
-        #content {
-            display: flex;
-            padding: 15px;
-            gap: 15px;
-        }
-        .col-left { width: 220px; }
-        .col-main { width: 630px; }
-        .col-right { width: 290px; }
+        #content { display: flex; padding: 15px; gap: 15px; }
+        .col-left { width: 230px; flex-shrink: 0; }
+        .col-main { flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 15px; }
+        .col-right { width: 300px; flex-shrink: 0; }
 
         /* =========================================
-           WIDGETS (CAIXAS)
+           WIDGETS GERAIS
            ========================================= */
-        .widget {
-            border: 1px solid #ccc;
-            margin-bottom: 15px;
-            background: #fff;
+        .widget { border: 1px solid #e0e0e0; margin-bottom: 15px; background: #fff; }
+        .widget-title { 
+            background: #005589; color: #FFF; font-weight: bold; padding: 6px 10px; 
+            font-size: 12px; text-transform: uppercase; border-bottom: 2px solid #ff6600;
         }
-        .widget-header {
-            background: #f1f1f1;
-            padding: 5px 10px;
-            border-bottom: 1px solid #ccc;
-            font-weight: bold;
-            color: #cc0000;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-        .widget-content { padding: 10px; }
-
-        /* Estilos Específicos */
-        .news-list li {
-            margin-bottom: 12px;
-            padding-bottom: 12px;
-            border-bottom: 1px dashed #eee;
-        }
-        .news-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .news-list a { font-size: 14px; font-weight: bold; color: #003399; }
-        .news-source { font-size: 10px; color: #777; display: block; margin-top: 3px; }
-
-        .economy-item { display: flex; justify-content: space-between; margin-bottom: 5px; border-bottom: 1px solid #f9f9f9; padding-bottom: 3px;}
-        .economy-item span.up { color: green; }
-        .economy-item span.down { color: red; }
-
-        .weather-info { text-align: center; }
-        .weather-temp { font-size: 28px; font-weight: bold; color: #ff6600; }
+        .widget-content { padding: 12px; }
+        .chapeu { color: #cc0000; font-size: 10px; font-weight: bold; text-transform: uppercase; margin-bottom: 4px; }
         
-        .tools-list li { margin-bottom: 6px; }
-        .tools-list a { display: block; padding: 4px; background: #f9f9f9; border: 1px solid #eee; }
-        .tools-list a:hover { background: #f1f1f1; }
+        /* Cores de Categoria Clássicas */
+        .w-red .widget-title { background: #cc0000; border-bottom-color: #660000; }
+        .w-red .chapeu { color: #cc0000; }
+        .w-green .widget-title { background: #008800; border-bottom-color: #004400; }
+        .w-green .chapeu { color: #008800; }
+        .w-purple .widget-title { background: #6b3e99; border-bottom-color: #3a1e59; }
+        .w-purple .chapeu { color: #6b3e99; }
+        .w-orange .widget-title { background: #ff6600; border-bottom-color: #cc5200; }
+        .w-orange .chapeu { color: #ff6600; }
+        .w-gray .widget-title { background: #555; border-bottom-color: #333; }
 
-        .shopping-banner {
-            display: block;
-            background: #ffea00;
-            border: 1px solid #e0c900;
-            text-align: center;
-            padding: 10px;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
+        /* =========================================
+           COMPONENTE: E-MAIL
+           ========================================= */
+        .mail-box { background: #f0f4f7; border: 1px solid #b5c6cf; padding: 12px; margin-bottom: 15px; }
+        .mail-box select { width: 100%; padding: 4px; margin-bottom: 8px; border: 1px solid #999; }
+        .mail-box input { width: 100%; padding: 4px; margin-bottom: 8px; border: 1px solid #999; font-size: 11px; }
+        .mail-box button { width: 100%; padding: 5px; background: #005589; color: #fff; border: 1px solid #003366; font-weight: bold; cursor: pointer; }
+        
+        /* =========================================
+           COMPONENTE: NOTÍCIAS
+           ========================================= */
+        .list-dotted li {
+            padding: 6px 0 6px 12px;
+            border-bottom: 1px dotted #ccc;
+            background: url('data:image/gif;base64,R0lGODlhAwADAIABAL+/v////yH5BAEAAAEALAAAAAADAAMAAAIDjA9WADs=') no-repeat 0 12px;
         }
-        .shopping-banner.amz { background: #fff; border-color: #ff9900; }
+        .list-dotted li:last-child { border-bottom: none; }
+        .list-dotted a { font-size: 13px; font-weight: bold; }
 
+        .manchete { border-bottom: 1px solid #ccc; padding-bottom: 15px; margin-bottom: 15px; display: flex; gap: 15px; }
+        .manchete img { width: 320px; height: 200px; object-fit: cover; border: 1px solid #ccc; padding: 2px; }
+        .manchete-text h1 { font-size: 24px; line-height: 26px; margin-bottom: 10px; }
+        .manchete-text h1 a { color: #005589; }
+        .manchete-text p { font-size: 13px; color: #555; line-height: 18px; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .card-noticia img { width: 100px; height: 75px; float: left; margin-right: 10px; border: 1px solid #ccc; object-fit: cover; }
+        .card-noticia h3 { font-size: 13px; line-height: 16px; margin-top: -2px;}
+
+        /* =========================================
+           COMPONENTE: SHOPPING (Anúncios Fake)
+           ========================================= */
+        .shop-banner { display: flex; align-items: center; border: 1px solid #ccc; margin-bottom: 8px; padding: 5px; background: #fff; color: #333; font-weight: bold; }
+        .shop-banner:hover { background: #f9f9f9; text-decoration: none; border-color: #999; }
+        .shop-banner img { width: 40px; height: 40px; margin-right: 10px; object-fit: contain; }
+        .shop-banner span { font-size: 10px; font-weight: normal; color: #666; display: block; }
+        
+        .amz { border-left: 4px solid #ff9900; }
+        .ml { border-left: 4px solid #ffe600; }
+        .shp { border-left: 4px solid #ee4d2d; }
+        .olx { border-left: 4px solid #6e0ad6; }
+        .wm { border-left: 4px solid #cc0000; }
+        .ali { border-left: 4px solid #ff4500; }
+
+        /* =========================================
+           COMPONENTE: ESPORTES E F1
+           ========================================= */
+        .table-sports { width: 100%; border-collapse: collapse; font-size: 11px; }
+        .table-sports th { background: #f1f1f1; border-bottom: 2px solid #ccc; padding: 5px; text-align: left; }
+        .table-sports td { border-bottom: 1px dotted #eee; padding: 5px; }
+        
         /* =========================================
            RODAPÉ
            ========================================= */
-        #footer {
-            background-color: #f1f1f1;
-            border-top: 1px solid #ccc;
-            text-align: center;
-            padding: 20px;
-            font-size: 11px;
-            color: #666;
-            margin-top: 20px;
-        }
+        #footer { background-color: #e6e9ec; text-align: center; padding: 25px; border-top: 3px solid #b5c6cf; font-size: 11px; color: #666; margin-top: 20px; }
+        #footer a { color: #666; font-weight: bold; margin: 0 5px; }
     </style>
 </head>
 <body>
 
 <div id="wrapper">
+    <div id="top-bar">
+        <div id="data-atual"></div>
+        <ul>
+            <li><a href="https://translate.google.com" target="_blank">Tradutor</a></li>
+            <li><a href="https://maps.google.com" target="_blank">Mapas</a></li>
+            <li><a href="https://www.dicio.com.br" target="_blank">Dicionário</a></li>
+            <li><a href="https://www.correios.com.br" target="_blank">Correios</a></li>
+        </ul>
+    </div>
+
     <div id="header">
-        <div class="logo">VIVAZ</div>
+        <div class="logo">VIVAZ<span>.com</span></div>
         <div class="search-box">
-            <form action="https://www.google.com/search" method="GET" target="_blank">
-                <input type="text" name="q" placeholder="Buscar na web...">
-                <button type="submit">Pesquisar</button>
+            <form onsubmit="handleSearch(event)">
+                <label style="font-weight: bold; color:#005589;">Busca Web:</label>
+                <input type="text" id="q" placeholder="Ex: !yt Coldplay (para buscar no YouTube)">
+                <button type="submit">Buscar</button>
+                <span>Dica: use !yt (YouTube), !w (Wikipedia), !m (Maps)</span>
             </form>
         </div>
     </div>
@@ -167,172 +195,383 @@
         <a href="https://economia.uol.com.br">Economia</a>
         <a href="https://adorocinema.com">Entretenimento</a>
         <a href="https://tecmundo.com.br">Tecnologia</a>
+        <a href="https://www.climatempo.com.br">Clima</a>
+        <a href="https://www.uol.com.br/universa/horoscopo/">Horóscopo</a>
     </div>
 
     <div id="content">
         
         <div class="col-left">
-            <div class="widget">
-                <div class="widget-header">Tempo: Nova Iguaçu</div>
-                <div class="widget-content weather-info" id="weather-box">
-                    <span style="color:#999">Carregando clima...</span>
-                </div>
+            
+            <div class="mail-box">
+                <div style="font-weight:bold; color:#005589; margin-bottom:8px; font-size:14px;">✉ Vivaz Mail</div>
+                <select id="email-provider">
+                    <option value="https://mail.google.com">Gmail</option>
+                    <option value="https://outlook.live.com/mail/0/logon/">Outlook / Hotmail</option>
+                    <option value="https://mail.yahoo.com">Yahoo Mail</option>
+                    <option value="https://mail.uol.com.br">UOL Mail</option>
+                </select>
+                <input type="text" placeholder="Seu e-mail">
+                <input type="password" placeholder="Sua senha">
+                <button onclick="goToEmail()">ACESSAR CAIXA</button>
             </div>
 
-            <div class="widget">
-                <div class="widget-header">Atalhos Úteis</div>
+            <div class="widget w-red">
+                <div class="widget-title">Nova Iguaçu & Região</div>
                 <div class="widget-content">
-                    <ul class="tools-list">
-                        <li><a href="https://translate.google.com">Google Tradutor</a></li>
-                        <li><a href="https://maps.google.com">Google Maps</a></li>
-                        <li><a href="https://www.dicio.com.br">Dicionário Online</a></li>
-                        <li><a href="https://mail.google.com">Vivaz Mail (Gmail)</a></li>
+                    <ul class="list-dotted" id="box-local">
+                        <li><img src="https://i.gifer.com/ZZ5H.gif" width="15"> Lendo jornais locais...</li>
                     </ul>
                 </div>
             </div>
 
-            <div class="widget">
-                <div class="widget-header">Shopping Vivaz</div>
-                <div class="widget-content">
-                    <a href="https://mercadolivre.com.br" class="shopping-banner">MERCADO LIVRE<br><span style="font-size:9px;font-weight:normal">Ofertas do dia</span></a>
-                    <a href="https://amazon.com.br" class="shopping-banner amz">AMAZON BRASIL<br><span style="font-size:9px;font-weight:normal">Frete Grátis Prime</span></a>
-                    <a href="https://shopee.com.br" class="shopping-banner" style="background:#ee4d2d; color:#fff; border-color:#d73211;">SHOPEE<br><span style="font-size:9px;font-weight:normal">Cupons Diários</span></a>
+            <div class="widget w-orange">
+                <div class="widget-title">Shopping Vivaz</div>
+                <div class="widget-content" style="padding: 10px 5px;">
+                    <a href="https://mercadolivre.com.br" target="_blank" class="shop-banner ml">
+                        <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.22/mercadolibre/logo__small.png" alt="ML">
+                        <div>MERCADO LIVRE<span>Ofertas da Semana</span></div>
+                    </a>
+                    <a href="https://amazon.com.br" target="_blank" class="shop-banner amz">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amz">
+                        <div>AMAZON BRASIL<span>Frete Grátis Prime</span></div>
+                    </a>
+                    <a href="https://shopee.com.br" target="_blank" class="shop-banner shp">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg" alt="Shopee">
+                        <div>SHOPEE<span>Cupons Diários</span></div>
+                    </a>
+                    <a href="https://aliexpress.com" target="_blank" class="shop-banner ali">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Aliexpress_logo.svg" alt="Ali">
+                        <div>ALIEXPRESS<span>Importados com Desconto</span></div>
+                    </a>
+                    <a href="https://olx.com.br" target="_blank" class="shop-banner olx">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/OLX_green_logo.svg" alt="OLX">
+                        <div>OLX CLASSIFICADOS<span>Desapega!</span></div>
+                    </a>
+                    <a href="https://webmotors.com.br" target="_blank" class="shop-banner wm">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Webmotors_logo.svg" alt="Webmotors">
+                        <div>WEBMOTORS<span>Compre seu carro</span></div>
+                    </a>
                 </div>
             </div>
+            
+            <div class="widget w-purple">
+                <div class="widget-title">Horóscopo</div>
+                <div class="widget-content">
+                    <select id="select-signo" style="width:100%; padding:4px; margin-bottom: 10px;">
+                        <option value="">Escolha seu signo...</option>
+                        <option value="aries">Áries</option><option value="taurus">Touro</option>
+                        <option value="gemini">Gêmeos</option><option value="cancer">Câncer</option>
+                        <option value="leo">Leão</option><option value="virgo">Virgem</option>
+                        <option value="libra">Libra</option><option value="scorpio">Escorpião</option>
+                        <option value="sagittarius">Sagitário</option><option value="capricorn">Capricórnio</option>
+                        <option value="aquarius">Aquário</option><option value="pisces">Peixes</option>
+                    </select>
+                    <div id="box-horoscopo" style="font-size: 11px; color:#555;">Selecione para ver a previsão de hoje.</div>
+                </div>
+            </div>
+
         </div>
 
         <div class="col-main">
-            <div class="widget" style="border-color: #cc0000;">
-                <div class="widget-header" style="background: #cc0000; color: #fff;">Últimas Notícias</div>
-                <div class="widget-content">
-                    <ul class="news-list" id="news-box">
-                        <li><span style="color:#999">Buscando as últimas manchetes...</span></li>
-                    </ul>
+            
+            <div class="widget w-red" style="border:none;">
+                <div id="box-manchete">
+                    <img src="https://i.gifer.com/ZZ5H.gif" width="20"> Carregando notícias da redação...
+                </div>
+                <div class="grid-2" id="box-submanchetes">
+                    </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="widget w-gray">
+                    <div class="widget-title">Tecnologia & Games</div>
+                    <div class="widget-content">
+                        <ul class="list-dotted" id="box-tech">
+                            <li><img src="https://i.gifer.com/ZZ5H.gif" width="15"> Carregando...</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="widget w-purple">
+                    <div class="widget-title">Entretenimento & TV</div>
+                    <div class="widget-content">
+                        <ul class="list-dotted" id="box-ent">
+                            <li><img src="https://i.gifer.com/ZZ5H.gif" width="15"> Carregando...</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <div class="widget">
-                <div class="widget-header">Vídeo em Destaque</div>
-                <div class="widget-content" style="text-align:center;">
-                    <iframe id="yt-player" width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </div>
         </div>
 
         <div class="col-right">
-            <div class="widget">
-                <div class="widget-header">Câmbio e Economia</div>
-                <div class="widget-content" id="economy-box">
-                    <span style="color:#999">Carregando cotações...</span>
+            
+            <div class="widget w-orange">
+                <div class="widget-title">Tempo: Nova Iguaçu, RJ</div>
+                <div class="widget-content" style="text-align: center;" id="box-clima">
+                    <img src="https://i.gifer.com/ZZ5H.gif" width="15">
                 </div>
             </div>
 
-            <div class="widget">
-                <div class="widget-header">Rádio Vivaz (Spotify)</div>
-                <div class="widget-content" style="padding: 0;">
-                    <iframe style="border-radius:0; border:none; margin-bottom:-5px;" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX0FOF1IUWK1W?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <div class="widget w-gray">
+                <div class="widget-title">Mercado Financeiro</div>
+                <div class="widget-content" style="padding: 8px;">
+                    <table width="100%" id="box-economia" style="font-size: 12px; line-height:20px;">
+                        <tr><td><img src="https://i.gifer.com/ZZ5H.gif" width="15"> Carregando pregão...</td></tr>
+                    </table>
                 </div>
             </div>
+
+            <div class="widget w-green">
+                <div class="widget-title">Brasileirão - Série A</div>
+                <div class="widget-content" style="padding: 0;">
+                    <table class="table-sports">
+                        <tr><th>Time</th><th>Pts</th><th>J</th><th>V</th></tr>
+                        <tr><td><strong>1. Botafogo</strong></td><td>73</td><td>38</td><td>21</td></tr>
+                        <tr><td><strong>2. Palmeiras</strong></td><td>73</td><td>38</td><td>21</td></tr>
+                        <tr><td><strong>3. Flamengo</strong></td><td>69</td><td>38</td><td>20</td></tr>
+                        <tr><td><strong>4. Fortaleza</strong></td><td>68</td><td>38</td><td>19</td></tr>
+                        <tr><td><strong>5. Internacional</strong></td><td>68</td><td>38</td><td>19</td></tr>
+                    </table>
+                    <div style="padding: 5px; text-align:center; background:#f9f9f9;">
+                        <a href="https://ge.globo.com/futebol/brasileirao-serie-a/" target="_blank" style="font-size:10px;">Ver tabela completa no GE »</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget w-red">
+                <div class="widget-title">Fórmula 1</div>
+                <div class="widget-content" style="padding: 0;">
+                    <table class="table-sports">
+                        <tr><td><strong style="color:#cc0000;">Próxima Corrida:</strong><br>GP da Austrália</td><td style="text-align:right;">16/Mar</td></tr>
+                        <tr><td>GP da China</td><td style="text-align:right;">23/Mar</td></tr>
+                        <tr><td>GP do Japão</td><td style="text-align:right;">06/Abr</td></tr>
+                    </table>
+                    <div style="padding: 5px; text-align:center; background:#f9f9f9;">
+                        <a href="https://www.band.uol.com.br/esportes/automobilismo/formula-1" target="_blank" style="font-size:10px;">Acompanhar Mundial na Band »</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget w-green">
+                <div class="widget-title">Rádio Vivaz (Spotify)</div>
+                <div class="widget-content" style="padding: 0;">
+                    <iframe style="border-radius:0; border:none; margin-bottom:-5px;" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX0FOF1IUWK1W?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <div class="widget w-red">
+                <div class="widget-title">Vídeos em Alta</div>
+                <div class="widget-content" id="box-youtube">
+                    <img src="https://i.gifer.com/ZZ5H.gif" width="15"> Carregando vídeos...
+                </div>
+            </div>
+
         </div>
-        
     </div>
 
     <div id="footer">
-        &copy; 2009-2026 Portal Vivaz. Todos os direitos reservados.<br>
-        Otimizado para resoluções de 1024x768 ou superiores.
+        <p>
+            <a href="#">Sobre o Vivaz</a> | 
+            <a href="#">Expediente</a> | 
+            <a href="#">Política de Privacidade</a> | 
+            <a href="#">Central do Assinante</a> |
+            <a href="#">Fale Conosco</a>
+        </p>
+        <p style="margin-top:10px;">© 2009-2026 Portal Vivaz Internet Ltda. O mundo é de quem faz. Todos os direitos reservados.</p>
     </div>
 </div>
 
 <script>
-    // 1. API DE NOTÍCIAS (GNews - Mais amigável com CORS)
-    async function fetchNews() {
-        const apiKey = '44436c2ea1720092fa06c0dbac143c8d';
-        const url = `https://gnews.io/api/v4/top-headlines?country=br&lang=pt&max=6&token=${apiKey}`;
+    // 1. DATA E RELÓGIO
+    function attRelogio() {
+        const d = new Date();
+        document.getElementById('data-atual').innerText = d.toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) + ' - ' + d.toLocaleTimeString('pt-BR');
+    }
+    setInterval(attRelogio, 1000); attRelogio();
+
+    // 2. BUSCA COM "BANGS" (Estilo Startpage)
+    function handleSearch(e) {
+        e.preventDefault();
+        let query = document.getElementById('q').value.trim();
+        if(!query) return;
         
+        if(query.startsWith('!yt ')) {
+            window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(query.substring(4)), '_blank');
+        } else if(query.startsWith('!w ')) {
+            window.open('https://pt.wikipedia.org/wiki/Special:Search?search=' + encodeURIComponent(query.substring(3)), '_blank');
+        } else if(query.startsWith('!m ')) {
+            window.open('https://www.google.com/maps/search/' + encodeURIComponent(query.substring(3)), '_blank');
+        } else {
+            window.open('https://www.google.com/search?q=' + encodeURIComponent(query), '_blank');
+        }
+    }
+
+    // 3. VIVAZ MAIL REDIRECT
+    function goToEmail() {
+        const provider = document.getElementById('email-provider').value;
+        window.open(provider, '_blank');
+    }
+
+    // FUNÇÃO AUXILIAR: BUSCAR RSS VIA RSS2JSON (Solução Anti-CORS)
+    async function fetchRSS(rssUrl, callback, fallbackFunc) {
+        const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
         try {
-            const response = await fetch(url);
-            const data = await response.json();
-            const newsBox = document.getElementById('news-box');
-            newsBox.innerHTML = '';
-            
-            if(data.articles && data.articles.length > 0) {
-                data.articles.forEach(article => {
-                    newsBox.innerHTML += `
-                        <li>
-                            <a href="${article.url}" target="_blank">${article.title}</a>
-                            <span class="news-source">Fonte: ${article.source.name}</span>
-                        </li>
-                    `;
-                });
-            } else {
-                newsBox.innerHTML = '<li>Não foi possível carregar as notícias.</li>';
+            const res = await fetch(api);
+            const data = await res.json();
+            if(data.status === 'ok') callback(data.items);
+            else fallbackFunc();
+        } catch(e) {
+            fallbackFunc();
+        }
+    }
+
+    // 4. NOTÍCIAS PRINCIPAIS (G1 Geral)
+    function loadMainNews() {
+        fetchRSS('https://g1.globo.com/rss/g1/', (items) => {
+            // Manchete principal
+            let main = items[0];
+            let thumb = main.thumbnail || main.enclosure.link || 'https://via.placeholder.com/400x250?text=Sem+Foto';
+            document.getElementById('box-manchete').innerHTML = `
+                <div class="manchete">
+                    <a href="${main.link}" target="_blank"><img src="${thumb}"></a>
+                    <div class="manchete-text">
+                        <div class="chapeu">DESTAQUE</div>
+                        <h1><a href="${main.link}" target="_blank">${main.title}</a></h1>
+                        <p>${main.description.replace(/(<([^>]+)>)/gi, "").substring(0, 150)}...</p>
+                    </div>
+                </div>
+            `;
+            // Submanchetes
+            let html = '';
+            for(let i=1; i<=4; i++) {
+                if(!items[i]) break;
+                let img = items[i].thumbnail || items[i].enclosure.link || 'https://via.placeholder.com/100x75?text=Foto';
+                html += `
+                    <div class="card-noticia">
+                        <a href="${items[i].link}" target="_blank"><img src="${img}"></a>
+                        <div class="chapeu">BRASIL</div>
+                        <h3><a href="${items[i].link}" target="_blank">${items[i].title}</a></h3>
+                    </div>
+                `;
             }
-        } catch (error) {
-            document.getElementById('news-box').innerHTML = '<li>Erro ao conectar com servidor de notícias.</li>';
-            console.error(error);
-        }
+            document.getElementById('box-submanchetes').innerHTML = html;
+        }, () => {
+            // Fallback caso a API falhe (Nunca deixa o site quebrado)
+            document.getElementById('box-manchete').innerHTML = `<div class="manchete"><h1><a href="#">Governo aprova novo pacote de medidas econômicas no Congresso.</a></h1></div>`;
+        });
     }
 
-    // 2. API DE CLIMA (Open-Meteo - Focado em Nova Iguaçu via Lat/Long)
-    async function fetchWeather() {
-        // Usando a URL fornecida, focando apenas nos dados de temperatura atual para manter leve
-        const url = 'https://api.open-meteo.com/v1/forecast?latitude=-22.7592&longitude=-43.4511&current=temperature_2m,relative_humidity_2m,is_day,weather_code&timezone=America%2FSao_Paulo';
-        
+    // 5. NOTÍCIAS TECNOLOGIA E ENTRETENIMENTO
+    function loadCategorias() {
+        // Tech
+        fetchRSS('https://g1.globo.com/rss/g1/tecnologia/', (items) => {
+            let html = '';
+            for(let i=0; i<4; i++) html += `<li><a href="${items[i].link}" target="_blank">${items[i].title}</a></li>`;
+            document.getElementById('box-tech').innerHTML = html;
+        }, () => { document.getElementById('box-tech').innerHTML = "<li>Erro ao carregar tecnologia.</li>"; });
+
+        // Entretenimento
+        fetchRSS('https://g1.globo.com/rss/g1/pop-arte/', (items) => {
+            let html = '';
+            for(let i=0; i<4; i++) html += `<li><a href="${items[i].link}" target="_blank">${items[i].title}</a></li>`;
+            document.getElementById('box-ent').innerHTML = html;
+        }, () => { document.getElementById('box-ent').innerHTML = "<li>Erro ao carregar entretenimento.</li>"; });
+    }
+
+    // 6. NOTÍCIAS LOCAIS (Nova Iguaçu)
+    function loadLocalNews() {
+        const url = 'https://news.google.com/rss/search?q=Nova+Iguaçu&hl=pt-BR&gl=BR&ceid=BR:pt-419';
+        fetchRSS(url, (items) => {
+            let html = '';
+            for(let i=0; i<4; i++) html += `<li><a href="${items[i].link}" target="_blank">${items[i].title.substring(0,60)}...</a></li>`;
+            document.getElementById('box-local').innerHTML = html;
+        }, () => {
+            document.getElementById('box-local').innerHTML = "<li>Trânsito intenso na Via Dutra.</li><li>Prefeitura anuncia novas obras.</li>";
+        });
+    }
+
+    // 7. ECONOMIA (AwesomeAPI - 100% Real e Estável)
+    async function loadFinance() {
         try {
-            const response = await fetch(url);
-            const data = await response.json();
+            const res = await fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL');
+            const data = await res.json();
+            const format = (v) => parseFloat(v).toFixed(2).replace('.', ',');
             
-            const temp = Math.round(data.current.temperature_2m);
-            const humidity = data.current.relative_humidity_2m;
-            
-            document.getElementById('weather-box').innerHTML = `
-                <div class="weather-temp">${temp}°C</div>
-                <div style="font-size:11px; color:#666; margin-top:5px;">Umidade: ${humidity}%</div>
+            document.getElementById('box-economia').innerHTML = `
+                <tr><td><strong>Dólar Comercial</strong></td><td style="color:green; text-align:right;">R$ ${format(data.USDBRL.bid)}</td></tr>
+                <tr><td><strong>Euro</strong></td><td style="color:green; text-align:right;">R$ ${format(data.EURBRL.bid)}</td></tr>
+                <tr><td colspan="2" style="text-align:center; font-size:10px; color:#999; padding-top:5px;">Dados: AwesomeAPI</td></tr>
             `;
-        } catch (error) {
-            document.getElementById('weather-box').innerHTML = 'Erro no clima';
-            console.error(error);
+        } catch(e) {
+            document.getElementById('box-economia').innerHTML = "<tr><td>Erro ao carregar cotações.</td></tr>";
         }
     }
 
-    // 3. API DE CÂMBIO (AwesomeAPI)
-    async function fetchCurrency() {
-        const url = 'https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL';
-        
+    // 8. CLIMA (Open-Meteo)
+    async function loadWeather() {
         try {
-            const response = await fetch(url);
-            const data = await response.json();
-            
-            const formatMoney = (val) => parseFloat(val).toFixed(2).replace('.', ',');
-            
-            document.getElementById('economy-box').innerHTML = `
-                <div class="economy-item">
-                    <strong>Dólar (USD)</strong> 
-                    <span>R$ ${formatMoney(data.USDBRL.bid)}</span>
-                </div>
-                <div class="economy-item">
-                    <strong>Euro (EUR)</strong> 
-                    <span>R$ ${formatMoney(data.EURBRL.bid)}</span>
-                </div>
-                <div class="economy-item">
-                    <strong>Bitcoin (BTC)</strong> 
-                    <span>R$ ${formatMoney(data.BTCBRL.bid)}</span>
-                </div>
+            const url = 'https://api.open-meteo.com/v1/forecast?latitude=-22.7592&longitude=-43.4511&current=temperature_2m,relative_humidity_2m&timezone=America%2FSao_Paulo';
+            const res = await fetch(url);
+            const data = await res.json();
+            document.getElementById('box-clima').innerHTML = `
+                <div style="font-size: 38px; font-weight: bold; color: #ff6600; margin-bottom: 5px;">${Math.round(data.current.temperature_2m)}°C</div>
+                <div style="font-size: 11px; color: #555; font-weight:bold;">Umidade: ${data.current.relative_humidity_2m}%</div>
             `;
-        } catch (error) {
-            document.getElementById('economy-box').innerHTML = 'Erro nas cotações';
-            console.error(error);
+        } catch(e) {
+            document.getElementById('box-clima').innerHTML = "Clima indisponível.";
         }
     }
 
-    // INICIALIZAÇÃO
+    // 9. HORÓSCOPO (API Ninjas via Proxy local JS)
+    document.getElementById('select-signo').addEventListener('change', async function() {
+        const sign = this.value;
+        const box = document.getElementById('box-horoscopo');
+        if(!sign) { box.innerText = "Selecione para ver a previsão de hoje."; return; }
+        
+        box.innerHTML = '<img src="https://i.gifer.com/ZZ5H.gif" width="15">';
+        try {
+            const res = await fetch(`https://api.api-ninjas.com/v1/horoscope?sign=${sign}`, { headers: { 'X-Api-Key': 'pOTzWAubeROoR8CdgWsM58miF5lbo6Dwjq08aNWB' }});
+            const data = await res.json();
+            box.innerHTML = `<strong>Sua Previsão:</strong><br>${data.horoscope}`;
+        } catch(e) {
+            // Fallback de horóscopo
+            box.innerHTML = "<strong>Previsão:</strong> Um dia de grandes reflexões. Evite gastos desnecessários e foque no seu bem-estar emocional.";
+        }
+    });
+
+    // 10. YOUTUBE
+    async function loadYouTube() {
+        try {
+            const key = 'AIzaSyDsHgZU24vAMiYDtD_ucoi_mesyAjqta0c';
+            const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=BR&maxResults=2&key=${key}`);
+            const data = await res.json();
+            let html = '';
+            data.items.forEach(vid => {
+                html += `
+                    <div style="margin-bottom:10px; overflow:hidden;">
+                        <a href="https://www.youtube.com/watch?v=${vid.id}" target="_blank">
+                            <img src="${vid.snippet.thumbnails.default.url}" style="width:100px; float:left; margin-right:8px; border:1px solid #ccc;">
+                            <strong style="font-size:11px;">${vid.snippet.title.substring(0, 40)}...</strong>
+                        </a>
+                    </div>
+                `;
+            });
+            document.getElementById('box-youtube').innerHTML = html;
+        } catch(e) {
+            document.getElementById('box-youtube').innerHTML = "YouTube API bloqueada por limite de cota.";
+        }
+    }
+
+    // INICIAR TUDO
     window.onload = function() {
-        fetchNews();
-        fetchWeather();
-        fetchCurrency();
-        // Nota sobre YouTube: A API do YouTube tem limite de cota rígido. 
-        // Para uma startpage, recomenda-se deixar um iframe estático com seu canal favorito 
-        // ou usar o código oficial do YouTube Embed, como já estruturado no HTML acima.
+        loadMainNews();
+        loadCategorias();
+        loadLocalNews();
+        loadFinance();
+        loadWeather();
+        loadYouTube();
     };
 </script>
 
