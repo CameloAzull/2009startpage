@@ -2,266 +2,579 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>VIVAZ PORTAL - O Mundo em um Clique</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>VIVAZ • Portal 2009 • v6</title>
     <style>
-        /* ESTÉTICA 2009: GRADIENTES E BORDAS SUTIS */
-        :root { --uol-blue: #005589; --ig-orange: #ff6600; --terra-green: #5da500; --bg: #f0f2f5; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Tahoma", "Verdana", sans-serif; }
-        body { background: var(--bg); color: #333; font-size: 11px; }
-        a { color: var(--uol-blue); text-decoration: none; }
-        a:hover { text-decoration: underline; color: #c00; }
-
-        #wrapper { width: 1180px; margin: 0 auto; background: #fff; border: 1px solid #ccc; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
-
-        /* HEADER DENSE */
-        header { padding: 15px; border-bottom: 5px solid var(--uol-blue); display: flex; justify-content: space-between; align-items: center; }
-        #logo { font-size: 45px; font-weight: bold; color: var(--uol-blue); letter-spacing: -3px; }
-        #logo span { color: var(--ig-orange); }
+        /* ===== RESET E ESTILOS BASE (RETRÔ DENSO) ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; list-style: none; }
+        body { background: #d9d2c5; font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 1.3; color: #222; }
+        a { color: #005589; text-decoration: none; }
+        a:hover { text-decoration: underline; color: #cc0000; }
+        img { border: 0; vertical-align: middle; }
         
-        #info-box { text-align: right; }
-        #relogio { font-size: 28px; font-weight: bold; display: block; color: #444; }
-        #data { font-size: 11px; text-transform: uppercase; color: #888; }
+        /* container principal – largura fixa 980px (clássico) */
+        #container { width: 980px; margin: 15px auto; background: #fff; border: 1px solid #847a6b; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 
-        /* BARRA DE BUSCA (ESTILO YAHOO) */
-        #search-section { background: #e9eff5; padding: 10px; border-bottom: 1px solid #d1dce5; text-align: center; }
-        #search-input { width: 500px; padding: 8px; border: 1px solid #999; }
-        #search-btn { padding: 8px 20px; background: var(--ig-orange); color: #fff; border: 1px solid #cc5200; font-weight: bold; cursor: pointer; }
+        /* ===== BARRA SUPERIOR ===== */
+        #topbar { background: #ece9e2; border-bottom: 1px solid #b5a99a; padding: 4px 10px; font-size: 10px; color: #555; overflow: hidden; }
+        #topbar-left { float: left; }
+        #topbar-left strong { color: #b64b00; }
+        #topbar-right { float: right; }
+        #topbar-right a { color: #005589; margin-left: 12px; }
 
-        /* MARQUEE FINANCEIRO */
-        #ticker { background: #333; color: #0f0; padding: 5px; font-family: monospace; font-size: 12px; border-bottom: 1px solid #000; }
+        /* ===== CABEÇALHO COM LOGO E BUSCA ===== */
+        #header { padding: 15px 15px 10px; background: linear-gradient(#ffffff, #e8e5dd); border-bottom: 3px solid #005589; overflow: hidden; }
+        #logo { float: left; font-size: 48px; font-weight: bold; letter-spacing: -3px; line-height: 1; }
+        #logo span { color: #ff6600; }
+        #search-area { float: right; width: 460px; background: #fff; border: 1px solid #b5a99a; padding: 8px; }
+        #search-tabs { margin-bottom: 6px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+        #search-tabs a { font-size: 12px; font-weight: bold; color: #005589; margin-right: 15px; padding: 2px 0; }
+        #search-tabs a.ativo { color: #ff6600; border-bottom: 2px solid #ff6600; }
+        #search-form { display: flex; gap: 5px; }
+        #search-form input[type=text] { flex: 1; padding: 6px; border: 1px solid #7c9bb7; font-size: 12px; }
+        #search-form button { background: #ff6600; color: white; border: 1px solid #cc5200; padding: 6px 15px; font-weight: bold; cursor: pointer; }
 
-        /* NAVEGAÇÃO PROFISSIONAL */
-        nav { background: var(--uol-blue); display: flex; overflow: hidden; }
-        nav a { color: #fff; padding: 10px 18px; font-weight: bold; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,0.1); }
-        nav a:hover { background: #00446e; }
+        /* ===== MENU PRINCIPAL (CHEIO DE LINKS) ===== */
+        #nav { background: #005589; border-bottom: 2px solid #003d66; padding: 0 5px; }
+        #nav a { display: inline-block; color: #fff; font-weight: bold; padding: 8px 12px; font-size: 12px; border-right: 1px solid #3070a8; }
+        #nav a:hover { background: #004680; text-decoration: none; }
 
-        /* GRID PRINCIPAL (3 COLUNAS) */
-        main { display: grid; grid-template-columns: 220px 650px 280px; gap: 15px; padding: 15px; }
+        /* ===== ESTRUTURA DE 3 COLUNAS ===== */
+        #main { display: flex; gap: 10px; padding: 12px; background: #f3f1eb; }
 
-        /* BLOCOS (WIDGETS) */
-        .bloco { border: 1px solid #ddd; margin-bottom: 15px; }
-        .bloco-h { background: #f0f3f6; color: var(--uol-blue); padding: 6px 10px; border-bottom: 1px solid #ddd; font-weight: bold; font-size: 10px; text-transform: uppercase; display: flex; justify-content: space-between; }
-        .bloco-c { padding: 10px; }
+        /* coluna esquerda – 200px */
+        .col-left { width: 200px; }
+        /* coluna central – 480px */
+        .col-center { width: 480px; }
+        /* coluna direita – 250px (980-200-480-2*10 = 250) */
+        .col-right { width: 250px; }
 
-        /* MANCHETE (ESTILO GLOBO.COM) */
-        .destaque { margin-bottom: 20px; position: relative; }
-        .destaque img { width: 100%; height: 350px; object-fit: cover; border: 1px solid #ccc; }
-        .destaque-txt { position: absolute; bottom: 0; background: rgba(0,0,0,0.7); color: #fff; padding: 15px; width: 100%; }
-        .destaque-txt h2 { font-size: 24px; }
+        /* ===== MÓDULOS PADRÃO (BOXES) ===== */
+        .mod { border: 1px solid #b5a99a; background: #fff; margin-bottom: 12px; }
+        .mod-hd { background: linear-gradient(#005589, #003f6b); color: white; font-weight: bold; padding: 6px 8px; font-size: 12px; border-bottom: 1px solid #002b48; text-transform: uppercase; }
+        .mod-hd .mais { float: right; color: #ffcc00; font-size: 10px; }
+        .mod-bd { padding: 8px; }
+        .mod-bd ul li { padding: 4px 0; border-bottom: 1px dotted #ccc; }
+        .mod-bd ul li:last-child { border-bottom: none; }
+        .mod-bd .link-list a { display: block; padding: 3px 0; }
+        
+        /* caixa de login/email simplificada */
+        .caixa-email { background: #f4eedb; border: 1px solid #b5a99a; padding: 10px; margin-bottom: 12px; }
+        .caixa-email h4 { color: #b64b00; font-size: 12px; margin-bottom: 5px; border-bottom: 1px dotted #b5a99a; padding-bottom: 3px; }
+        .caixa-email .btn { background: #005589; color: #fff; padding: 4px; text-align: center; border: 1px solid #003366; margin-top: 6px; font-weight: bold; }
 
-        /* LISTA DE NOTÍCIAS */
-        .news-item { border-bottom: 1px dotted #ccc; padding: 6px 0; display: flex; align-items: flex-start; }
-        .news-item:before { content: "•"; color: var(--ig-orange); font-weight: bold; margin-right: 8px; }
-        .chapeu { color: var(--ig-orange); font-weight: bold; font-size: 9px; text-transform: uppercase; display: block; }
+        /* clima destaque */
+        .clima-temp { font-size: 32px; font-weight: bold; color: #ff6600; text-align: center; }
+        .clima-minmax { text-align: center; margin: 5px 0; font-size: 12px; }
 
-        /* UTILIDADES LATERAIS */
-        .servico-link { display: block; padding: 7px; background: #f8f9fa; border: 1px solid #eee; margin-bottom: 4px; font-weight: bold; color: #555; }
-        .servico-link:hover { border-color: var(--uol-blue); background: #fff; }
+        /* grid de notícias secundárias */
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+        .card-noticia { border: 1px solid #ddd; padding: 5px; background: #f9f9f9; }
+        .card-noticia img { width: 100%; height: 80px; object-fit: cover; margin-bottom: 4px; border: 1px solid #ccc; }
+        .card-noticia .tit { font-weight: bold; font-size: 11px; line-height: 13px; }
 
-        footer { background: #222; color: #777; text-align: center; padding: 20px; font-size: 10px; border-top: 5px solid var(--ig-orange); }
+        /* vídeos youtube */
+        .video-item { display: flex; gap: 8px; margin-bottom: 10px; border-bottom: 1px dotted #ccc; padding-bottom: 6px; }
+        .video-item img { width: 90px; height: 60px; border: 1px solid #999; }
+
+        /* carrossel simples */
+        .carrossel { position: relative; height: 220px; overflow: hidden; border: 1px solid #aaa; background: #000; margin-bottom: 10px; }
+        .carrossel-slide { position: absolute; width: 100%; height: 100%; transition: opacity 0.5s; opacity: 0; }
+        .carrossel-slide.ativo { opacity: 1; }
+        .carrossel-slide img { width: 100%; height: 220px; object-fit: cover; opacity: 0.8; }
+        .carrossel-legenda { position: absolute; bottom: 0; background: rgba(0,0,0,0.7); color: #fff; padding: 8px; width: 100%; }
+        .carrossel-legenda a { color: #ffcc00; font-weight: bold; display: block; }
+        .carrossel-controles { position: absolute; bottom: 5px; right: 10px; z-index: 10; }
+        .carrossel-controles button { background: #333; color: #fff; border: 1px solid #666; padding: 2px 8px; cursor: pointer; }
+
+        /* horóscopo */
+        #signo-select { width: 100%; padding: 4px; margin-bottom: 6px; border: 1px solid #aaa; }
+        #horoscopo-texto { font-style: italic; color: #444; }
+
+        /* atalhos */
+        .atalhos { display: flex; flex-wrap: wrap; gap: 5px; }
+        .atalhos a { background: #f0f0f0; border: 1px solid #aaa; padding: 4px 8px; font-size: 11px; color: #333; }
+        .atalhos a:hover { background: #e0e0e0; border-color: #005589; }
+
+        /* rodapé */
+        #footer { background: #e0dbd0; border-top: 3px solid #847a6b; padding: 15px 20px; font-size: 10px; color: #444; }
+        #footer .colunas { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        #footer .coluna { width: 180px; }
+        #footer .coluna strong { color: #b64b00; display: block; margin-bottom: 5px; }
+        #footer a { color: #005589; display: block; margin-bottom: 3px; }
+        #footer .copyright { text-align: center; border-top: 1px solid #b5a99a; padding-top: 10px; color: #666; }
+
+        /* publicidade fake */
+        .pub-placeholder { background: #f0f0f0; border: 1px solid #ccc; text-align: center; padding: 15px 0; margin: 12px 0; color: #999; font-size: 10px; }
     </style>
 </head>
 <body>
+<div id="container">
 
-<div id="wrapper">
-    <header>
-        <div id="logo">VIVAZ<span>.com</span></div>
-        <div id="info-box">
-            <span id="relogio">00:00:00</span>
-            <span id="data">Sábado, 09 de Março de 2024</span>
+    <!-- BARRA SUPERIOR -->
+    <div id="topbar">
+        <div id="topbar-left"><strong>ASSINE VIVAZ BANDA LARGA</strong> 0800 703 3000</div>
+        <div id="topbar-right">
+            <a href="#">Bate-Papo</a>
+            <a href="#">E-mail Grátis</a>
+            <a href="#">Shopping</a>
+            <a href="#">SAC</a>
+            <a href="#">Faça do Vivaz sua Homepage</a>
+            <span id="data-hora-top"></span>
         </div>
-    </header>
+    </div>
 
-    <section id="search-section">
-        <form action="https://www.google.com/search" method="GET" target="_blank">
-            <input type="text" name="q" id="search-input" placeholder="Pesquisar na Web...">
-            <button type="submit" id="search-btn">BUSCAR</button>
-        </form>
-    </section>
+    <!-- CABEÇALHO -->
+    <div id="header">
+        <div id="logo">VIVAZ<span>.com</span></div>
+        <div id="search-area">
+            <div id="search-tabs">
+                <a href="#" class="ativo" data-engine="google">Web</a>
+                <a href="#" data-engine="imagens">Imagens</a>
+                <a href="#" data-engine="noticias">Notícias</a>
+                <a href="#" data-engine="videos">Vídeos</a>
+            </div>
+            <form id="search-form" onsubmit="return buscaSubmit(event)">
+                <input type="text" id="search-input" placeholder="O que você procura?">
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
 
-    <marquee id="ticker">Carregando indicadores econômicos e últimas notícias do Brasil e do Mundo...</marquee>
+    <!-- MENU PRINCIPAL (MUITOS LINKS) -->
+    <div id="nav">
+        <a href="#">Notícias</a>
+        <a href="#">Esportes</a>
+        <a href="#">Entretenimento</a>
+        <a href="#">Vídeos</a>
+        <a href="#">Música</a>
+        <a href="#">Clima</a>
+        <a href="#">Economia</a>
+        <a href="#">Horóscopo</a>
+        <a href="#">Fórmula 1</a>
+        <a href="#">Tecnologia</a>
+        <a href="#">Jogos</a>
+        <a href="#">Viagem</a>
+        <a href="#">Moda</a>
+        <a href="#">Saúde</a>
+    </div>
 
-    <nav>
-        <a href="https://g1.globo.com">Notícias</a>
-        <a href="https://ge.globo.com">Esportes</a>
-        <a href="https://www.conjur.com.br">Direito</a>
-        <a href="https://www.tecmundo.com.br">Tecnologia</a>
-        <a href="https://www.omelete.com.br">Entretenimento</a>
-        <a href="https://viva.ig.com.br/horoscopo/">Horóscopo</a>
-    </nav>
+    <!-- CORPO PRINCIPAL 3 COLUNAS -->
+    <div id="main">
 
-    <main>
-        <aside>
-            <div class="bloco">
-                <div class="bloco-h">Meus E-mails</div>
-                <div class="bloco-c">
-                    <a href="https://mail.google.com/mail/u/0/" class="servico-link" style="border-left: 3px solid #d93025">Gmail Pessoal</a>
-                    <a href="https://mail.google.com/mail/u/1/" class="servico-link">Gmail Estudo</a>
-                    <a href="https://mail.google.com/mail/u/2/" class="servico-link">Gmail Profissional</a>
+        <!-- COLUNA ESQUERDA (200px) -->
+        <div class="col-left">
+            <!-- CAIXA DE EMAIL (SIMULADA) -->
+            <div class="caixa-email">
+                <h4>VIVAZ MAIL</h4>
+                <div><input type="text" placeholder="usuário@vivaz.com" style="width:100%; padding:3px; margin-bottom:4px;"></div>
+                <div><input type="password" placeholder="senha" style="width:100%; padding:3px;"></div>
+                <div class="btn">Entrar</div>
+                <div style="margin-top:6px; font-size:10px;"><a href="#">Cadastre-se grátis</a></div>
+            </div>
+
+            <!-- REDES SOCIAIS E COMUNICAÇÃO -->
+            <div class="mod">
+                <div class="mod-hd">Redes & Comunicação</div>
+                <div class="mod-bd">
+                    <a href="#" class="link-list">WhatsApp Web</a>
+                    <a href="#" class="link-list">Telegram Web</a>
+                    <a href="#" class="link-list">Instagram</a>
+                    <a href="#" class="link-list">Facebook</a>
+                    <a href="#" class="link-list">X (Twitter)</a>
+                    <a href="#" class="link-list">TikTok</a>
                 </div>
             </div>
 
-            <div class="bloco">
-                <div class="bloco-h">Redes Sociais</div>
-                <div class="bloco-c">
-                    <a href="https://web.whatsapp.com" class="servico-link">WhatsApp Web</a>
-                    <a href="https://www.instagram.com" class="servico-link">Instagram</a>
-                    <a href="https://www.reddit.com" class="servico-link">Reddit</a>
-                    <a href="https://www.youtube.com" class="servico-link">YouTube</a>
+            <!-- NOTÍCIAS LOCAIS (NOVA IGUAÇU/RJ) -->
+            <div class="mod">
+                <div class="mod-hd">Nova Iguaçu & Baixada</div>
+                <div class="mod-bd" id="local-news-mod">
+                    <ul><li>Carregando notícias locais...</li></ul>
                 </div>
             </div>
 
-            <div class="bloco">
-                <div class="bloco-h">Úteis do Aluno</div>
-                <div class="bloco-c">
-                    <a href="https://www.jusbrasil.com.br" class="servico-link">Jusbrasil</a>
-                    <a href="https://scholar.google.com.br" class="servico-link">Google Acadêmico</a>
-                    <a href="https://www.canva.com" class="servico-link">Canva</a>
+            <!-- BLOCO DE NOTAS (LOCALSTORAGE) -->
+            <div class="mod">
+                <div class="mod-hd">Bloco de Notas</div>
+                <div class="mod-bd">
+                    <textarea id="bloco-notas" style="width:100%; height:80px; font-size:11px; padding:3px; border:1px solid #aaa; background:#ffffe0;">Anotações rápidas...</textarea>
                 </div>
             </div>
-        </aside>
+        </div>
 
-        <section>
-            <div id="manchete-principal" class="destaque">
-                <div class="destaque-txt">
-                    <span class="chapeu" style="color:#fff">Plantão</span>
-                    <h2>Carregando as principais notícias do dia...</h2>
+        <!-- COLUNA CENTRAL (480px) -->
+        <div class="col-center">
+            <!-- CARROSSEL DE MANCHETES (3 SLIDES) -->
+            <div class="carrossel" id="carrossel">
+                <div class="carrossel-slide ativo" id="slide1">
+                    <img src="" alt="slide1">
+                    <div class="carrossel-legenda"><a href="#" id="link1">Carregando...</a></div>
                 </div>
-            </div>
-
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-                <div>
-                    <span class="chapeu">Política & Economia</span>
-                    <div id="feed-politica" class="bloco-c">Carregando...</div>
+                <div class="carrossel-slide" id="slide2">
+                    <img src="" alt="slide2">
+                    <div class="carrossel-legenda"><a href="#" id="link2">Carregando...</a></div>
                 </div>
-                <div>
-                    <span class="chapeu">Tecnologia & Ciência</span>
-                    <div id="feed-tech" class="bloco-c">Carregando...</div>
+                <div class="carrossel-slide" id="slide3">
+                    <img src="" alt="slide3">
+                    <div class="carrossel-legenda"><a href="#" id="link3">Carregando...</a></div>
                 </div>
-            </div>
-            
-            <div class="bloco" style="margin-top:20px;">
-                <div class="bloco-h">Vídeos Populares</div>
-                <div id="yt-videos" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; padding:10px;">
-                    </div>
-            </div>
-        </section>
-
-        <aside>
-            <div class="bloco" id="clima">
-                <div class="bloco-h">Clima Agora</div>
-                <div class="bloco-c" style="text-align:center;">
-                    <span id="temp" style="font-size:35px; font-weight:bold; color:var(--ig-orange);">--°C</span><br>
-                    <strong>Nova Iguaçu, RJ</strong>
+                <div class="carrossel-controles">
+                    <button onclick="mudaSlide(-1)">◀</button>
+                    <button onclick="mudaSlide(1)">▶</button>
                 </div>
             </div>
 
-            <div class="bloco">
-                <div class="bloco-h">Horóscopo do Dia</div>
-                <div class="bloco-c">
-                    <select id="signo" style="width:100%; padding:5px;">
+            <!-- GRID DE NOTÍCIAS SECUNDÁRIAS (2x2) -->
+            <div class="grid-2col" id="secundarias-grid">
+                <div class="card-noticia"><img src="" alt=""><div class="tit">Carregando...</div></div>
+                <div class="card-noticia"><img src="" alt=""><div class="tit">Carregando...</div></div>
+                <div class="card-noticia"><img src="" alt=""><div class="tit">Carregando...</div></div>
+                <div class="card-noticia"><img src="" alt=""><div class="tit">Carregando...</div></div>
+            </div>
+
+            <!-- VÍDEOS EM DESTAQUE (YOUTUBE) -->
+            <div class="mod" style="margin-top:12px;">
+                <div class="mod-hd">Vídeos em alta (YouTube) <span class="mais">+</span></div>
+                <div class="mod-bd" id="youtube-mod">
+                    <div class="video-item"><img src="" alt=""><div><a href="#">Carregando...</a></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUNA DIREITA (250px) -->
+        <div class="col-right">
+            <!-- CLIMA (OPEN-METEO) -->
+            <div class="mod">
+                <div class="mod-hd">Clima • Nova Iguaçu</div>
+                <div class="mod-bd" id="clima-mod">
+                    <div class="clima-temp">--°C</div>
+                    <div class="clima-minmax">Máx --° / Mín --°</div>
+                    <div style="text-align:center; font-size:10px;">Atualizado há 1 min</div>
+                </div>
+            </div>
+
+            <!-- HORÓSCOPO (API NINJAS) -->
+            <div class="mod">
+                <div class="mod-hd">Horóscopo do Dia</div>
+                <div class="mod-bd">
+                    <select id="signo-select">
+                        <option value="">Escolha seu signo</option>
                         <option value="aries">Áries</option>
+                        <option value="taurus">Touro</option>
+                        <option value="gemini">Gêmeos</option>
+                        <option value="cancer">Câncer</option>
                         <option value="leo">Leão</option>
+                        <option value="virgo">Virgem</option>
+                        <option value="libra">Libra</option>
                         <option value="scorpio">Escorpião</option>
-                        </select>
-                    <p id="horoscopo-txt" style="margin-top:10px; font-style:italic; color:#666;">Selecione seu signo...</p>
+                        <option value="sagittarius">Sagitário</option>
+                        <option value="capricorn">Capricórnio</option>
+                        <option value="aquarius">Aquário</option>
+                        <option value="pisces">Peixes</option>
+                    </select>
+                    <div id="horoscopo-texto" style="margin-top:6px;">Selecione um signo para ver a previsão.</div>
                 </div>
             </div>
 
-            <div class="bloco">
-                <div class="bloco-h">F1: Classificação</div>
-                <iframe src="https://www.f1-fansite.com/f1-results/f1-standings-widget/" width="100%" height="200" frameborder="0"></iframe>
+            <!-- ECONOMIA (AWESOMEAPI) -->
+            <div class="mod">
+                <div class="mod-hd">Mercado Financeiro</div>
+                <div class="mod-bd" id="economia-mod">
+                    <div>Dólar: R$ --</div>
+                    <div>Euro: R$ --</div>
+                    <div>Bitcoin: R$ --</div>
+                </div>
             </div>
 
-            <div class="bloco">
-                <div class="bloco-h">No Spotify</div>
-                <iframe src="https://open.spotify.com/playlist/70iBVaIhyjVNfqJbPDfBy6?si=bb5a8590726249c8" width="100%" height="80" frameborder="0" allow="encrypted-media"></iframe>
+            <!-- FUTEBOL (MOCK) + F1 (ERGAST) -->
+            <div class="mod">
+                <div class="mod-hd">Esportes</div>
+                <div class="mod-bd">
+                    <div><strong>Brasileirão Série A</strong></div>
+                    <ul id="futebol-lista">
+                        <li>1. Botafogo - 45 pts</li>
+                        <li>2. Palmeiras - 43 pts</li>
+                        <li>3. Flamengo - 41 pts</li>
+                        <li>4. São Paulo - 39 pts</li>
+                    </ul>
+                    <div style="margin-top:6px;"><strong>F1:</strong> <span id="f1-prox">Carregando...</span></div>
+                </div>
             </div>
-        </aside>
-    </main>
 
-    <footer>
-        VIVAZ PORTAL 2009-2024 | O melhor da web em um só lugar.<br>
-        Hospedado no GitHub Pages - Livre de anúncios e travas.
-    </footer>
+            <!-- ATALHOS RÁPIDOS -->
+            <div class="mod">
+                <div class="mod-hd">Atalhos Úteis</div>
+                <div class="mod-bd atalhos">
+                    <a href="#">Gmail</a>
+                    <a href="#">Mercado Livre</a>
+                    <a href="#">Amazon</a>
+                    <a href="#">Shopee</a>
+                    <a href="#">Google Maps</a>
+                    <a href="#">ChatGPT</a>
+                </div>
+            </div>
+
+            <!-- PUBLICIDADE (PLACEHOLDER) -->
+            <div class="pub-placeholder">PUBLICIDADE • 300x250</div>
+        </div>
+    </div>
+
+    <!-- RODAPÉ CHEIO DE LINKS -->
+    <div id="footer">
+        <div class="colunas">
+            <div class="coluna">
+                <strong>Institucional</strong>
+                <a href="#">Sobre o Vivaz</a>
+                <a href="#">Trabalhe conosco</a>
+                <a href="#">Anuncie</a>
+                <a href="#">Relações com investidores</a>
+            </div>
+            <div class="coluna">
+                <strong>Serviços</strong>
+                <a href="#">Assine banda larga</a>
+                <a href="#">E-mail grátis</a>
+                <a href="#">Discador</a>
+                <a href="#">Antivírus</a>
+                <a href="#">Hospedagem</a>
+            </div>
+            <div class="coluna">
+                <strong>Ajuda</strong>
+                <a href="#">Central de ajuda</a>
+                <a href="#">Segurança e privacidade</a>
+                <a href="#">Termos de uso</a>
+                <a href="#">Denuncie</a>
+            </div>
+            <div class="coluna">
+                <strong>Redes</strong>
+                <a href="#">Blog</a>
+                <a href="#">Twitter</a>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+        <div class="copyright">
+            © 1999-2026 Vivaz Internet Ltda. O mundo é de quem faz. | Versão 6.0
+        </div>
+    </div>
 </div>
 
 <script>
-    const GNEWS_KEY = '44436c2ea1720092fa06c0dbac143c8d';
-    const YT_KEY = 'AIzaSyDsHgZU24vAMiYDtD_ucoi_mesyAjqta0c';
+    // CONFIGURAÇÕES E CHAVES
+    const CONFIG = {
+        gnews: '44436c2ea1720092fa06c0dbac143c8d',
+        youtube: 'AIzaSyDsHgZU24vAMiYDtD_ucoi_mesyAjqta0c',
+        awesome: '620cdb6b01f0924d546c08073044270fce27fc59ee81aa3c572972427f2875a4',
+        horoscope: 'pOTzWAubeROoR8CdgWsM58miF5lbo6Dwjq08aNWB',
+        openmeteo: 'https://api.open-meteo.com/v1/forecast?latitude=-22.7592&longitude=-43.4511&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=America/Sao_Paulo'
+    };
 
-    // 1. RELÓGIO
-    function atualizarRelogio() {
+    // ========== UTILITÁRIOS ==========
+    function atualizarDataHora() {
         const agora = new Date();
-        document.getElementById('relogio').innerText = agora.toLocaleTimeString('pt-BR');
-        document.getElementById('data').innerText = agora.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+        const opcoes = { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+        document.getElementById('data-hora-top').innerText = agora.toLocaleString('pt-BR', opcoes).replace(',', '');
     }
-    setInterval(atualizarRelogio, 1000);
+    setInterval(atualizarDataHora, 1000);
 
-    // 2. FINANCEIRO (TICKER)
-    async function getFinance() {
-        const res = await fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL');
-        const d = await res.json();
-        document.getElementById('ticker').innerText = `DÓLAR: R$ ${d.USDBRL.bid} | EURO: R$ ${d.EURBRL.bid} | BITCOIN: R$ ${d.BTCBRL.bid} | IBOVESPA: +1.24% | PETR4: R$ 34.20`;
-    }
-
-    // 3. NOTÍCIAS (GNEWS)
-    async function getNews() {
-        try {
-            const res = await fetch(`https://gnews.io/api/v4/top-headlines?category=general&lang=pt&country=br&apikey=${GNEWS_KEY}`);
-            const data = await res.json();
-            const art = data.articles[0];
-            document.getElementById('manchete-principal').innerHTML = `
-                <a href="${art.url}" target="_blank">
-                    <img src="${art.image}" alt="">
-                    <div class="destaque-txt">
-                        <span class="chapeu" style="color:#fff">DESTAQUE</span>
-                        <h2>${art.title}</h2>
-                    </div>
-                </a>`;
-        } catch(e) { console.log("GNews Limit"); }
-    }
-
-    // 4. RSS2JSON (FOLHA E CONJUR)
-    async function getRSS(url, divId) {
-        const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`);
-        const data = await res.json();
-        let html = '';
-        data.items.slice(0, 5).forEach(item => {
-            html += `<div class="news-item"><a href="${item.link}" target="_blank">${item.title}</a></div>`;
+    // ========== BUSCA COM ABAS ==========
+    let engineAtual = 'google';
+    document.querySelectorAll('#search-tabs a').forEach(tab => {
+        tab.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('#search-tabs a').forEach(t => t.classList.remove('ativo'));
+            this.classList.add('ativo');
+            engineAtual = this.dataset.engine;
         });
-        document.getElementById(divId).innerHTML = html;
-    }
+    });
+    window.buscaSubmit = function(e) {
+        e.preventDefault();
+        const q = document.getElementById('search-input').value.trim();
+        if (!q) return false;
+        let url = '';
+        if (engineAtual === 'google') url = `https://www.google.com/search?q=${encodeURIComponent(q)}`;
+        else if (engineAtual === 'imagens') url = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(q)}`;
+        else if (engineAtual === 'noticias') url = `https://news.google.com/search?q=${encodeURIComponent(q)}&hl=pt-BR`;
+        else if (engineAtual === 'videos') url = `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`;
+        window.open(url, '_blank');
+        return false;
+    };
 
-    // 5. CLIMA
-    async function getClima() {
-        const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-22.7592&longitude=-43.4511&current=temperature_2m');
-        const data = await res.json();
-        document.getElementById('temp').innerText = `${Math.round(data.current.temperature_2m)}°C`;
-    }
+    // ========== CARROSSEL ==========
+    let slideAtual = 0;
+    const slides = document.querySelectorAll('.carrossel-slide');
+    window.mudaSlide = function(delta) {
+        slides[slideAtual].classList.remove('ativo');
+        slideAtual = (slideAtual + delta + slides.length) % slides.length;
+        slides[slideAtual].classList.add('ativo');
+    };
 
-    // 6. YOUTUBE
-    async function getYT() {
+    // ========== NOTÍCIAS (GNEWS) ==========
+    async function carregarNoticias() {
         try {
-            const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=BR&maxResults=3&key=${YT_KEY}`);
+            const res = await fetch(`https://gnews.io/api/v4/top-headlines?country=br&lang=pt&max=8&apikey=${CONFIG.gnews}`);
+            if (!res.ok) throw new Error('Erro GNews');
             const data = await res.json();
-            let html = '';
-            data.items.forEach(v => {
-                html += `<div><a href="https://youtube.com/watch?v=${v.id}" target="_blank"><img src="${v.snippet.thumbnails.default.url}" width="100%"><p style="font-size:9px">${v.snippet.title}</p></a></div>`;
-            });
-            document.getElementById('yt-videos').innerHTML = html;
-        } catch(e) { }
+            if (!data.articles || data.articles.length < 3) throw new Error('Poucas notícias');
+
+            // Preenche carrossel (3 primeiras)
+            for (let i = 0; i < 3; i++) {
+                const a = data.articles[i];
+                const slide = document.getElementById(`slide${i+1}`);
+                const img = slide.querySelector('img');
+                const link = slide.querySelector('a');
+                img.src = a.image || 'https://via.placeholder.com/480x220?text=Notícia';
+                link.href = a.url;
+                link.innerText = a.title.substring(0, 70) + '...';
+            }
+
+            // Secundárias (4 notícias)
+            const grid = document.getElementById('secundarias-grid');
+            grid.innerHTML = '';
+            for (let i = 3; i < 7; i++) {
+                const a = data.articles[i] || data.articles[0];
+                const card = document.createElement('div');
+                card.className = 'card-noticia';
+                card.innerHTML = `<img src="${a.image || 'https://via.placeholder.com/220x80'}" alt=""><div class="tit"><a href="${a.url}" target="_blank">${a.title.substring(0, 50)}</a></div>`;
+                grid.appendChild(card);
+            }
+
+            // Notícias locais (busca por Nova Iguaçu)
+            const localRes = await fetch(`https://gnews.io/api/v4/search?q="Nova Iguaçu" OR "Baixada Fluminense"&lang=pt&max=4&apikey=${CONFIG.gnews}`);
+            if (localRes.ok) {
+                const localData = await localRes.json();
+                const ul = document.querySelector('#local-news-mod ul');
+                ul.innerHTML = '';
+                if (localData.articles && localData.articles.length) {
+                    localData.articles.forEach(a => {
+                        ul.innerHTML += `<li><a href="${a.url}" target="_blank">${a.title.substring(0, 45)}...</a></li>`;
+                    });
+                } else {
+                    ul.innerHTML = '<li>Nenhuma notícia local encontrada.</li>';
+                }
+            }
+        } catch (e) {
+            console.warn('Falha GNews, usando fallback', e);
+            // Fallback
+            document.getElementById('slide1').querySelector('a').innerText = 'Governo anuncia pacote de medidas econômicas';
+            document.getElementById('slide2').querySelector('a').innerText = 'Novo campeonato brasileiro começa neste fim de semana';
+            document.getElementById('slide3').querySelector('a').innerText = 'Descoberta científica promete revolucionar tratamento';
+            const grid = document.getElementById('secundarias-grid');
+            grid.innerHTML = `
+                <div class="card-noticia"><img src="https://via.placeholder.com/220x80"><div class="tit"><a href="#">Inflação recua e juros podem cair</a></div></div>
+                <div class="card-noticia"><img src="https://via.placeholder.com/220x80"><div class="tit"><a href="#">Violência no Rio: polícia ocupa comunidade</a></div></div>
+                <div class="card-noticia"><img src="https://via.placeholder.com/220x80"><div class="tit"><a href="#">Novo filme de animação estreia hoje</a></div></div>
+                <div class="card-noticia"><img src="https://via.placeholder.com/220x80"><div class="tit"><a href="#">Tecnologia brasileira é destaque mundial</a></div></div>
+            `;
+            document.querySelector('#local-news-mod ul').innerHTML = '<li><a href="#">Prefeitura de Nova Iguaçu anuncia obras no centro</a></li><li><a href="#">Trânsito intenso na Via Dutra</a></li>';
+        }
     }
 
-    // INICIAR TUDO
-    window.onload = () => {
-        atualizarRelogio();
-        getFinance();
-        getNews();
-        getClima();
-        getYT();
-        getRSS('https://feeds.folha.uol.com.br/poder/rss091.xml', 'feed-politica');
-        getRSS('https://www.conjur.com.br/rss.xml', 'feed-tech');
+    // ========== YOUTUBE ==========
+    async function carregarYouTube() {
+        try {
+            const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=BR&maxResults=3&key=${CONFIG.youtube}`);
+            if (!res.ok) throw new Error('Erro YouTube');
+            const data = await res.json();
+            const container = document.getElementById('youtube-mod');
+            container.innerHTML = '';
+            data.items.forEach(v => {
+                const div = document.createElement('div');
+                div.className = 'video-item';
+                div.innerHTML = `<img src="${v.snippet.thumbnails.default.url}" alt=""><div><a href="https://youtube.com/watch?v=${v.id}" target="_blank">${v.snippet.title.substring(0, 40)}...</a></div>`;
+                container.appendChild(div);
+            });
+        } catch (e) {
+            document.getElementById('youtube-mod').innerHTML = '<div class="video-item">Serviço indisponível no momento.</div>';
+        }
+    }
+
+    // ========== CLIMA (OPEN-METEO) ==========
+    async function carregarClima() {
+        try {
+            const res = await fetch(CONFIG.openmeteo);
+            const data = await res.json();
+            const temp = data.current.temperature_2m;
+            const max = data.daily.temperature_2m_max[0];
+            const min = data.daily.temperature_2m_min[0];
+            document.querySelector('#clima-mod .clima-temp').innerText = temp + '°C';
+            document.querySelector('#clima-mod .clima-minmax').innerHTML = `Máx ${max}° / Mín ${min}°`;
+        } catch (e) {
+            document.querySelector('#clima-mod .clima-temp').innerText = '23°C';
+            document.querySelector('#clima-mod .clima-minmax').innerHTML = 'Máx 28° / Mín 19°';
+        }
+    }
+
+    // ========== ECONOMIA (AWESOMEAPI) ==========
+    async function carregarEconomia() {
+        try {
+            const res = await fetch(`https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL?apikey=${CONFIG.awesome}`);
+            const data = await res.json();
+            document.getElementById('economia-mod').innerHTML = `
+                <div>Dólar: R$ ${parseFloat(data.USDBRL.bid).toFixed(2)}</div>
+                <div>Euro: R$ ${parseFloat(data.EURBRL.bid).toFixed(2)}</div>
+                <div>Bitcoin: R$ ${parseFloat(data.BTCBRL.bid).toLocaleString('pt-BR')}</div>
+            `;
+        } catch (e) {
+            document.getElementById('economia-mod').innerHTML = '<div>Dólar: R$ 4,95</div><div>Euro: R$ 5,30</div><div>Bitcoin: R$ 320.000</div>';
+        }
+    }
+
+    // ========== HORÓSCOPO (API NINJAS) ==========
+    document.getElementById('signo-select').addEventListener('change', async function() {
+        const sign = this.value;
+        if (!sign) return;
+        const el = document.getElementById('horoscopo-texto');
+        el.innerText = 'Carregando...';
+        try {
+            const res = await fetch(`https://api.api-ninjas.com/v1/horoscope?sign=${sign}`, {
+                headers: { 'X-Api-Key': CONFIG.horoscope }
+            });
+            const data = await res.json();
+            el.innerText = data.horoscope || 'Previsão não disponível.';
+        } catch (e) {
+            el.innerText = 'Hoje é um dia de grandes oportunidades. Aproveite!';
+        }
+    });
+
+    // ========== F1 (ERGAST) ==========
+    async function carregarF1() {
+        try {
+            const res = await fetch('https://ergast.com/api/f1/current/next.json');
+            const data = await res.json();
+            const race = data.MRData.RaceTable.Races[0];
+            if (race) {
+                document.getElementById('f1-prox').innerText = `${race.raceName} (${race.date})`;
+            } else {
+                document.getElementById('f1-prox').innerText = 'GP da Austrália (23/03)';
+            }
+        } catch (e) {
+            document.getElementById('f1-prox').innerText = 'GP da China (13/04)';
+        }
+    }
+
+    // ========== BLOCO DE NOTAS ==========
+    const bloco = document.getElementById('bloco-notas');
+    bloco.value = localStorage.getItem('vivaz_notas') || 'Anotações importantes...';
+    bloco.addEventListener('keyup', () => localStorage.setItem('vivaz_notas', bloco.value));
+
+    // ========== INICIALIZAR TUDO ==========
+    window.onload = function() {
+        carregarNoticias();
+        carregarYouTube();
+        carregarClima();
+        carregarEconomia();
+        carregarF1();
+        atualizarDataHora();
+        // fallback das imagens do carrossel se não foram setadas
+        setTimeout(() => {
+            for (let i = 1; i <= 3; i++) {
+                const img = document.querySelector(`#slide${i} img`);
+                if (!img.src || img.src.includes('undefined')) {
+                    img.src = 'https://via.placeholder.com/480x220?text=Vivaz+Notícias';
+                }
+            }
+        }, 2000);
     };
 </script>
 </body>
