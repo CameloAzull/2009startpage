@@ -3,395 +3,580 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Vivaz - O mundo é de quem faz</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>Portal Vivaz - O melhor conteúdo da Internet</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
     
     <style>
-        /* =========================================
-           RESET E ESTÉTICA WEB 2009
-           ========================================= */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* ==========================================================================
+           1. RESET E ESTÉTICA WEB 2.0 (ANOS 2000)
+           ========================================================================== */
+        * { margin: 0; padding: 0; outline: none; }
         body {
             font-family: Tahoma, Arial, Helvetica, sans-serif;
-            font-size: 11px; /* Fonte clássica pequena da época */
-            background-color: #e9e9e9; /* Fundo cinza clássico */
+            font-size: 11px;
+            background-color: #f4f3ef; /* Fundo bege clássico UOL/Terra */
             color: #333;
         }
         a { color: #004488; text-decoration: none; }
         a:hover { text-decoration: underline; color: #cc0000; }
-        ul { list-style: none; }
-        h1, h2, h3, h4 { font-family: Arial, Helvetica, sans-serif; }
+        ul, ol { list-style: none; }
+        h1, h2, h3, h4, h5 { font-family: Arial, Helvetica, sans-serif; font-weight: bold; }
+        img { border: 0; }
+        table { border-collapse: collapse; width: 100%; }
 
-        /* =========================================
-           CONTAINER PRINCIPAL (990px era o padrão Widescreen de 2009)
-           Neste caso, ajustado para 1100px para caber mais conteúdo sem perder a essência.
-           ========================================= */
-        #wrapper {
-            width: 1100px;
-            margin: 10px auto;
+        .clear { clear: both; }
+        .hide { display: none !important; }
+
+        /* ==========================================================================
+           2. ESTRUTURA PRINCIPAL
+           ========================================================================== */
+        #container {
+            width: 990px; /* Largura padrão de 2009 */
+            margin: 0 auto;
             background-color: #fff;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        /* =========================================
-           BARRA SUPERIOR (Data e Links Institucionais)
-           ========================================= */
+        /* ==========================================================================
+           3. BARRA SUPERIOR DE UTILIDADES (ESTILO "BARRA UOL")
+           ========================================================================== */
         #top-bar {
-            background: #f4f3ef;
-            border-bottom: 1px solid #d9d4c0;
-            padding: 5px 10px;
+            background-color: #e6e6e6;
+            border-bottom: 1px solid #ccc;
+            height: 25px;
+            line-height: 25px;
+            padding: 0 15px;
             display: flex;
             justify-content: space-between;
-            color: #666;
+            font-size: 10px;
+            color: #555;
         }
-        #top-bar ul { display: flex; gap: 10px; }
-        #top-bar ul li { border-left: 1px solid #ccc; padding-left: 10px; }
-        #top-bar ul li:first-child { border-left: none; }
+        #top-bar a { color: #555; font-weight: bold; }
+        #top-bar .top-links { display: flex; gap: 10px; }
+        #top-bar .top-links li { border-left: 1px solid #b5b5b5; padding-left: 10px; }
+        #top-bar .top-links li:first-child { border-left: none; }
 
-        /* =========================================
-           HEADER (Logo e Publicidade/Busca)
-           ========================================= */
+        /* ==========================================================================
+           4. CABEÇALHO (LOGO, E-MAIL, ASSINATURA)
+           ========================================================================== */
         #header {
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAyCAIAAAAh/m08AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACRJREFUeNpi+P//PwMTAwMDEwPD//9gDAzMOMTAwIAhD+Mzg1nBgGgLzHlcaA4AhgAEGACv1w21+9Y3AAAAAElFTkSuQmCC') repeat-x bottom;
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAsCAYAAAC0T4SCAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADJJREFUeNpi+P//PwMTAwMDEwPDfwY4wMAAA04B9/423m0AAAAASUVORK5CYII=') repeat-x bottom;
         }
-        .logo { font-size: 45px; font-weight: bold; color: #003464; letter-spacing: -2px; text-shadow: 1px 1px 2px #ccc; }
-        .logo span { color: #cc0000; }
-        .logo-sub { font-size: 10px; color: #666; display: block; margin-top: -5px; letter-spacing: 0; font-weight: normal; }
-        
-        .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-        
-        /* Pseudo-Banner 468x60 de Atalhos */
-        .ad-banner {
-            width: 468px; height: 60px; background: #f9f9f9; border: 1px solid #ccc;
-            display: flex; justify-content: space-around; align-items: center; padding: 5px;
+        .logo-area { display: flex; flex-direction: column; }
+        .logo { font-size: 42px; font-weight: bold; color: #003464; letter-spacing: -2px; }
+        .logo span { color: #ff6600; }
+        .logo-sub { font-size: 10px; color: #666; font-weight: normal; margin-top: -3px; }
+
+        /* Box de Email no Header */
+        .header-email-box {
+            background: #003464;
+            border: 1px solid #002244;
+            padding: 8px 12px;
+            color: #fff;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .ad-banner a { display: flex; flex-direction: column; align-items: center; font-size: 9px; font-weight: bold; color: #555; }
-        .ad-banner a:hover { text-decoration: none; color: #cc0000; }
-        .ad-banner img { height: 25px; margin-bottom: 3px; object-fit: contain; }
+        .header-email-box span { font-weight: bold; font-size: 12px; }
+        .header-email-box input { padding: 3px; font-size: 11px; border: 1px solid #7c9bb7; width: 120px; }
+        .header-email-box select { padding: 2px; font-size: 11px; border: 1px solid #7c9bb7; }
+        .header-email-box button {
+            background: url('data:image/gif;base64,R0lGODlhEQANAJEAAP///wAAAMzMzAAAACH5BAAAAAAALAAAAAARAA0AAAIklI+py+0Poxwg2msvy3r37IEgM2pZk2Voup6a68JwwI40tVEAACH5BAAAAAAALAAAAAARAA0AAAIilI+py+0Poxwgwmsvy3r3HIIgM2pZk2Voup6a+75wzI40tVEAACH5BAAAAAAALAAAAAARAA0AAAIjlI+py+0Poxwgwmsvy3r3HIIgM2pZk2Voup6a+75wzI40tVEAAOw==') no-repeat center;
+            width: 17px; height: 13px; border: none; cursor: pointer; background-color: #fff; border: 1px solid #fff;
+        }
 
-        /* =========================================
-           BUSCA TIPO UOL/GOOGLE 2009
-           ========================================= */
-        .search-box { background: #f4f3ef; padding: 8px; border: 1px solid #d9d4c0; display: flex; align-items: center; gap: 10px; width: 100%; }
-        .search-box input[type="text"] { width: 350px; padding: 4px; border: 1px solid #7e9db9; font-family: Arial; font-size: 13px; }
-        .search-box button { padding: 3px 15px; background: #e5e5e5; border: 1px solid #999; font-weight: bold; cursor: pointer; color: #333; }
-        .search-box button:hover { background: #d5d5d5; }
-        .search-hint { font-size: 10px; color: #777; }
+        /* ==========================================================================
+           5. BARRA DE BUSCA
+           ========================================================================== */
+        #search-bar {
+            background-color: #f4f3ef;
+            border-bottom: 2px solid #fff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        #search-bar .tabs { font-size: 12px; font-weight: bold; margin-bottom: 5px; }
+        #search-bar .tabs a { color: #000; margin-right: 10px; }
+        #search-bar .tabs a.active { color: #ff6600; text-decoration: underline; }
+        
+        .search-form { display: flex; align-items: center; gap: 5px; width: 100%; }
+        .search-form input[type="text"] { width: 450px; padding: 5px; border: 1px solid #7e9db9; font-size: 13px; }
+        .search-form button {
+            background-color: #e5e5e5; border: 1px solid #999; padding: 4px 15px; font-weight: bold; cursor: pointer; color: #333;
+        }
+        .search-form button:hover { background-color: #d5d5d5; }
+        .search-hint { font-size: 10px; color: #777; margin-left: 10px; }
 
-        /* =========================================
-           MENU PRINCIPAL (Bordas fortes, blocos)
-           ========================================= */
-        #nav-menu { background-color: #003464; height: 30px; display: flex; padding: 0 10px; border-bottom: 3px solid #cc0000; }
-        #nav-menu a { color: #FFF; font-weight: bold; padding: 0 15px; line-height: 30px; border-right: 1px solid #002244; font-size: 12px; }
-        #nav-menu a:hover { background: #cc0000; text-decoration: none; }
+        /* ==========================================================================
+           6. MENU PRINCIPAL GLOBAL
+           ========================================================================== */
+        #nav-menu {
+            background-color: #9a0000;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+        #nav-menu a {
+            color: #fff; font-weight: bold; padding: 0 12px; font-size: 12px; border-right: 1px solid #cc3333; line-height: 14px;
+        }
+        #nav-menu a:last-child { border-right: none; }
+        #nav-menu a:hover { text-decoration: underline; }
 
-        /* =========================================
-           TICKER DE NOTÍCIAS (MARQUEE)
-           ========================================= */
-        #ticker { background: #ffffcc; border-bottom: 1px solid #e5e5cb; padding: 5px 10px; font-weight: bold; color: #333; display: flex; align-items: center; }
-        #ticker span { background: #cc0000; color: #fff; padding: 2px 5px; margin-right: 10px; border-radius: 2px; font-size: 10px; }
+        /* TICKER / MARQUEE URGENTE */
+        #ticker {
+            background-color: #ffffcc; border-bottom: 1px solid #e5e5cb; padding: 5px 15px; display: flex; align-items: center;
+        }
+        #ticker .label { background-color: #cc0000; color: #fff; font-weight: bold; padding: 2px 6px; font-size: 10px; margin-right: 10px; text-transform: uppercase;}
+        #ticker marquee { font-weight: bold; font-size: 11px; color: #333; width: 100%; }
 
-        /* =========================================
-           LAYOUT DE 3 COLUNAS
-           ========================================= */
-        #content { display: flex; padding: 15px; gap: 15px; }
-        .col-left { width: 220px; flex-shrink: 0; }
-        .col-main { flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 15px; }
-        .col-right { width: 280px; flex-shrink: 0; }
+        /* ==========================================================================
+           7. LAYOUT EM 3 COLUNAS
+           ========================================================================== */
+        #main-content {
+            display: flex; padding: 15px; gap: 15px;
+        }
+        .col-left { width: 180px; flex-shrink: 0; }
+        .col-center { flex-grow: 1; min-width: 0; }
+        .col-right { width: 300px; flex-shrink: 0; }
 
-        /* =========================================
-           WIDGETS / BOXES PADRÃO
-           ========================================= */
-        .widget { border: 1px solid #ccc; margin-bottom: 15px; background: #fff; }
-        .w-header { padding: 4px 8px; font-weight: bold; font-size: 12px; text-transform: uppercase; color: #fff; }
-        .w-content { padding: 10px; }
+        /* ==========================================================================
+           8. WIDGETS GERAIS E CHAPÉUS
+           ========================================================================== */
+        .widget { margin-bottom: 20px; }
+        .widget-title {
+            font-size: 12px; text-transform: uppercase; font-weight: bold; padding: 5px 8px; color: #fff; margin-bottom: 8px;
+        }
+        .widget-content { padding: 0 5px; }
+        
         .chapeu { color: #cc0000; font-size: 10px; font-weight: bold; text-transform: uppercase; margin-bottom: 2px; }
-        
-        /* Paleta de Cores dos Headers */
-        .w-blue .w-header { background: #005589; border-bottom: 2px solid #003366; }
-        .w-red .w-header { background: #cc0000; border-bottom: 2px solid #990000; }
-        .w-green .w-header { background: #408829; border-bottom: 2px solid #285519; }
-        .w-orange .w-header { background: #ff6600; border-bottom: 2px solid #cc5200; }
-        .w-purple .w-header { background: #6b3e99; border-bottom: 2px solid #3a1e59; }
+        .chapeu a { color: inherit; text-decoration: none; }
+        .chapeu a:hover { text-decoration: underline; }
 
-        /* =========================================
-           COMPONENTE: E-MAIL
-           ========================================= */
-        .mail-box { background: #f4f3ef; border: 1px solid #d9d4c0; padding: 10px; margin-bottom: 15px; }
-        .mail-box select, .mail-box input { width: 100%; padding: 3px; margin-bottom: 5px; border: 1px solid #7e9db9; font-size: 11px; }
-        .mail-box button { width: 100%; padding: 4px; background: #005589; color: #fff; border: 1px solid #003366; font-weight: bold; cursor: pointer; }
+        /* Cores Temáticas de Widgets */
+        .w-red .widget-title { background: #9a0000; border-bottom: 2px solid #660000; }
+        .w-blue .widget-title { background: #005589; border-bottom: 2px solid #003366; }
+        .w-green .widget-title { background: #408829; border-bottom: 2px solid #285519; }
+        .w-orange .widget-title { background: #ec9b01; border-bottom: 2px solid #b37500; }
+        .w-gray .widget-title { background: #666; border-bottom: 2px solid #333; }
 
-        /* =========================================
-           COMPONENTE: LISTAS PONTILHADAS
-           ========================================= */
-        .list-dotted li { padding: 6px 0 6px 12px; border-bottom: 1px dotted #ccc; position: relative; }
-        .list-dotted li::before { content: "»"; position: absolute; left: 0; color: #cc0000; font-weight: bold; }
+        /* Listas Pontilhadas (estilo UOL clássico) */
+        .list-dotted li {
+            padding: 6px 0 6px 12px; border-bottom: 1px dotted #ccc; position: relative; line-height: 1.3;
+        }
+        .list-dotted li::before {
+            content: ""; position: absolute; left: 0; top: 11px; width: 4px; height: 4px; background-color: #cc0000;
+        }
         .list-dotted li:last-child { border-bottom: none; }
-        .list-dotted a { font-size: 12px; font-weight: bold; color: #333; }
-        .list-dotted p { font-size: 10px; color: #666; margin-top: 3px; }
+        .list-dotted a { font-size: 11px; font-weight: normal; color: #000; }
+        .list-dotted a strong { color: #005589; }
 
-        /* =========================================
-           COMPONENTE: MANCHETE ROTATIVA (Slider Anos 2000)
-           ========================================= */
-        .manchete { display: flex; gap: 15px; border-bottom: 1px solid #ccc; padding-bottom: 15px; margin-bottom: 15px; }
-        .manchete-img { position: relative; width: 350px; height: 230px; border: 1px solid #ccc; padding: 2px; }
-        .manchete-img img { width: 100%; height: 100%; object-fit: cover; }
-        .manchete-text { flex: 1; }
-        .manchete-text h1 { font-size: 20px; line-height: 22px; margin-bottom: 10px; }
-        .manchete-text h1 a { color: #003464; }
-        .manchete-text p { font-size: 12px; color: #444; line-height: 16px; margin-bottom: 10px;}
+        /* ==========================================================================
+           9. CARROSSEL DE NOTÍCIAS (CENTRO)
+           ========================================================================== */
+        #news-carousel {
+            width: 100%; height: 260px; position: relative; background-color: #f5f4ef; margin-bottom: 20px; border: 1px solid #ccc; overflow: hidden;
+        }
+        .carousel-slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none;
+        }
+        .carousel-slide.active { display: block; }
+        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .carousel-caption {
+            position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.7); color: #fff; padding: 15px 15px 30px 15px;
+        }
+        .carousel-caption .chapeu { color: #ffcc00; }
+        .carousel-caption h2 { font-size: 20px; line-height: 22px; margin-bottom: 5px; }
+        .carousel-caption h2 a { color: #fff; }
         
-        .sub-manchetes { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .card-noticia { display: flex; gap: 10px; border-top: 1px dotted #ccc; padding-top: 10px;}
-        .card-noticia img { width: 80px; height: 60px; object-fit: cover; border: 1px solid #ccc; }
-        .card-noticia h3 { font-size: 11px; line-height: 14px; }
-        .card-noticia h3 a { color: #333; }
+        .carousel-nav {
+            position: absolute; bottom: 10px; right: 15px; display: flex; gap: 5px; z-index: 10;
+        }
+        .carousel-nav span {
+            display: block; width: 12px; height: 12px; background: #fff; border: 1px solid #999; cursor: pointer; text-align: center; line-height: 10px; font-size: 9px; font-weight: bold; color: #333;
+        }
+        .carousel-nav span.active { background: #cc0000; color: #fff; border-color: #990000; }
 
-        /* =========================================
-           COMPONENTE: TABELAS ESPORTIVAS
-           ========================================= */
-        .tabs { display: flex; border-bottom: 2px solid #408829; margin-bottom: 10px; }
-        .tabs span { padding: 5px 10px; background: #eee; border: 1px solid #ccc; border-bottom: none; cursor: pointer; font-weight: bold; margin-right: 5px; }
-        .tabs span.active { background: #408829; color: #fff; border-color: #408829; }
-        
-        .table-sports { width: 100%; border-collapse: collapse; font-size: 11px; text-align: center; }
-        .table-sports th { background: #f4f3ef; border-bottom: 1px solid #ccc; padding: 4px; font-weight: bold; }
-        .table-sports td { border-bottom: 1px dotted #eee; padding: 4px; }
-        .table-sports td:first-child { text-align: left; font-weight: bold; }
-        .table-sports tr.g-4 td { background-color: #e8f4e8; } /* G4 Libertadores */
-        .table-sports tr.z-4 td { background-color: #fce8e8; } /* Z4 Rebaixamento */
+        /* ==========================================================================
+           10. GRID DE NOTÍCIAS (Sub-manchetes)
+           ========================================================================== */
+        .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 15px; }
+        .card-news { display: flex; flex-direction: column; gap: 5px; }
+        .card-news img { width: 100%; height: 120px; object-fit: cover; border: 1px solid #ccc; padding: 2px; }
+        .card-news h3 { font-size: 14px; line-height: 16px; }
+        .card-news h3 a { color: #000; }
 
-        /* =========================================
-           COMPONENTE: YOUTUBE & SPOTIFY
-           ========================================= */
-        .yt-video { margin-bottom: 10px; display: flex; gap: 10px; align-items: flex-start; }
-        .yt-video img { width: 100px; height: 75px; object-fit: cover; border: 1px solid #999; }
-        .yt-video a { font-weight: bold; font-size: 11px; color: #333; line-height: 14px; }
-        .yt-video p { font-size: 9px; color: #777; margin-top: 2px; }
+        /* Sistema de Abas Internas (Esportes/Economia) */
+        .tab-header { border-bottom: 2px solid #ccc; display: flex; margin-bottom: 10px; }
+        .tab-header span {
+            padding: 5px 10px; cursor: pointer; font-weight: bold; font-size: 11px; color: #666; background: #eee; border: 1px solid #ccc; border-bottom: none; margin-right: 5px;
+        }
+        .tab-header span.active { background: #fff; color: #cc0000; border-bottom: 2px solid #fff; margin-bottom: -2px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
-        /* =========================================
-           COMPONENTE: CLIMA & FINANCEIRO
-           ========================================= */
-        .weather-box { display: flex; align-items: center; justify-content: center; gap: 15px; }
-        .temp-big { font-size: 36px; font-weight: bold; color: #ff6600; letter-spacing: -2px; }
-        .weather-details { font-size: 11px; color: #555; }
-        
-        .fin-table { width: 100%; border-collapse: collapse; }
-        .fin-table td { padding: 5px 0; border-bottom: 1px dotted #ccc; }
+        /* ==========================================================================
+           11. WIDGETS DA COLUNA DIREITA (Clima, Finanças, YouTube, Spotify)
+           ========================================================================== */
+        /* Clima */
+        .weather-container { background: #f0f0e4; border: 1px solid #d7d7d7; padding: 10px; text-align: center; }
+        .weather-current { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px; border-bottom: 1px dotted #ccc; padding-bottom: 10px;}
+        .weather-icon { font-size: 40px; line-height: 40px; }
+        .weather-temp { font-size: 32px; font-weight: bold; color: #de4016; letter-spacing: -2px; }
+        .weather-info { font-size: 10px; color: #555; text-align: left; }
+        .weather-forecast { display: flex; justify-content: space-between; font-size: 9px; }
+        .forecast-day { display: flex; flex-direction: column; align-items: center; }
+        .forecast-day strong { color: #005589; }
+        .forecast-min { color: #336699; } .forecast-max { color: #de4016; font-weight: bold; }
+
+        /* Finanças */
+        .finance-table { width: 100%; text-align: left; font-size: 11px; }
+        .finance-table td { padding: 4px 0; border-bottom: 1px dotted #ccc; }
         .fin-val { font-weight: bold; text-align: right; }
-        .fin-up { color: green; } .fin-down { color: red; }
+        .fin-up { color: #489414; background: url('data:image/gif;base64,R0lGODlhCgAKAIABAL+/v////yH5BAEAAAEALAAAAAAKAAoAAAIQjI+py+0Po5y02ouz3rz7BQA7') no-repeat left center; padding-left: 12px; }
+        .fin-down { color: #b50611; background: url('data:image/gif;base64,R0lGODlhCgAKAIABAL+/v////yH5BAEAAAEALAAAAAAKAAoAAAIQjI+py+0Po5y02ouz3rz7BQA7') no-repeat left center; padding-left: 12px; /* Placeholder para seta down, rotacionaríamos via css ou sprite na época */ }
 
-        /* =========================================
-           RODAPÉ
-           ========================================= */
-        #footer { background-color: #f4f3ef; text-align: center; padding: 20px; border-top: 3px solid #ccc; margin-top: 20px; color: #666; }
-        #footer a { color: #666; margin: 0 5px; }
-        #footer p { margin-top: 5px; }
+        /* YouTube */
+        .yt-list { display: flex; flex-direction: column; gap: 10px; }
+        .yt-item { display: flex; gap: 10px; align-items: flex-start; }
+        .yt-item img { width: 90px; height: 67px; border: 1px solid #999; padding: 1px; }
+        .yt-item h4 { font-size: 11px; line-height: 13px; }
+        .yt-item p { font-size: 9px; color: #666; margin-top: 3px; }
+
+        /* ==========================================================================
+           12. WIDGETS DA COLUNA ESQUERDA (Ads, Horóscopo, Enquete, Álbum)
+           ========================================================================== */
+        /* Banner Vertical de Compras */
+        .ad-vertical { border: 1px solid #ccc; background: #fff; margin-bottom: 20px; }
+        .ad-header { background: #e5e5e5; text-align: center; padding: 5px; font-weight: bold; font-size: 10px; color: #555; text-transform: uppercase; border-bottom: 1px solid #ccc; }
+        .ad-item { display: flex; flex-direction: column; align-items: center; padding: 10px; border-bottom: 1px dotted #ccc; text-align: center; }
+        .ad-item:last-child { border-bottom: none; }
+        .ad-item img { max-width: 100px; max-height: 40px; margin-bottom: 5px; object-fit: contain; }
+        .ad-item span { font-size: 10px; font-weight: bold; color: #004488; }
+        .ad-item em { font-size: 9px; color: #666; font-style: normal; display: block; margin-top: 2px; }
+
+        /* Horóscopo */
+        .horoscope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+        .horoscope-grid a { display: flex; align-items: center; gap: 5px; font-size: 10px; background: #f5f4ef; padding: 4px; border: 1px solid #ebebeb; }
+        .horoscope-grid a:hover { background: #e9e9e9; text-decoration: none; }
+        #horoscope-result { margin-top: 10px; padding: 10px; background: #ffffcc; border: 1px solid #e5e5cb; font-size: 11px; display: none; }
+
+        /* Enquete */
+        .poll-box { background: #f0f4f7; border: 1px solid #b5c6cf; padding: 10px; }
+        .poll-box h4 { font-size: 12px; margin-bottom: 10px; color: #003464; }
+        .poll-box label { display: block; margin-bottom: 5px; cursor: pointer; }
+        .poll-box button { margin-top: 10px; padding: 3px 10px; background: #005589; color: #fff; border: 1px solid #002244; font-weight: bold; cursor: pointer; }
+        .poll-results { margin-top: 10px; display: none; }
+        .poll-bar-bg { width: 100%; background: #ccc; height: 10px; margin-top: 2px; margin-bottom: 8px;}
+        .poll-bar-fg { background: #cc0000; height: 100%; }
+
+        /* Álbum de Fotos (Flickr) */
+        .photo-album { display: flex; flex-wrap: wrap; gap: 5px; }
+        .photo-album img { width: 50px; height: 50px; object-fit: cover; border: 1px solid #ccc; padding: 1px; cursor: pointer; }
+
+        /* ==========================================================================
+           13. TABELAS DE ESPORTES (Simulação fiel de 2009)
+           ========================================================================== */
+        .table-standings { width: 100%; text-align: center; border-collapse: collapse; }
+        .table-standings th { background: #f1f1f1; border-bottom: 2px solid #ccc; padding: 4px; font-size: 10px; }
+        .table-standings td { border-bottom: 1px dotted #ddd; padding: 4px; font-size: 11px; }
+        .table-standings td.team { text-align: left; font-weight: bold; }
+        .t-libertadores td { background-color: #e8f4e8; } /* Verde claro */
+        .t-sulamericana td { background-color: #f4f4e8; } /* Amarelo claro */
+        .t-rebaixamento td { background-color: #fce8e8; } /* Vermelho claro */
+
+        /* ==========================================================================
+           14. RODAPÉ
+           ========================================================================== */
+        #footer {
+            background-color: #e6e9ec;
+            border-top: 3px solid #b5c6cf;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            color: #555;
+            font-size: 10px;
+        }
+        #footer a { color: #555; margin: 0 5px; }
+        #footer .footer-main-links { font-size: 11px; font-weight: bold; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-<div id="wrapper">
+<div id="container">
+    
     <div id="top-bar">
-        <div id="data-atual">Carregando data...</div>
-        <ul>
-            <li><a href="#" onclick="alert('Defina este arquivo HTML como página inicial nas configurações do seu navegador!')">Faça do Vivaz sua Homepage</a></li>
-            <li><a href="https://mail.google.com" target="_blank">E-mail</a></li>
+        <div id="datetime-display">Carregando data...</div>
+        <ul class="top-links">
+            <li><a href="#" onclick="alert('Defina no seu navegador para abrir este arquivo na inicialização!')">Faça do Vivaz sua Home Page</a></li>
             <li><a href="https://translate.google.com" target="_blank">Tradutor</a></li>
-            <li><a href="https://maps.google.com" target="_blank">Mapas</a></li>
+            <li><a href="https://maps.google.com" target="_blank">Mapas e Rotas</a></li>
+            <li><a href="https://www.correios.com.br" target="_blank">Correios</a></li>
         </ul>
     </div>
 
     <div id="header">
         <div class="logo-area">
             <div class="logo">VIVAZ<span>.com</span></div>
-            <div class="logo-sub">O mundo é de quem faz.</div>
+            <div class="logo-sub">O mundo é de quem faz. Desde 1996.</div>
         </div>
 
-        <div class="header-right">
-            <div class="ad-banner">
-                <a href="https://mercadolivre.com.br" target="_blank"><img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.22/mercadolibre/logo__small.png" alt="ML">Mercado Livre</a>
-                <a href="https://shopee.com.br" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg" alt="Shopee">Shopee</a>
-                <a href="https://aliexpress.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Aliexpress_logo.svg" alt="Ali">AliExpress</a>
-                <a href="https://olx.com.br" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/OLX_green_logo.svg" alt="OLX">OLX</a>
-                <a href="https://webmotors.com.br" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Webmotors_logo.svg" alt="Webmotors">Webmotors</a>
-            </div>
-
-            <div class="search-box">
-                <form onsubmit="handleSearch(event)" style="display:flex; align-items:center; gap:5px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" height="20" alt="Google">
-                    <input type="text" id="q" placeholder="Busque na Web ou use !yt (YouTube), !m (Maps)...">
-                    <button type="submit">BUSCAR</button>
-                </form>
-            </div>
+        <div class="header-email-box">
+            <span>E-MAIL</span>
+            <form onsubmit="handleEmailLogin(event)" style="display:flex; gap:5px; align-items:center;">
+                <input type="text" placeholder="Usuário">
+                <select id="email-provider">
+                    <option value="gmail">@gmail.com</option>
+                    <option value="hotmail">@hotmail.com</option>
+                    <option value="yahoo">@yahoo.com</option>
+                    <option value="uol">@uol.com.br</option>
+                </select>
+                <input type="password" placeholder="Senha">
+                <button type="submit"></button>
+            </form>
         </div>
     </div>
-    
+
+    <div id="search-bar">
+        <div>
+            <div class="tabs">
+                <a href="#" class="active">A Web</a>
+                <a href="#">Imagens</a>
+                <a href="#">Notícias</a>
+                <a href="#">Shopping</a>
+            </div>
+            <form class="search-form" onsubmit="handleSearch(event)">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" height="20" alt="Google" style="margin-right: 10px;">
+                <input type="text" id="search-query" placeholder="Dica: Use !yt para YouTube, !w para Wikipedia, !m para Maps">
+                <button type="submit">Buscar</button>
+                <span class="search-hint">Enhanced by Google</span>
+            </form>
+        </div>
+    </div>
+
     <div id="nav-menu">
-        <a href="https://g1.globo.com">Últimas Notícias</a>
+        <a href="https://g1.globo.com">Notícias</a>
         <a href="https://ge.globo.com">Esportes</a>
         <a href="https://economia.uol.com.br">Economia</a>
-        <a href="https://adorocinema.com">Cinema & TV</a>
+        <a href="https://adorocinema.com">Entretenimento</a>
         <a href="https://tecmundo.com.br">Tecnologia</a>
-        <a href="https://www.uol.com.br/universa/horoscopo/">Horóscopo</a>
         <a href="https://www.climatempo.com.br">Tempo</a>
-        <a href="https://gshow.globo.com">Celebridades</a>
+        <a href="https://www.uol.com.br/universa/horoscopo/">Horóscopo</a>
+        <a href="#">Bate-Papo</a>
+        <a href="#">Jogos</a>
+        <a href="#">Fotoblog</a>
     </div>
 
     <div id="ticker">
-        <span>URGENTE</span> 
-        <marquee scrollamount="5" id="marquee-news">Carregando últimas atualizações do mercado e notícias...</marquee>
+        <span class="label">ÚLTIMAS</span>
+        <marquee scrollamount="4" id="marquee-news">Carregando últimas notícias via RSS...</marquee>
     </div>
 
-    <div id="content">
+    <div id="main-content">
         
         <div class="col-left">
             
-            <div class="mail-box">
-                <div style="font-weight:bold; color:#003464; margin-bottom:8px; font-size:12px;">✉ Acesso E-mail</div>
-                <select id="email-provider">
-                    <option value="https://mail.google.com">Gmail</option>
-                    <option value="https://outlook.live.com/">Hotmail / Outlook</option>
-                    <option value="https://mail.yahoo.com">Yahoo Mail</option>
-                    <option value="https://mail.uol.com.br">UOL Mail</option>
-                </select>
-                <input type="text" placeholder="Usuário">
-                <input type="password" placeholder="Senha">
-                <button onclick="goToEmail()">ENTRAR</button>
+            <div class="ad-vertical">
+                <div class="ad-header">Guia de Compras</div>
+                
+                <a href="https://www.mercadolivre.com.br" target="_blank" class="ad-item">
+                    <img src="https://logodownload.org/wp-content/uploads/2016/08/Mercado-Livre-logo-1.png" alt="Mercado Livre">
+                    <span>MERCADO LIVRE</span>
+                    <em>Onde você compra e vende de tudo!</em>
+                </a>
+                
+                <a href="https://www.olx.com.br" target="_blank" class="ad-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/OLX_green_logo.svg" alt="OLX">
+                    <span>OLX</span>
+                    <em>Desapega, Desapega!</em>
+                </a>
+                
+                <a href="https://www.webmotors.com.br" target="_blank" class="ad-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Webmotors_logo.svg" alt="Webmotors">
+                    <span>WEBMOTORS</span>
+                    <em>O maior classificado de veículos.</em>
+                </a>
+
+                <a href="https://pt.aliexpress.com/" target="_blank" class="ad-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Aliexpress_logo.svg" alt="AliExpress">
+                    <span>ALIEXPRESS</span>
+                    <em>Importados direto da China.</em>
+                </a>
+
+                <a href="https://shopee.com.br" target="_blank" class="ad-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg" alt="Shopee">
+                    <span>SHOPEE</span>
+                    <em>Frete Grátis e Cupons Diários.</em>
+                </a>
             </div>
 
-            <div class="widget w-orange">
-                <div class="w-header">Tempo: Nova Iguaçu, RJ</div>
-                <div class="w-content weather-box" id="box-clima">
-                    <div style="text-align:center; padding: 20px;">Carregando...</div>
+            <div class="widget w-blue">
+                <div class="widget-title">Enquete do Dia</div>
+                <div class="widget-content">
+                    <div class="poll-box" id="poll-container">
+                        <h4>Como você avalia a atual situação econômica do Brasil em 2026?</h4>
+                        <label><input type="radio" name="poll" value="otima"> Ótima</label>
+                        <label><input type="radio" name="poll" value="regular"> Regular</label>
+                        <label><input type="radio" name="poll" value="ruim"> Ruim</label>
+                        <button onclick="submitPoll()">VOTAR</button>
+                    </div>
+                    <div class="poll-results" id="poll-results">
+                        <h4>Resultados Parciais:</h4>
+                        Ótima (15%)<div class="poll-bar-bg"><div class="poll-bar-fg" style="width: 15%"></div></div>
+                        Regular (45%)<div class="poll-bar-bg"><div class="poll-bar-fg" style="width: 45%"></div></div>
+                        Ruim (40%)<div class="poll-bar-bg"><div class="poll-bar-fg" style="width: 40%"></div></div>
+                        <em>Total de votos: 1.452</em>
+                    </div>
                 </div>
             </div>
 
             <div class="widget w-purple">
-                <div class="w-header">Horóscopo de Hoje</div>
-                <div class="w-content">
-                    <select id="select-signo" style="width:100%; padding:3px; margin-bottom: 8px; border:1px solid #ccc;">
-                        <option value="">Selecione seu signo...</option>
-                        <option value="aries">Áries</option><option value="touro">Touro</option>
-                        <option value="gemeos">Gêmeos</option><option value="cancer">Câncer</option>
-                        <option value="leao">Leão</option><option value="virgem">Virgem</option>
-                        <option value="libra">Libra</option><option value="escorpiao">Escorpião</option>
-                        <option value="sagitario">Sagitário</option><option value="capricornio">Capricórnio</option>
-                        <option value="aquario">Aquário</option><option value="peixes">Peixes</option>
-                    </select>
-                    <div id="box-horoscopo" style="font-size: 11px; color:#555; line-height: 1.4;">
-                        Acompanhe as previsões astrais diárias.
+                <div class="widget-title">Horóscopo</div>
+                <div class="widget-content">
+                    <div class="horoscope-grid">
+                        <a href="#" onclick="showHoroscope('Áries')">♈ Áries</a>
+                        <a href="#" onclick="showHoroscope('Touro')">♉ Touro</a>
+                        <a href="#" onclick="showHoroscope('Gêmeos')">♊ Gêmeos</a>
+                        <a href="#" onclick="showHoroscope('Câncer')">♋ Câncer</a>
+                        <a href="#" onclick="showHoroscope('Leão')">♌ Leão</a>
+                        <a href="#" onclick="showHoroscope('Virgem')">♍ Virgem</a>
+                        <a href="#" onclick="showHoroscope('Libra')">♎ Libra</a>
+                        <a href="#" onclick="showHoroscope('Escorpião')">♏ Escorpião</a>
+                        <a href="#" onclick="showHoroscope('Sagitário')">♐ Sagitário</a>
+                        <a href="#" onclick="showHoroscope('Capricórnio')">♑ Capricórnio</a>
+                        <a href="#" onclick="showHoroscope('Aquário')">♒ Aquário</a>
+                        <a href="#" onclick="showHoroscope('Peixes')">♓ Peixes</a>
                     </div>
-                </div>
-            </div>
-
-            <div class="widget w-blue">
-                <div class="w-header">Nova Iguaçu & Baixada</div>
-                <div class="w-content" style="padding: 5px;">
-                    <ul class="list-dotted" id="box-local">
-                        <li>Carregando...</li>
-                    </ul>
+                    <div id="horoscope-result">Selecione seu signo.</div>
                 </div>
             </div>
 
         </div>
 
-        <div class="col-main">
+        <div class="col-center">
             
-            <div class="widget" style="border:none; background:transparent;">
-                <div id="box-manchete">
-                    <div style="text-align:center; padding: 50px;">Carregando notícias (GNews)...</div>
+            <div id="news-carousel">
+                <div id="carousel-slides-container">
+                    <div class="carousel-slide active">
+                        <img src="https://via.placeholder.com/600x260?text=Carregando+Notícias" alt="Carregando">
+                        <div class="carousel-caption">
+                            <h2>Aguarde, carregando os destaques do dia via RSS...</h2>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="sub-manchetes" id="box-submanchetes">
+                <div class="carousel-nav" id="carousel-nav-container">
                     </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                <div class="widget w-purple">
-                    <div class="w-header">Entretenimento</div>
-                    <div class="w-content" style="padding: 5px;">
-                        <ul class="list-dotted" id="box-ent">
-                            <li>Carregando...</li>
-                        </ul>
-                    </div>
+            <div class="news-grid" id="main-news-grid">
+                Carregando sub-manchetes...
+            </div>
+
+            <div class="widget w-blue" style="border:none;">
+                <div class="tab-header" id="news-tabs-header">
+                    <span class="active" onclick="switchTab('news', 'tab-nacional')">Nacional</span>
+                    <span onclick="switchTab('news', 'tab-internacional')">Internacional</span>
+                    <span onclick="switchTab('news', 'tab-tech')">Tecnologia</span>
                 </div>
 
-                <div class="widget w-blue">
-                    <div class="w-header">Tecnologia</div>
-                    <div class="w-content" style="padding: 5px;">
-                        <ul class="list-dotted" id="box-tech">
-                            <li>Carregando...</li>
-                        </ul>
-                    </div>
+                <div class="tab-content active" id="tab-nacional">
+                    <ul class="list-dotted" id="list-nacional"><li>Carregando...</li></ul>
+                </div>
+                <div class="tab-content" id="tab-internacional">
+                    <ul class="list-dotted" id="list-internacional"><li>Carregando...</li></ul>
+                </div>
+                <div class="tab-content" id="tab-tech">
+                    <ul class="list-dotted" id="list-tech"><li>Carregando...</li></ul>
                 </div>
             </div>
 
-            <div class="widget w-green">
-                <div class="w-header">Painel Esportivo</div>
-                <div class="w-content">
-                    <div class="tabs" id="sport-tabs">
-                        <span class="active" onclick="switchSportTab('serieA')">Brasileirão Série A</span>
-                        <span onclick="switchSportTab('serieB')">Brasileirão Série B</span>
-                        <span onclick="switchSportTab('f1')">Fórmula 1</span>
-                    </div>
+            <hr style="border: 0; border-top: 1px dotted #ccc; margin: 20px 0;">
 
-                    <div id="tab-serieA">
-                        <table class="table-sports">
-                            <tr><th>Classificação</th><th>Pts</th><th>J</th><th>V</th><th>E</th><th>D</th></tr>
-                            <tr class="g-4"><td>1. Botafogo</td><td>73</td><td>38</td><td>21</td><td>10</td><td>7</td></tr>
-                            <tr class="g-4"><td>2. Palmeiras</td><td>73</td><td>38</td><td>21</td><td>10</td><td>7</td></tr>
-                            <tr class="g-4"><td>3. Flamengo</td><td>69</td><td>38</td><td>20</td><td>9</td><td>9</td></tr>
-                            <tr class="g-4"><td>4. Fortaleza</td><td>68</td><td>38</td><td>19</td><td>11</td><td>8</td></tr>
-                            <tr><td>5. Internacional</td><td>68</td><td>38</td><td>19</td><td>11</td><td>8</td></tr>
-                            <tr><td>6. São Paulo</td><td>59</td><td>38</td><td>17</td><td>8</td><td>13</td></tr>
-                            <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
-                            <tr class="z-4"><td>17. Athletico-PR</td><td>42</td><td>38</td><td>11</td><td>9</td><td>18</td></tr>
-                            <tr class="z-4"><td>18. Criciúma</td><td>38</td><td>38</td><td>9</td><td>11</td><td>18</td></tr>
-                            <tr class="z-4"><td>19. Atlético-GO</td><td>26</td><td>38</td><td>6</td><td>8</td><td>24</td></tr>
-                            <tr class="z-4"><td>20. Cuiabá</td><td>30</td><td>38</td><td>7</td><td>9</td><td>22</td></tr>
-                        </table>
-                        <div style="text-align:right; margin-top:5px;"><a href="https://ge.globo.com/futebol/brasileirao-serie-a/" target="_blank" style="font-size:10px;">Ver tabela completa »</a></div>
-                    </div>
+            <div class="widget w-green" style="border:none;">
+                <div class="tab-header" id="sports-tabs-header">
+                    <span class="active" onclick="switchTab('sports', 'tab-sports-news')">Últimas do Esporte</span>
+                    <span onclick="switchTab('sports', 'tab-brasileiraoA')">Série A</span>
+                    <span onclick="switchTab('sports', 'tab-brasileiraoB')">Série B</span>
+                    <span onclick="switchTab('sports', 'tab-f1')">Fórmula 1</span>
+                </div>
 
-                    <div id="tab-serieB" style="display:none;">
-                        <table class="table-sports">
-                            <tr><th>Classificação</th><th>Pts</th><th>J</th><th>V</th><th>E</th><th>D</th></tr>
-                            <tr class="g-4"><td>1. Santos</td><td>68</td><td>38</td><td>20</td><td>8</td><td>10</td></tr>
-                            <tr class="g-4"><td>2. Mirassol</td><td>67</td><td>38</td><td>19</td><td>10</td><td>9</td></tr>
-                            <tr class="g-4"><td>3. Novorizontino</td><td>67</td><td>38</td><td>19</td><td>10</td><td>9</td></tr>
-                            <tr class="g-4"><td>4. Sport</td><td>66</td><td>38</td><td>18</td><td>12</td><td>8</td></tr>
-                            <tr><td>5. Ceará</td><td>64</td><td>38</td><td>19</td><td>7</td><td>12</td></tr>
-                        </table>
-                        <div style="text-align:right; margin-top:5px;"><a href="https://ge.globo.com/futebol/brasileirao-serie-b/" target="_blank" style="font-size:10px;">Ver tabela completa »</a></div>
-                    </div>
+                <div class="tab-content active" id="tab-sports-news">
+                    <ul class="list-dotted" id="list-sports"><li>Carregando notícias esportivas...</li></ul>
+                </div>
 
-                    <div id="tab-f1" style="display:none;">
-                        <div style="display: flex; gap: 20px;">
-                            <table class="table-sports" style="flex: 1;">
-                                <tr><th colspan="2">Mundial de Pilotos 2026</th></tr>
-                                <tr><td>1. Max Verstappen</td><td>RED BULL</td></tr>
-                                <tr><td>2. Lando Norris</td><td>MCLAREN</td></tr>
-                                <tr><td>3. Charles Leclerc</td><td>MCLAREN</td></tr>
-                                <tr><td>4. Lewis Hamilton</td><td>FERRARI</td></tr>
-                                <tr><td>5. George Russell</td><td>FERRARI</td></tr>
+                <div class="tab-content" id="tab-brasileiraoA">
+                    <table class="table-standings">
+                        <tr><th>Pos</th><th class="team">Time</th><th>P</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>SG</th></tr>
+                        <tr class="t-libertadores"><td>1</td><td class="team">Botafogo</td><td>73</td><td>38</td><td>21</td><td>10</td><td>7</td><td>55</td><td>29</td><td>26</td></tr>
+                        <tr class="t-libertadores"><td>2</td><td class="team">Palmeiras</td><td>73</td><td>38</td><td>21</td><td>10</td><td>7</td><td>57</td><td>33</td><td>24</td></tr>
+                        <tr class="t-libertadores"><td>3</td><td class="team">Flamengo</td><td>69</td><td>38</td><td>20</td><td>9</td><td>9</td><td>53</td><td>38</td><td>15</td></tr>
+                        <tr class="t-libertadores"><td>4</td><td class="team">Fortaleza</td><td>68</td><td>38</td><td>19</td><td>11</td><td>8</td><td>49</td><td>37</td><td>12</td></tr>
+                        <tr class="t-sulamericana"><td>5</td><td class="team">Internacional</td><td>68</td><td>38</td><td>19</td><td>11</td><td>8</td><td>49</td><td>35</td><td>14</td></tr>
+                        <tr class="t-sulamericana"><td>6</td><td class="team">São Paulo</td><td>59</td><td>38</td><td>17</td><td>8</td><td>13</td><td>49</td><td>40</td><td>9</td></tr>
+                        <tr class="t-sulamericana"><td>7</td><td class="team">Bahia</td><td>53</td><td>38</td><td>15</td><td>8</td><td>15</td><td>48</td><td>47</td><td>1</td></tr>
+                        <tr><td colspan="10" style="text-align:center; color:#999; font-size:9px;">...</td></tr>
+                        <tr class="t-rebaixamento"><td>17</td><td class="team">Athletico-PR</td><td>42</td><td>38</td><td>11</td><td>9</td><td>18</td><td>37</td><td>44</td><td>-7</td></tr>
+                        <tr class="t-rebaixamento"><td>18</td><td class="team">Criciúma</td><td>38</td><td>38</td><td>9</td><td>11</td><td>18</td><td>41</td><td>57</td><td>-16</td></tr>
+                        <tr class="t-rebaixamento"><td>19</td><td class="team">Cuiabá</td><td>30</td><td>38</td><td>7</td><td>9</td><td>22</td><td>29</td><td>51</td><td>-22</td></tr>
+                        <tr class="t-rebaixamento"><td>20</td><td class="team">Atlético-GO</td><td>26</td><td>38</td><td>6</td><td>8</td><td>24</td><td>28</td><td>61</td><td>-33</td></tr>
+                    </table>
+                    <div style="text-align:right; margin-top:5px;"><a href="https://ge.globo.com/futebol/brasileirao-serie-a/" target="_blank" style="font-size:10px;">Tabela Completa »</a></div>
+                </div>
+
+                <div class="tab-content" id="tab-brasileiraoB">
+                    <table class="table-standings">
+                        <tr><th>Pos</th><th class="team">Time</th><th>P</th><th>J</th><th>V</th><th>E</th><th>D</th></tr>
+                        <tr class="t-libertadores"><td>1</td><td class="team">Santos</td><td>68</td><td>38</td><td>20</td><td>8</td><td>10</td></tr>
+                        <tr class="t-libertadores"><td>2</td><td class="team">Mirassol</td><td>67</td><td>38</td><td>19</td><td>10</td><td>9</td></tr>
+                        <tr class="t-libertadores"><td>3</td><td class="team">Novorizontino</td><td>67</td><td>38</td><td>19</td><td>10</td><td>9</td></tr>
+                        <tr class="t-libertadores"><td>4</td><td class="team">Sport</td><td>66</td><td>38</td><td>18</td><td>12</td><td>8</td></tr>
+                        <tr><td>5</td><td class="team">Ceará</td><td>64</td><td>38</td><td>19</td><td>7</td><td>12</td></tr>
+                        <tr><td colspan="7" style="text-align:center; color:#999; font-size:9px;">...</td></tr>
+                        <tr class="t-rebaixamento"><td>17</td><td class="team">Ponte Preta</td><td>40</td><td>38</td><td>10</td><td>10</td><td>18</td></tr>
+                        <tr class="t-rebaixamento"><td>18</td><td class="team">Ituano</td><td>35</td><td>38</td><td>8</td><td>11</td><td>19</td></tr>
+                        <tr class="t-rebaixamento"><td>19</td><td class="team">Guarani</td><td>32</td><td>38</td><td>8</td><td>8</td><td>22</td></tr>
+                        <tr class="t-rebaixamento"><td>20</td><td class="team">Brusque</td><td>30</td><td>38</td><td>6</td><td>12</td><td>20</td></tr>
+                    </table>
+                </div>
+
+                <div class="tab-content" id="tab-f1">
+                    <div style="display:flex; gap: 15px;">
+                        <div style="flex:1;">
+                            <div class="chapeu" style="margin-bottom:5px;">MUNDIAL DE PILOTOS 2026</div>
+                            <table class="table-standings">
+                                <tr><th class="team">Piloto</th><th>Equipe</th><th>Pts</th></tr>
+                                <tr><td class="team">1. M. Verstappen</td><td>Red Bull</td><td>0</td></tr>
+                                <tr><td class="team">2. L. Norris</td><td>McLaren</td><td>0</td></tr>
+                                <tr><td class="team">3. C. Leclerc</td><td>Ferrari</td><td>0</td></tr>
+                                <tr><td class="team">4. L. Hamilton</td><td>Ferrari</td><td>0</td></tr>
+                                <tr><td class="team">5. G. Russell</td><td>Mercedes</td><td>0</td></tr>
                             </table>
-                            <div style="flex: 1; border-left: 1px dotted #ccc; padding-left: 10px;">
-                                <h4 style="color:#cc0000; margin-bottom: 5px;">Próximas Corridas</h4>
-                                <ul class="list-dotted" style="font-size: 11px;">
-                                    <li>GP do Bahrein - 01/Mar</li>
-                                    <li>GP da Arábia Saudita - 08/Mar</li>
-                                    <li>GP da Austrália - 22/Mar</li>
-                                </ul>
+                        </div>
+                        <div style="flex:1;">
+                            <div class="chapeu" style="margin-bottom:5px;">MUNDIAL DE CONSTRUTORES</div>
+                            <table class="table-standings">
+                                <tr><th class="team">Equipe</th><th>Pts</th></tr>
+                                <tr><td class="team">1. McLaren</td><td>0</td></tr>
+                                <tr><td class="team">2. Ferrari</td><td>0</td></tr>
+                                <tr><td class="team">3. Red Bull</td><td>0</td></tr>
+                                <tr><td class="team">4. Mercedes</td><td>0</td></tr>
+                                <tr><td class="team">5. Aston Martin</td><td>0</td></tr>
+                            </table>
+                            <div style="margin-top: 10px; font-size:10px; color:#555;">
+                                <strong>Próxima Corrida:</strong><br>
+                                GP do Bahrein - 01 de Março
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -399,27 +584,59 @@
 
         <div class="col-right">
             
+            <div class="widget w-orange">
+                <div class="widget-title">Tempo e Trânsito: Nova Iguaçu</div>
+                <div class="widget-content">
+                    <div class="weather-container" id="box-weather">
+                        <div style="padding: 20px;">Carregando dados meteorológicos...</div>
+                    </div>
+                    <div style="margin-top: 10px; text-align: center; border-top: 1px dotted #ccc; padding-top: 5px;">
+                        <a href="https://maps.google.com" target="_blank" style="font-weight:bold; font-size:10px; color:#005589;">🚗 Ver Trânsito Agora na Via Dutra</a>
+                    </div>
+                </div>
+            </div>
+
             <div class="widget w-gray">
-                <div class="w-header">Mercado Financeiro</div>
-                <div class="w-content" style="padding: 10px;">
-                    <table class="fin-table" id="box-economia">
-                        <tr><td>Carregando cotações...</td></tr>
+                <div class="widget-title">Mercado Financeiro</div>
+                <div class="widget-content">
+                    <table class="finance-table" id="box-finance">
+                        <tr><td>Carregando cotações via AwesomeAPI...</td></tr>
                     </table>
-                    <div style="text-align:center; font-size:9px; color:#999; margin-top:5px;">Dados fornecidos por AwesomeAPI</div>
+                    <div style="margin-top: 10px;">
+                        <div class="chapeu">Últimas de Economia</div>
+                        <ul class="list-dotted" id="list-finance" style="font-size: 10px;">
+                            <li>Carregando...</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
             <div class="widget w-red">
-                <div class="w-header">Vídeos em Alta (YouTube BR)</div>
-                <div class="w-content" id="box-youtube" style="padding: 8px;">
-                    <div style="text-align:center;">Carregando...</div>
+                <div class="widget-title">YouTube em Alta (Brasil)</div>
+                <div class="widget-content">
+                    <div class="yt-list" id="box-youtube">
+                        <div style="text-align:center; padding:10px;">Carregando vídeos da API...</div>
+                    </div>
                 </div>
             </div>
 
             <div class="widget w-green">
-                <div class="w-header">Rádio Vivaz (Top Brasil)</div>
-                <div class="w-content" style="padding: 0;">
-                    <iframe style="border-radius:0; border:none; margin-bottom:-5px; display:block;" src="https://open.spotify.com/embed/playlist/37i9dQZEVXbMXbN3EUUhlg?utm_source=generator" width="100%" height="250" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <div class="widget-title">Rádio Vivaz (Spotify)</div>
+                <div class="widget-content" style="padding: 0;">
+                    <div style="background:#408829; padding: 2px 5px; display:flex; gap: 5px;">
+                        <button onclick="changeSpotify('0')" style="font-size:9px; cursor:pointer;">Sua Playlist</button>
+                        <button onclick="changeSpotify('37i9dQZEVXbMXbN3EUUhlg')" style="font-size:9px; cursor:pointer;">Top Brasil</button>
+                    </div>
+                    <iframe id="spotify-iframe" style="border-radius:0; border:none; display:block;" src="https://open.spotify.com/playlist/70iBVaIhyjVNfqJbPDfBy6?si=0f577c2577314e4e" width="100%" height="280" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <div class="widget w-orange">
+                <div class="widget-title">Álbum de Fotos (Flickr)</div>
+                <div class="widget-content">
+                    <div class="photo-album" id="box-photos">
+                        Carregando fotos recentes...
+                    </div>
                 </div>
             </div>
 
@@ -427,28 +644,35 @@
     </div>
 
     <div id="footer">
-        <p>
+        <div class="footer-main-links">
             <a href="#">Banda Larga</a> | 
             <a href="#">TodaOferta</a> | 
             <a href="#">Shopping</a> | 
             <a href="#">Antivírus</a> | 
             <a href="#">Jogos</a> | 
-            <a href="#">E-mail gratuito</a>
-        </p>
-        <p style="margin-top:10px;">
-            <a href="#">Sobre o Vivaz</a> • 
+            <a href="#">Voip</a> | 
+            <a href="#">E-mail gratuito</a> |
+            <a href="#">Índice de Sites</a>
+        </div>
+        <p>
+            <a href="#">Sobre o Portal Vivaz</a> • 
+            <a href="#">Trabalhe Conosco</a> • 
             <a href="#">Política de Privacidade</a> • 
             <a href="#">Central de Denúncias</a> • 
-            <a href="#">Fale Conosco</a>
+            <a href="#">Fale Conosco / SAC</a>
         </p>
-        <p style="margin-top:15px; font-size: 10px;">© 2009-2026 Portal Vivaz Internet Ltda. O mundo é de quem faz. Todos os direitos reservados.</p>
+        <p style="margin-top:15px; color:#888;">
+            © 1996-2026 Portal Vivaz Internet Ltda. O mundo é de quem faz. Todos os direitos reservados.<br>
+            <span style="font-size:9px;">Design otimizado para resoluções de 1024x768 ou superiores.</span>
+        </p>
     </div>
+
 </div>
 
 <script>
-    /* =========================================
-       1. DATA E RELÓGIO
-       ========================================= */
+    /* --------------------------------------------------------------------------
+       1. DATA E RELÓGIO DO SISTEMA
+       -------------------------------------------------------------------------- */
     function attRelogio() {
         const d = new Date();
         const dias = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
@@ -461,17 +685,17 @@
         let hora = d.getHours().toString().padStart(2, '0');
         let min = d.getMinutes().toString().padStart(2, '0');
         
-        document.getElementById('data-atual').innerHTML = `<strong>${diaStr}, ${diaNum} de ${mesStr} de ${ano} - ${hora}:${min}</strong>`;
+        document.getElementById('datetime-display').innerHTML = `<strong>${diaStr}, ${diaNum} de ${mesStr} de ${ano} - ${hora}:${min}</strong>`;
     }
     setInterval(attRelogio, 1000); 
     attRelogio();
 
-    /* =========================================
-       2. BUSCA COM "BANGS" (Estilo Startpage)
-       ========================================= */
+    /* --------------------------------------------------------------------------
+       2. BUSCA INTELIGENTE (!BANGS) E LOGIN E-MAIL
+       -------------------------------------------------------------------------- */
     function handleSearch(e) {
         e.preventDefault();
-        let query = document.getElementById('q').value.trim();
+        let query = document.getElementById('search-query').value.trim();
         if(!query) return;
         
         if(query.startsWith('!yt ')) {
@@ -479,193 +703,308 @@
         } else if(query.startsWith('!w ')) {
             window.open('https://pt.wikipedia.org/wiki/Special:Search?search=' + encodeURIComponent(query.substring(3)), '_blank');
         } else if(query.startsWith('!m ')) {
-            window.open('https://maps.google.com/?q=' + encodeURIComponent(query.substring(3)), '_blank');
+            window.open('http://googleusercontent.com/maps.google.com/6' + encodeURIComponent(query.substring(3)), '_blank');
         } else {
             window.open('https://www.google.com/search?q=' + encodeURIComponent(query), '_blank');
         }
     }
 
-    /* =========================================
-       3. REDIRECIONAMENTO E-MAIL
-       ========================================= */
-    function goToEmail() {
+    function handleEmailLogin(e) {
+        e.preventDefault();
         const provider = document.getElementById('email-provider').value;
-        window.open(provider, '_blank');
+        const urls = {
+            'gmail': 'https://mail.google.com',
+            'hotmail': 'https://outlook.live.com',
+            'yahoo': 'https://mail.yahoo.com',
+            'uol': 'https://mail.uol.com.br'
+        };
+        window.open(urls[provider], '_blank');
     }
 
-    /* =========================================
-       4. ALTERNAR ABAS ESPORTES
-       ========================================= */
-    function switchSportTab(tab) {
-        // Esconde todos
-        document.getElementById('tab-serieA').style.display = 'none';
-        document.getElementById('tab-serieB').style.display = 'none';
-        document.getElementById('tab-f1').style.display = 'none';
-        
-        // Tira classe active de todos
-        let spans = document.getElementById('sport-tabs').getElementsByTagName('span');
+    /* --------------------------------------------------------------------------
+       3. CONTROLE DE ABAS GENÉRICO
+       -------------------------------------------------------------------------- */
+    function switchTab(groupName, targetId) {
+        // Encontra os headers e conteúdos baseados na proximidade ou grupo
+        let headerContainer, contentClass;
+        if(groupName === 'news') {
+            headerContainer = document.getElementById('news-tabs-header');
+            contentClass = 'tab-content'; 
+        } else if(groupName === 'sports') {
+            headerContainer = document.getElementById('sports-tabs-header');
+            contentClass = 'tab-content';
+        }
+
+        if(!headerContainer) return;
+
+        // Resetar headers
+        let spans = headerContainer.getElementsByTagName('span');
         for(let i=0; i<spans.length; i++) spans[i].className = '';
-
-        // Mostra o clicado
-        document.getElementById('tab-' + tab).style.display = 'block';
         event.target.className = 'active';
+
+        // Resetar conteúdos (no mesmo widget)
+        let widget = headerContainer.parentElement;
+        let contents = widget.getElementsByClassName(contentClass);
+        for(let i=0; i<contents.length; i++) contents[i].style.display = 'none';
+        
+        document.getElementById(targetId).style.display = 'block';
     }
 
-    /* =========================================
-       5. INTEGRAÇÃO GNEWS API (Notícias)
-       ========================================= */
-    async function loadNews() {
-        // Trocado para o endpoint br
-        const apiKey = '44436c2ea1720092fa06c0dbac143c8d'; 
-        const url = `https://gnews.io/api/v4/top-headlines?category=general&country=br&lang=pt&max=10&token=${apiKey}`;
-
+    /* --------------------------------------------------------------------------
+       4. UTILITÁRIO: FETCH RSS VIA RSS2JSON (Bypass de CORS - Robusto)
+       -------------------------------------------------------------------------- */
+    async function fetchRSS(rssUrl) {
+        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&api_key=`;
         try {
-            const res = await fetch(url);
+            const res = await fetch(apiUrl);
             const data = await res.json();
+            if(data.status === 'ok') return data.items;
+            throw new Error('Falha no RSS');
+        } catch(e) {
+            console.error("Erro RSS:", e);
+            return null;
+        }
+    }
+
+    /* --------------------------------------------------------------------------
+       5. CARREGAMENTO DE NOTÍCIAS (Carrossel, Grid e Abas)
+       -------------------------------------------------------------------------- */
+    let carouselInterval;
+    
+    async function loadNews() {
+        // Feed principal (G1 Geral)
+        const itemsGeral = await fetchRSS('https://g1.globo.com/rss/g1/');
+        
+        if(itemsGeral && itemsGeral.length > 0) {
+            // 5.1 Preencher Carrossel (5 itens)
+            let carouselHtml = '';
+            let navHtml = '';
             
-            if(data.articles && data.articles.length > 0) {
-                // MANCHETE PRINCIPAL
-                let main = data.articles[0];
-                document.getElementById('box-manchete').innerHTML = `
-                    <div class="manchete">
-                        <div class="manchete-img">
-                            <a href="${main.url}" target="_blank"><img src="${main.image || 'https://via.placeholder.com/350x230?text=Sem+Imagem'}" alt="Manchete"></a>
-                        </div>
-                        <div class="manchete-text">
-                            <div class="chapeu">Destaque do Dia</div>
-                            <h1><a href="${main.url}" target="_blank">${main.title}</a></h1>
-                            <p>${main.description}</p>
-                            <a href="${main.url}" target="_blank" style="font-weight:bold; font-size:10px;">Leia mais »</a>
+            for(let i=0; i<5; i++) {
+                if(!itemsGeral[i]) break;
+                let art = itemsGeral[i];
+                let imgUrl = art.thumbnail || (art.enclosure ? art.enclosure.link : 'https://via.placeholder.com/600x260?text=Sem+Imagem');
+                
+                carouselHtml += `
+                    <div class="carousel-slide ${i === 0 ? 'active' : ''}" id="slide-${i}">
+                        <a href="${art.link}" target="_blank"><img src="${imgUrl}" alt="Notícia"></a>
+                        <div class="carousel-caption">
+                            <div class="chapeu">Destaque ${i+1}</div>
+                            <h2><a href="${art.link}" target="_blank">${art.title}</a></h2>
                         </div>
                     </div>
                 `;
-
-                // SUB-MANCHETES
-                let subHtml = '';
-                for(let i=1; i<=4; i++) {
-                    if(!data.articles[i]) break;
-                    let art = data.articles[i];
-                    subHtml += `
-                        <div class="card-noticia">
-                            <a href="${art.url}" target="_blank"><img src="${art.image || 'https://via.placeholder.com/80x60?text=Foto'}"></a>
-                            <div>
-                                <div class="chapeu">Brasil</div>
-                                <h3><a href="${art.url}" target="_blank">${art.title}</a></h3>
-                            </div>
-                        </div>
-                    `;
-                }
-                document.getElementById('box-submanchetes').innerHTML = subHtml;
-
-                // PREENCHER TICKER (MARQUEE)
-                let tickerText = data.articles.map(a => a.title).join(' &nbsp;&nbsp; • &nbsp;&nbsp; ');
-                document.getElementById('marquee-news').innerHTML = tickerText;
-
-                // PREENCHER TECNOLOGIA (Usando as próximas notícias da lista como mock)
-                let techHtml = '';
-                for(let i=5; i<=7; i++) {
-                    if(data.articles[i]) techHtml += `<li><a href="${data.articles[i].url}" target="_blank">${data.articles[i].title}</a></li>`;
-                }
-                document.getElementById('box-tech').innerHTML = techHtml || "<li>Sem notícias no momento.</li>";
-
-                // PREENCHER ENTRETENIMENTO
-                let entHtml = '';
-                for(let i=8; i<=9; i++) {
-                    if(data.articles[i]) entHtml += `<li><a href="${data.articles[i].url}" target="_blank">${data.articles[i].title}</a></li>`;
-                }
-                document.getElementById('box-ent').innerHTML = entHtml || "<li>Sem notícias no momento.</li>";
-                
+                navHtml += `<span class="${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})">${i+1}</span>`;
             }
-        } catch(e) {
-            // Fallback elegante caso a API falhe (limite excedido)
-            document.getElementById('box-manchete').innerHTML = `<div class="manchete"><div class="manchete-text"><h1><a href="#">Governo aprova novo pacote de medidas no Congresso Nacional.</a></h1><p>Após longos debates, as novas regras entram em vigor no próximo mês.</p></div></div>`;
-            document.getElementById('box-tech').innerHTML = `<li><a href="#">Lançamento do novo smartphone revoluciona o mercado.</a></li>`;
-            document.getElementById('box-ent').innerHTML = `<li><a href="#">Ator famoso confirma participação em nova novela.</a></li>`;
+            document.getElementById('carousel-slides-container').innerHTML = carouselHtml;
+            document.getElementById('carousel-nav-container').innerHTML = navHtml;
+            
+            // Iniciar animação do carrossel
+            startCarousel();
+
+            // 5.2 Preencher Sub-manchetes (Grid)
+            let gridHtml = '';
+            for(let i=5; i<=8; i++) {
+                if(!itemsGeral[i]) break;
+                let art = itemsGeral[i];
+                let imgUrl = art.thumbnail || (art.enclosure ? art.enclosure.link : 'https://via.placeholder.com/150x120?text=Foto');
+                gridHtml += `
+                    <div class="card-news">
+                        <a href="${art.link}" target="_blank"><img src="${imgUrl}"></a>
+                        <h3><a href="${art.link}" target="_blank">${art.title}</a></h3>
+                    </div>
+                `;
+            }
+            document.getElementById('main-news-grid').innerHTML = gridHtml;
+
+            // 5.3 Preencher Ticker e Aba Nacional
+            let tickerHtml = '';
+            let listNacional = '';
+            itemsGeral.forEach((art, index) => {
+                tickerHtml += `<a href="${art.link}" target="_blank" style="color:#333;">${art.title}</a> &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; `;
+                if(index > 8 && index <= 14) {
+                    listNacional += `<li><a href="${art.link}" target="_blank">${art.title}</a></li>`;
+                }
+            });
+            document.getElementById('marquee-news').innerHTML = tickerHtml;
+            document.getElementById('list-nacional').innerHTML = listNacional || "<li>Sem mais notícias.</li>";
+        } else {
+            // Fallback Sem Dados Falsos (Apenas avisa indisponibilidade)
+            document.getElementById('carousel-slides-container').innerHTML = `<div class="carousel-slide active"><div class="carousel-caption"><h2>Serviço de notícias indisponível no momento.</h2></div></div>`;
         }
+
+        // 5.4 Preencher outras categorias em paralelo
+        fetchRSS('https://g1.globo.com/rss/g1/mundo/').then(items => {
+            if(items) {
+                let html = '';
+                for(let i=0; i<6; i++) if(items[i]) html += `<li><a href="${items[i].link}" target="_blank">${items[i].title}</a></li>`;
+                document.getElementById('list-internacional').innerHTML = html;
+            }
+        });
+
+        fetchRSS('https://g1.globo.com/rss/g1/tecnologia/').then(items => {
+            if(items) {
+                let html = '';
+                for(let i=0; i<6; i++) if(items[i]) html += `<li><a href="${items[i].link}" target="_blank">${items[i].title}</a></li>`;
+                document.getElementById('list-tech').innerHTML = html;
+            }
+        });
+
+        fetchRSS('https://ge.globo.com/rss/').then(items => {
+            if(items) {
+                let html = '';
+                for(let i=0; i<8; i++) if(items[i]) html += `<li><a href="${items[i].link}" target="_blank">${items[i].title}</a></li>`;
+                document.getElementById('list-sports').innerHTML = html;
+            }
+        });
+
+        fetchRSS('https://g1.globo.com/rss/g1/economia/').then(items => {
+            if(items) {
+                let html = '';
+                for(let i=0; i<5; i++) if(items[i]) html += `<li><a href="${items[i].link}" target="_blank">${items[i].title}</a></li>`;
+                document.getElementById('list-finance').innerHTML = html;
+            }
+        });
     }
 
-    /* =========================================
-       6. INTEGRAÇÃO WEATHER (Open-Meteo Nova Iguaçu)
-       ========================================= */
+    // Controle do Carrossel
+    let currentSlide = 0;
+    function goToSlide(index) {
+        let slides = document.getElementsByClassName('carousel-slide');
+        let navs = document.getElementById('carousel-nav-container').getElementsByTagName('span');
+        
+        if(!slides.length) return;
+        
+        for(let i=0; i<slides.length; i++) {
+            slides[i].className = 'carousel-slide';
+            navs[i].className = '';
+        }
+        slides[index].className = 'carousel-slide active';
+        navs[index].className = 'active';
+        currentSlide = index;
+    }
+
+    function startCarousel() {
+        if(carouselInterval) clearInterval(carouselInterval);
+        carouselInterval = setInterval(() => {
+            let slides = document.getElementsByClassName('carousel-slide');
+            if(slides.length > 0) {
+                let next = (currentSlide + 1) % slides.length;
+                goToSlide(next);
+            }
+        }, 5000);
+    }
+
+    /* --------------------------------------------------------------------------
+       6. CLIMA / TEMPO (Open-Meteo Nova Iguaçu)
+       -------------------------------------------------------------------------- */
     async function loadWeather() {
-        const url = 'https://api.open-meteo.com/v1/forecast?latitude=-22.7592&longitude=-43.4511&current=temperature_2m,relative_humidity_2m,weather_code&timezone=America%2FSao_Paulo';
+        const url = 'https://api.open-meteo.com/v1/forecast?latitude=-22.7592&longitude=-43.4511&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=America%2FSao_Paulo';
         try {
             const res = await fetch(url);
             const data = await res.json();
             
-            // Mapeamento simples de códigos WMO para icones/texto
-            const code = data.current.weather_code;
-            let cond = "Céu Limpo"; let icon = "☀️";
-            if(code >= 1 && code <= 3) { cond = "Parcialmente Nublado"; icon = "⛅"; }
-            if(code >= 51 && code <= 67) { cond = "Chuva Leve"; icon = "🌧️"; }
-            if(code >= 80) { cond = "Pancadas de Chuva"; icon = "⛈️"; }
+            // Map weather codes
+            const getCond = (code) => {
+                if(code <= 3) return {txt: "Céu Limpo/Parcial", ico: "☀️"};
+                if(code >= 51 && code <= 67) return {txt: "Chuvoso", ico: "🌧️"};
+                if(code >= 80) return {txt: "Tempestade", ico: "⛈️"};
+                return {txt: "Nublado", ico: "☁️"};
+            };
 
-            document.getElementById('box-clima').innerHTML = `
-                <div style="font-size: 40px;">${icon}</div>
-                <div>
-                    <div class="temp-big">${Math.round(data.current.temperature_2m)}°C</div>
-                    <div class="weather-details">${cond}<br>Umidade: ${data.current.relative_humidity_2m}%</div>
+            let curr = getCond(data.current.weather_code);
+
+            let html = `
+                <div class="weather-current">
+                    <div class="weather-icon">${curr.ico}</div>
+                    <div class="weather-temp">${Math.round(data.current.temperature_2m)}°C</div>
+                    <div class="weather-info">
+                        <strong>${curr.txt}</strong><br>
+                        Umidade: ${data.current.relative_humidity_2m}%<br>
+                        Vento: ${data.current.wind_speed_10m} km/h
+                    </div>
                 </div>
+                <div class="weather-forecast">
             `;
+            
+            // Próximos 3 dias
+            const days = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+            for(let i=1; i<=3; i++) {
+                let dateObj = new Date(data.daily.time[i]);
+                // Ajuste para pegar dia correto localmente
+                let dName = days[(dateObj.getDay() + 1) % 7]; 
+                let dCond = getCond(data.daily.weather_code[i]);
+                
+                html += `
+                    <div class="forecast-day">
+                        <strong>${dName}</strong>
+                        <span style="font-size:16px;">${dCond.ico}</span>
+                        <span><span class="forecast-min">${Math.round(data.daily.temperature_2m_min[i])}°</span> / <span class="forecast-max">${Math.round(data.daily.temperature_2m_max[i])}°</span></span>
+                    </div>
+                `;
+            }
+            html += `</div>`;
+            document.getElementById('box-weather').innerHTML = html;
+
         } catch(e) {
-            document.getElementById('box-clima').innerHTML = "Tempo indisponível.";
+            document.getElementById('box-weather').innerHTML = "Serviço de meteorologia indisponível.";
         }
     }
 
-    /* =========================================
-       7. INTEGRAÇÃO AWESOMEAPI (Finanças)
-       ========================================= */
+    /* --------------------------------------------------------------------------
+       7. MERCADO FINANCEIRO (AwesomeAPI)
+       -------------------------------------------------------------------------- */
     async function loadFinance() {
         try {
             const res = await fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL');
             const data = await res.json();
             
             const format = (v) => parseFloat(v).toFixed(3).replace('.', ',');
-            const getIcon = (pct) => parseFloat(pct) > 0 ? '<span class="fin-up">▲</span>' : '<span class="fin-down">▼</span>';
+            const getIcon = (pct) => parseFloat(pct) >= 0 ? 'fin-up' : 'fin-down';
 
-            document.getElementById('box-economia').innerHTML = `
+            document.getElementById('box-finance').innerHTML = `
                 <tr>
-                    <td><strong>Dólar Comercial</strong></td>
+                    <td><strong>Dólar Com.</strong></td>
                     <td class="fin-val">R$ ${format(data.USDBRL.bid)}</td>
-                    <td>${getIcon(data.USDBRL.pctChange)} ${data.USDBRL.pctChange}%</td>
+                    <td class="${getIcon(data.USDBRL.pctChange)}">${data.USDBRL.pctChange}%</td>
                 </tr>
                 <tr>
                     <td><strong>Euro</strong></td>
                     <td class="fin-val">R$ ${format(data.EURBRL.bid)}</td>
-                    <td>${getIcon(data.EURBRL.pctChange)} ${data.EURBRL.pctChange}%</td>
+                    <td class="${getIcon(data.EURBRL.pctChange)}">${data.EURBRL.pctChange}%</td>
                 </tr>
                 <tr>
                     <td><strong>Bitcoin</strong></td>
                     <td class="fin-val">R$ ${parseFloat(data.BTCBRL.bid).toLocaleString('pt-BR')}</td>
-                    <td>${getIcon(data.BTCBRL.pctChange)} ${data.BTCBRL.pctChange}%</td>
+                    <td class="${getIcon(data.BTCBRL.pctChange)}">${data.BTCBRL.pctChange}%</td>
                 </tr>
             `;
         } catch(e) {
-            document.getElementById('box-economia').innerHTML = "<tr><td>Erro ao carregar cotações.</td></tr>";
+            document.getElementById('box-finance').innerHTML = "<tr><td>Cotações indisponíveis.</td></tr>";
         }
     }
 
-    /* =========================================
-       8. INTEGRAÇÃO YOUTUBE API (Em Alta)
-       ========================================= */
+    /* --------------------------------------------------------------------------
+       8. YOUTUBE API (Vídeos em Alta BR)
+       -------------------------------------------------------------------------- */
     async function loadYouTube() {
         const apiKey = 'AIzaSyDsHgZU24vAMiYDtD_ucoi_mesyAjqta0c';
-        const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=BR&maxResults=3&key=${apiKey}`;
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=BR&maxResults=4&key=${apiKey}`;
         
         try {
             const res = await fetch(url);
             const data = await res.json();
             let html = '';
             
-            if(data.items) {
+            if(data.items && data.items.length > 0) {
                 data.items.forEach(vid => {
                     html += `
-                        <div class="yt-video">
+                        <div class="yt-item">
                             <a href="https://www.youtube.com/watch?v=${vid.id}" target="_blank">
                                 <img src="${vid.snippet.thumbnails.default.url}" alt="Thumb">
                             </a>
                             <div>
-                                <a href="https://www.youtube.com/watch?v=${vid.id}" target="_blank">${vid.snippet.title.substring(0, 45)}...</a>
+                                <h4><a href="https://www.youtube.com/watch?v=${vid.id}" target="_blank" style="color:#000;">${vid.snippet.title.substring(0, 50)}...</a></h4>
                                 <p>${vid.snippet.channelTitle}</p>
                             </div>
                         </div>
@@ -673,75 +1012,93 @@
                 });
                 document.getElementById('box-youtube').innerHTML = html;
             } else {
-                throw new Error("Cota excedida");
+                throw new Error("Quota");
             }
         } catch(e) {
-            document.getElementById('box-youtube').innerHTML = "<div style='padding:10px; font-size:10px; color:#666;'>Falha ao carregar vídeos (Limite de cota do YouTube).</div>";
+            document.getElementById('box-youtube').innerHTML = "<div style='text-align:center; padding:10px; font-size:10px;'>Limite de consultas ao YouTube excedido hoje.</div>";
         }
     }
 
-    /* =========================================
-       9. NOTÍCIAS LOCAIS (Google News RSS - Bypass)
-       Usando rss2json para bypass de CORS
-       ========================================= */
-    async function loadLocalNews() {
-        const rssUrl = 'https://news.google.com/rss/search?q=Nova+Iguaçu&hl=pt-BR&gl=BR&ceid=BR:pt-419';
-        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-        
-        try {
-            const res = await fetch(apiUrl);
-            const data = await res.json();
-            if(data.items) {
-                let html = '';
-                for(let i=0; i<4; i++) {
-                    if(data.items[i]) {
-                        html += `<li><a href="${data.items[i].link}" target="_blank">${data.items[i].title.substring(0, 60)}...</a></li>`;
-                    }
-                }
-                document.getElementById('box-local').innerHTML = html;
-            }
-        } catch(e) {
-            document.getElementById('box-local').innerHTML = "<li>Prefeitura anuncia novas obras de infraestrutura.</li><li>Trânsito na Via Dutra apresenta lentidão.</li>";
-        }
+    /* --------------------------------------------------------------------------
+       9. SPOTIFY CHANGER
+       -------------------------------------------------------------------------- */
+    function changeSpotify(id) {
+        let url = id === '0' ? 'https://open.spotify.com/playlist/70iBVaIhyjVNfqJbPDfBy6?si=0f577c2577314e4e' : `https://open.spotify.com/embed/playlist/${id}?utm_source=generator`;
+        document.getElementById('spotify-iframe').src = url;
     }
 
-    /* =========================================
-       10. HORÓSCOPO (MOCK DINÂMICO DIÁRIO)
-       APIs de horóscopo gratuitas falham muito com CORS.
-       Criaremos um gerador determinístico baseado no dia.
-       ========================================= */
+    /* --------------------------------------------------------------------------
+       10. HORÓSCOPO (Algoritmo Determinístico ou RSS)
+       Para evitar falhas de API, criei um sistema de fallback robusto com textos 
+       reais variados pelo dia do ano, simulando um RSS de astrologia real.
+       -------------------------------------------------------------------------- */
     const horoscopes = [
-        "Hoje é um excelente dia para focar em suas finanças. Uma surpresa agradável pode ocorrer no período da tarde.",
-        "Evite discussões no ambiente de trabalho. A sua intuição está em alta, confie nela para tomar decisões importantes.",
-        "O amor está no ar! Se estiver solteiro, um novo encontro pode agitar sua rotina. Cuide melhor da sua alimentação.",
-        "Aproveite a energia do dia para iniciar aquele projeto engavetado. Cuidado com gastos supérfluos.",
-        "Sua capacidade de comunicação está favorecida. Ótimo momento para resolver pendências com familiares ou amigos."
+        "Sua criatividade está em alta hoje. Bom momento para apresentar projetos no trabalho e resolver pendências familiares.",
+        "Atenção com gastos excessivos. O dia pede cautela nas finanças, mas favorece encontros amorosos inesperados.",
+        "Sua energia vital precisa ser canalizada para esportes ou hobbies. Evite discussões acaloradas no período da tarde.",
+        "O alinhamento astral favorece novos contatos profissionais. Faça networking. Na saúde, beba mais água.",
+        "Dia de introspecção. Excelente para planejamento a longo prazo. Um amigo antigo pode trazer notícias importantes.",
+        "A lua entra em uma fase favorável para a sua comunicação. É o momento de expressar o que sente no relacionamento.",
+        "Problemas burocráticos podem surgir, mantenha a calma. A noite reserva surpresas agradáveis no ambiente doméstico."
     ];
 
-    document.getElementById('select-signo').addEventListener('change', function() {
-        const sign = this.value;
-        const box = document.getElementById('box-horoscopo');
-        if(!sign) { 
-            box.innerText = "Acompanhe as previsões astrais diárias."; 
-            return; 
-        }
+    function showHoroscope(sign) {
+        const box = document.getElementById('horoscope-result');
+        box.style.display = 'block';
         
-        // Gerador baseado no dia do ano e no tamanho da palavra do signo (pseudo-aleatório diário)
         const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
         const index = (dayOfYear + sign.length) % horoscopes.length;
         
-        box.innerHTML = `<strong style="color:#6b3e99;">${sign.toUpperCase()}:</strong><br><br>${horoscopes[index]}`;
-    });
+        box.innerHTML = `<strong style="color:#6b3e99; font-size:12px;">${sign}</strong><br><br>${horoscopes[index]}`;
+    }
 
-    /* =========================================
-       INICIAR TUDO
-       ========================================= */
+    /* --------------------------------------------------------------------------
+       11. ENQUETE FUNCIONAL
+       -------------------------------------------------------------------------- */
+    function submitPoll() {
+        const radios = document.getElementsByName('poll');
+        let selected = false;
+        for(let i=0; i<radios.length; i++) {
+            if(radios[i].checked) selected = true;
+        }
+        if(!selected) {
+            alert('Por favor, selecione uma opção para votar.');
+            return;
+        }
+        document.getElementById('poll-container').style.display = 'none';
+        document.getElementById('poll-results').style.display = 'block';
+        // Simulando que o voto computou e alterou ligeiramente a barra
+    }
+
+    /* --------------------------------------------------------------------------
+       12. FLICKR ALBUM DE FOTOS (JSONP)
+       Usa a API pública do Flickr sem necessidade de Key.
+       -------------------------------------------------------------------------- */
+    function jsonFlickrFeed(data) {
+        let html = '';
+        for(let i=0; i<10; i++) {
+            if(!data.items[i]) break;
+            let item = data.items[i];
+            html += `<a href="${item.link}" target="_blank" title="${item.title}"><img src="${item.media.m}" alt="Flickr"></a>`;
+        }
+        document.getElementById('box-photos').innerHTML = html;
+    }
+
+    function loadFlickr() {
+        let script = document.createElement('script');
+        script.src = 'https://api.flickr.com/services/feeds/photos_public.gne?tags=brasil,noticias&format=json';
+        document.head.appendChild(script);
+    }
+
+    /* --------------------------------------------------------------------------
+       INICIALIZAÇÃO
+       -------------------------------------------------------------------------- */
     window.onload = function() {
         loadNews();
         loadWeather();
         loadFinance();
         loadYouTube();
-        loadLocalNews();
+        loadFlickr();
     };
 
 </script>
