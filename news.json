@@ -1,0 +1,15 @@
+{
+  "generated_at": null,
+  "note": "Arquivo-semente. Será substituído automaticamente pelo GitHub Action 'Atualizar notícias' (.github/workflows/update-news.yml) após a primeira execução. Até lá, a página usa a camada 2 (RSS ao vivo via proxy) normalmente — nada quebra.",
+  "categorias": {
+    "brasil": [],
+    "rj": [],
+    "mundo": [],
+    "economia": [],
+    "tech": [],
+    "pop": [],
+    "rss-geral": [],
+    "rss-mundo2": [],
+    "rss-tech2": []
+  }
+}

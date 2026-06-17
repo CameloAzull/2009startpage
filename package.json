@@ -1,0 +1,12 @@
+{
+  "name": "vivaz-startpage",
+  "private": true,
+  "type": "module",
+  "description": "Pré-processamento opcional de notícias para a startpage VIVAZ (GitHub Pages).",
+  "scripts": {
+    "fetch-news": "node scripts/fetch-news.mjs"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.5.0"
+  }
+}

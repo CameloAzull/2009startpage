@@ -1,0 +1,46 @@
+name: Atualizar notícias
+
+"on":
+  schedule:
+    # a cada 30 minutos — frequência suficiente para "frescor" sem abusar
+    # da cota gratuita das fontes (G1 e CNN Brasil não exigem chave de API)
+    - cron: '*/30 * * * *'
+  workflow_dispatch: {}   # permite disparo manual em Actions > Run workflow
+  push:
+    paths:
+      - 'scripts/fetch-news.mjs'   # roda 1x ao editar o script, pra validar
+
+permissions:
+  contents: write   # necessário para o job commitar data/news.json de volta
+
+concurrency:
+  group: atualizar-noticias
+  cancel-in-progress: false   # nunca cancela um commit em andamento
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Buscar e normalizar feeds
+        run: npm run fetch-news
+
+      - name: Commitar data/news.json (se houver mudança)
+        run: |
+          git config user.name "vivaz-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/news.json
+          git diff --cached --quiet && echo "Sem mudanças — nada a commitar." && exit 0
+          git commit -m "chore: atualizar notícias [skip ci]"
+          git push
