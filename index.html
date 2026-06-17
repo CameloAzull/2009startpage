@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+<meta name="viewport" content="width=1080">
+<meta name="description" content="VIVAZ — startpage pessoal com notícias, esportes, Spotify, busca e favoritos. Estética 2009, arquitetura 2026.">
 <title>VIVAZ · Portal Brasil · Rio de Janeiro</title>
 <style>
 /* ============================================================
@@ -203,7 +204,41 @@ input, button, select, textarea {
   letter-spacing: 0.3px;
   border-right: 1px solid #aa0000;
 }
-#ticker-marquee { color: #333; font-size: 10px; line-height: 20px; }
+.ticker-viewport { flex: 1; overflow: hidden; position: relative; }
+.ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  color: #333; font-size: 10px; line-height: 20px;
+  position: relative; left: 0; top: 0;
+}
+.ticker-track.rolando {
+  position: absolute;
+  animation: ticker-scroll 40s linear infinite;
+  will-change: transform;
+}
+.ticker-track span { padding-right: 48px; }
+#ticker-bar:hover .ticker-track.rolando,
+#ticker-bar:focus-within .ticker-track.rolando { animation-play-state: paused; }
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track.rolando { animation: none; position: static; }
+  .ticker-track.rolando span:last-child { display: none; }
+}
+
+/* ============================================================
+   BADGE DE FONTE / FRESCOR — transparência de dados
+   ============================================================ */
+.fonte-badge {
+  font-size: 9px; color: #aaa; margin-left: 7px; margin-bottom: 2px;
+  white-space: nowrap; cursor: default;
+}
+.fonte-badge.live  { color: #6a9e6a; }
+.fonte-badge.cache { color: #b8860b; }
+.fonte-badge.fail  { color: #cc8888; }
+.fonte-badge::before { content: '● '; font-size: 7px; }
 
 /* ============================================================
    LAYOUT TRÊS COLUNAS
@@ -455,6 +490,31 @@ input, button, select, textarea {
    SPOTIFY
    ============================================================ */
 .spotify-wrap { background: #191414; display: block; overflow: hidden; }
+.spotify-config { padding: 5px 7px; border-top: 1px solid #eee; }
+.spotify-config-row { display: flex; gap: 3px; }
+.spotify-config input[type="text"] {
+  flex: 1; min-width: 0; padding: 3px 4px; border: 1px solid #bbb;
+  font-size: 9px; background: #fafafa; box-sizing: border-box;
+}
+.spotify-config button {
+  font-size: 9px; padding: 3px 7px;
+  background: #191414; color: #1ed760; border: 1px solid #000; cursor: pointer; font-weight: bold;
+}
+.spotify-config button:hover { background: #000; }
+.spotify-msg { display: block; font-size: 9px; margin-top: 3px; color: #999; min-height: 11px; }
+.spotify-msg.ok { color: #2a7a2a; }
+.spotify-msg.erro { color: #cc0000; }
+
+/* ============================================================
+   ÚLTIMOS RESULTADOS (esportes)
+   ============================================================ */
+.ult-resultados { margin-top: 6px; border-top: 1px dotted #ddd; padding-top: 4px; }
+.ult-resultados .ur-titulo { font-size: 9px; font-weight: bold; color: #888; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
+.ur-item { display: flex; align-items: center; justify-content: space-between; font-size: 10px; padding: 2px 0; border-bottom: 1px dotted #eee; gap: 6px; }
+.ur-item:last-child { border-bottom: none; }
+.ur-data { color: #aaa; font-size: 9px; flex-shrink: 0; width: 32px; }
+.ur-times { flex: 1; color: #333; }
+.ur-placar { font-weight: bold; color: #003399; white-space: nowrap; }
 
 /* ============================================================
    FOOTER
@@ -507,7 +567,11 @@ body.modo-noite #nav-principal a { color: #cc9090; border-right-color: #7a1010; 
 body.modo-noite #nav-principal a:first-child { border-left-color: #7a1010; }
 body.modo-noite #nav-principal a:hover { background: #3e0505; color: #fff; }
 body.modo-noite #ticker-bar { background: #070e1e; border-bottom-color: #182840; }
-body.modo-noite #ticker-marquee { color: #7088a8; }
+body.modo-noite .ticker-track { color: #7088a8; }
+body.modo-noite .fonte-badge { color: #2a3d55; }
+body.modo-noite .fonte-badge.live { color: #4a8a4a; }
+body.modo-noite .fonte-badge.cache { color: #a07820; }
+body.modo-noite .fonte-badge.fail { color: #884444; }
 body.modo-noite #content-area { background: #09111e; }
 body.modo-noite .col-esq, body.modo-noite .col-dir { background: #09111e; border-right-color: #182840; }
 body.modo-noite .col-centro { background: #0c1a30; border-right-color: #182840; }
@@ -532,6 +596,14 @@ body.modo-noite .destaque-titulo a { color: #99b5cc; }
 body.modo-noite .destaque-titulo a:hover { color: #cc6655; }
 body.modo-noite .destaque-resumo { color: #587090; }
 body.modo-noite .destaque-chapeu { background: #882222; }
+body.modo-noite .spotify-config { border-top-color: #182840; background: #0c1a30; }
+body.modo-noite .spotify-config input { background: #060d18; border-color: #182840; color: #99b0c5; }
+body.modo-noite .spotify-msg { color: #2a3d55; }
+body.modo-noite .ult-resultados { border-top-color: #182840; }
+body.modo-noite .ur-item { border-bottom-color: #182840; }
+body.modo-noite .ur-data { color: #2a3d55; }
+body.modo-noite .ur-times { color: #7088a8; }
+body.modo-noite .ur-placar { color: #4a70bb; }
 body.modo-noite .sep { border-top-color: #182840; }
 body.modo-noite .tabs-nav { background: #071020; border-color: #182840; }
 body.modo-noite .tab-btn { background: #071020; color: #587090; border-right-color: #182840; }
@@ -640,9 +712,9 @@ body.modo-noite #btn-modo { background: #060d18; border-color: #223550; }
   <!-- TICKER MANCHETES -->
   <div id="ticker-bar">
     <span class="ticker-label">URGENTE</span>
-    <marquee id="ticker-marquee" scrollamount="3" behavior="scroll">
-      Carregando manchetes &mdash; aguarde...
-    </marquee>
+    <div class="ticker-viewport">
+      <div id="ticker-track" class="ticker-track"><span>Carregando manchetes &mdash; aguarde...</span></div>
+    </div>
   </div>
 
   <!-- CONTEÚDO PRINCIPAL (3 colunas) -->
@@ -727,6 +799,7 @@ body.modo-noite #btn-modo { background: #060d18; border-color: #223550; }
       <div id="brasil" class="news-section">
         <div class="section-head">
           <h3>Brasil</h3>
+          <span class="fonte-badge" id="fonte-brasil" title="Fonte: G1 RSS"></span>
           <span class="section-more"><a href="https://g1.globo.com" target="_blank">mais not&iacute;cias &raquo;</a></span>
         </div>
         <div id="destaque-brasil" class="destaque-wrap">
@@ -752,6 +825,7 @@ body.modo-noite #btn-modo { background: #060d18; border-color: #223550; }
       <div id="rj" class="news-section">
         <div class="section-head">
           <h3>Rio de Janeiro &amp; Baixada</h3>
+          <span class="fonte-badge" id="fonte-rj" title="Fonte: G1 RSS"></span>
           <span class="section-more"><a href="https://g1.globo.com/rj/rio-de-janeiro/" target="_blank">mais RJ &raquo;</a></span>
         </div>
         <ul class="news-list" id="lista-rj">
@@ -766,6 +840,7 @@ body.modo-noite #btn-modo { background: #060d18; border-color: #223550; }
         <div id="mundo" class="news-section">
           <div class="section-head">
             <h3>Mundo</h3>
+            <span class="fonte-badge" id="fonte-mundo" title="Fonte: G1 RSS"></span>
             <span class="section-more"><a href="https://g1.globo.com/mundo/" target="_blank">mais &raquo;</a></span>
           </div>
           <ul class="news-list" id="lista-mundo"><li style="color:#aaa;">Carregando...</li></ul>
@@ -773,6 +848,7 @@ body.modo-noite #btn-modo { background: #060d18; border-color: #223550; }
         <div id="economia" class="news-section">
           <div class="section-head">
             <h3>Economia</h3>
+            <span class="fonte-badge" id="fonte-economia" title="Fonte: G1 RSS"></span>
             <span class="section-more"><a href="https://g1.globo.com/economia/" target="_blank">mais &raquo;</a></span>
           </div>
           <ul class="news-list" id="lista-economia"><li style="color:#aaa;">Carregando...</li></ul>
@@ -786,6 +862,7 @@ body.modo-noite #btn-modo { background: #060d18; border-color: #223550; }
         <div id="tech" class="news-section">
           <div class="section-head">
             <h3>Tecnologia</h3>
+            <span class="fonte-badge" id="fonte-tech" title="Fonte: G1 RSS"></span>
             <span class="section-more"><a href="https://g1.globo.com/tecnologia/" target="_blank">mais &raquo;</a></span>
           </div>
           <ul class="news-list" id="lista-tech"><li style="color:#aaa;">Carregando...</li></ul>
@@ -793,6 +870,7 @@ body.modo-noite #btn-modo { background: #060d18; border-color: #223550; }
         <div id="pop" class="news-section">
           <div class="section-head">
             <h3>Entretenimento</h3>
+            <span class="fonte-badge" id="fonte-pop" title="Fonte: G1 RSS"></span>
             <span class="section-more"><a href="https://g1.globo.com/pop-arte/" target="_blank">mais &raquo;</a></span>
           </div>
           <ul class="news-list" id="lista-pop"><li style="color:#aaa;">Carregando...</li></ul>
@@ -821,6 +899,10 @@ body.modo-noite #btn-modo { background: #060d18; border-color: #223550; }
               <tbody id="tbody-serie-a"><tr><td colspan="5" style="color:#aaa;padding:4px 0;">Carregando tabela...</td></tr></tbody>
             </table>
             <div class="tab-nota" id="nota-serie-a">Brasileirão Série A 2026 &mdash; via TheSportsDB</div>
+            <div class="ult-resultados" id="ur-serie-a-wrap" style="display:none;">
+              <div class="ur-titulo">Últimos resultados</div>
+              <div id="ur-serie-a"></div>
+            </div>
           </div>
 
           <div id="esp-serie-b" class="tab-panel">
@@ -829,6 +911,10 @@ body.modo-noite #btn-modo { background: #060d18; border-color: #223550; }
               <tbody id="tbody-serie-b"><tr><td colspan="5" style="color:#aaa;padding:4px 0;">Carregando tabela...</td></tr></tbody>
             </table>
             <div class="tab-nota" id="nota-serie-b">Série B 2026 &mdash; via TheSportsDB</div>
+            <div class="ult-resultados" id="ur-serie-b-wrap" style="display:none;">
+              <div class="ur-titulo">Últimos resultados</div>
+              <div id="ur-serie-b"></div>
+            </div>
           </div>
 
           <div id="esp-f1" class="tab-panel">
@@ -836,7 +922,7 @@ body.modo-noite #btn-modo { background: #060d18; border-color: #223550; }
               <thead><tr><th class="tc-pos">#</th><th>Piloto</th><th>Equipe</th><th class="tc-pts">Pts</th><th class="tc-pts">V</th></tr></thead>
               <tbody id="tbody-f1"><tr><td colspan="5" style="color:#aaa;padding:4px 0;">Clique na aba para carregar...</td></tr></tbody>
             </table>
-            <div class="tab-nota" id="nota-f1">F1 2026 &mdash; via Jolpi / Ergast</div>
+            <div class="tab-nota" id="nota-f1">F1 2026 &mdash; via Jolpica / Ergast</div>
           </div>
 
           <div id="esp-ge" class="tab-panel">
@@ -863,12 +949,20 @@ body.modo-noite #btn-modo { background: #060d18; border-color: #223550; }
       <div class="box">
         <div class="box-head">Vivaz FM &middot; Spotify</div>
         <div class="spotify-wrap">
-          <iframe
-            src="https://open.spotify.com/embed/playlist/37i9dQZEVXbMXbN3EUUhlg?utm_source=generator&theme=0"
+          <iframe id="spotify-iframe"
+            src=""
             width="100%" height="210" frameborder="0" allowfullscreen
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy" style="border-radius:0;display:block;">
           </iframe>
+        </div>
+        <div class="spotify-config">
+          <div class="spotify-config-row">
+            <input type="text" id="spotify-url-input" placeholder="Colar link do Spotify (playlist, álbum, artista...)"
+              onkeydown="if(event.key==='Enter')trocarSpotify()">
+            <button onclick="trocarSpotify()">Trocar</button>
+          </div>
+          <span class="spotify-msg" id="spotify-msg"></span>
         </div>
       </div>
 
@@ -883,23 +977,25 @@ body.modo-noite #btn-modo { background: #060d18; border-color: #223550; }
         </div>
       </div>
 
-      <!-- RSS -->
+      <!-- RSS — diversificação de fonte: CNN Brasil (G1 já cobre o centro) -->
       <div class="box">
-        <div class="box-head">RSS &middot; Feed ao Vivo</div>
+        <div class="box-head">RSS &middot; Outras Fontes
+          <a href="https://www.cnnbrasil.com.br" target="_blank">CNN Brasil</a>
+        </div>
         <div class="box-body-flush">
           <div class="tabs-nav" id="rss-tabs" style="border-left:none;border-right:none;">
-            <button class="tab-btn ativo" onclick="abaTab(this,'rss-br','rss-tabs')">Brasil</button>
-            <button class="tab-btn" onclick="abaTab(this,'rss-mundo','rss-tabs')">Mundo</button>
-            <button class="tab-btn" onclick="abaTab(this,'rss-tech','rss-tabs')">Tech</button>
+            <button class="tab-btn ativo" onclick="abaTab(this,'rss-geral','rss-tabs')">Geral</button>
+            <button class="tab-btn" onclick="abaTab(this,'rss-mundo2','rss-tabs')">Mundo</button>
+            <button class="tab-btn" onclick="abaTab(this,'rss-tech2','rss-tabs')">Tech</button>
           </div>
-          <div id="rss-br" class="tab-panel ativo" style="padding:5px 7px;">
-            <div id="rss-br-inner" style="color:#aaa;font-size:10px;">Carregando...</div>
+          <div id="rss-geral" class="tab-panel ativo" style="padding:5px 7px;">
+            <div id="rss-geral-inner" style="color:#aaa;font-size:10px;">Carregando...</div>
           </div>
-          <div id="rss-mundo" class="tab-panel" style="padding:5px 7px;">
-            <div id="rss-mundo-inner" style="color:#aaa;font-size:10px;">Carregando...</div>
+          <div id="rss-mundo2" class="tab-panel" style="padding:5px 7px;">
+            <div id="rss-mundo2-inner" style="color:#aaa;font-size:10px;">Carregando...</div>
           </div>
-          <div id="rss-tech" class="tab-panel" style="padding:5px 7px;">
-            <div id="rss-tech-inner" style="color:#aaa;font-size:10px;">Carregando...</div>
+          <div id="rss-tech2" class="tab-panel" style="padding:5px 7px;">
+            <div id="rss-tech2-inner" style="color:#aaa;font-size:10px;">Carregando...</div>
           </div>
         </div>
       </div>
@@ -911,8 +1007,8 @@ body.modo-noite #btn-modo { background: #060d18; border-color: #223550; }
   <!-- FOOTER -->
   <div id="footer">
     <div class="footer-links">
-      <a href="javascript:void(0)">Sobre o Vivaz</a>
-      <a href="javascript:void(0)">Privacidade</a>
+      <a href="javascript:void(0)" onclick="mostrarSobre()">Sobre o Vivaz</a>
+      <a href="javascript:void(0)" onclick="mostrarPrivacidade()">Privacidade</a>
       <a href="https://g1.globo.com/rss/g1/" target="_blank">RSS G1</a>
       <a href="javascript:void(0)" onclick="resetPage()">Redefinir P&aacute;gina</a>
     </div>
@@ -1026,6 +1122,49 @@ function fetchTimeout(url, ms) {
 }
 
 /* ──────────────────────────────────────────────────
+   5b. CACHE PERSISTENTE (localStorage) — sobrevive a reloads
+   Usado por notícias, RSS e esportes para nunca depender
+   só de sorte de rede: se a fonte falhar, mostramos o
+   último payload válido (rotulado), em vez de nada.
+   ────────────────────────────────────────────────── */
+const CACHE_PREFIX = 'vivaz-cache-v1-';
+
+function cacheSet(key, data) {
+  try {
+    localStorage.setItem(CACHE_PREFIX + key, JSON.stringify({ t: Date.now(), d: data }));
+  } catch (e) { /* localStorage indisponível (modo privado etc.) — segue sem cache */ }
+}
+
+function cacheGet(key) {
+  try {
+    const raw = localStorage.getItem(CACHE_PREFIX + key);
+    if (!raw) return null;
+    const obj = JSON.parse(raw);
+    if (!obj || !obj.d) return null;
+    return obj; // { t: timestamp, d: dados }
+  } catch (e) { return null; }
+}
+
+function fmtRelTime(ts) {
+  if (!ts) return '';
+  const min = Math.round((Date.now() - ts) / 60000);
+  if (min < 1)  return 'agora mesmo';
+  if (min < 60) return 'há ' + min + ' min';
+  const h = Math.round(min / 60);
+  if (h < 24) return 'há ' + h + 'h';
+  return 'há ' + Math.round(h / 24) + 'd';
+}
+
+function marcarFonte(elId, tipo, ts) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  el.classList.remove('live', 'cache', 'fail');
+  if (tipo === 'live')  { el.classList.add('live');  el.textContent = 'ao vivo · ' + fmtRelTime(ts); }
+  else if (tipo === 'cache') { el.classList.add('cache'); el.textContent = 'em cache · ' + fmtRelTime(ts); }
+  else { el.classList.add('fail'); el.textContent = 'indisponível'; }
+}
+
+/* ──────────────────────────────────────────────────
    6. RSS — duplo proxy: rss2json + allorigins
    ────────────────────────────────────────────────── */
 async function fetchRSS(feedUrl, limite) {
@@ -1072,6 +1211,74 @@ async function fetchRSS(feedUrl, limite) {
     }
   } catch(e) {}
 
+  return null;
+}
+
+/* ──────────────────────────────────────────────────
+   6b. ARQUITETURA EM CAMADAS — notícias e RSS
+   Camada 1: ./data/news.json same-origin (gerado por GitHub
+             Action agendado — zero CORS, zero rate limit).
+   Camada 2: fetchRSS() — proxy público (rss2json/allorigins),
+             usado só quando a camada 1 não tem a categoria.
+   Camada 3: cache local (último payload válido, com data).
+   Camada 4: link de saída — nunca tela vazia.
+   Isso evita o erro clássico de "viver permanentemente em
+   fallback": a camada 1, quando configurada, elimina por
+   completo a dependência de proxies públicos (que têm rate
+   limit agressivo e nenhuma SLA de uptime).
+   ────────────────────────────────────────────────── */
+let _newsJsonPre = null;
+const NEWS_MAX_AGE_DIAS = 5; // remove itens velhos demais (política de frescor)
+
+async function obterNoticiasPreProcessadas() {
+  try {
+    const res = await fetchTimeout('./data/news.json', 4000);
+    if (!res.ok) return null;
+    const json = await res.json();
+    if (json && json.categorias) return json;
+    return null;
+  } catch (e) { return null; }
+}
+
+function filtrarFrescor(items) {
+  if (!items || !items.length) return items || [];
+  const limite = Date.now() - NEWS_MAX_AGE_DIAS * 86400000;
+  const vistos = new Set();
+  return items.filter(function (it) {
+    const chave = (it.link || it.title || '').trim();
+    if (!chave || vistos.has(chave)) return false;
+    vistos.add(chave);
+    if (!it.pubDate) return true;
+    const t = new Date(it.pubDate).getTime();
+    return isNaN(t) ? true : t >= limite;
+  });
+}
+
+async function obterCategoria(catKey, feedUrl, limite) {
+  // Camada 1 — JSON pré-processado (já buscado uma vez no início)
+  if (_newsJsonPre && _newsJsonPre.categorias && _newsJsonPre.categorias[catKey] && _newsJsonPre.categorias[catKey].length) {
+    const itens = filtrarFrescor(_newsJsonPre.categorias[catKey]).slice(0, limite);
+    if (itens.length) {
+      cacheSet('news-' + catKey, itens);
+      const ts = _newsJsonPre.generated_at ? new Date(_newsJsonPre.generated_at).getTime() : Date.now();
+      return { items: itens, fonte: 'live', ts: ts };
+    }
+  }
+  // Camada 2 — RSS ao vivo via proxy (contingência)
+  const vivo = await fetchRSS(feedUrl, limite * 2);
+  if (vivo && vivo.length) {
+    const itens = filtrarFrescor(vivo).slice(0, limite);
+    if (itens.length) {
+      cacheSet('news-' + catKey, itens);
+      return { items: itens, fonte: 'live', ts: Date.now() };
+    }
+  }
+  // Camada 3 — cache local (último payload válido conhecido)
+  const cached = cacheGet('news-' + catKey);
+  if (cached && cached.d && cached.d.length) {
+    return { items: cached.d, fonte: 'cache', ts: cached.t };
+  }
+  // Camada 4 — falhou de verdade; quem chama decide o link de saída
   return null;
 }
 
@@ -1141,88 +1348,127 @@ function renderDestaque(item) {
     resumoEl.textContent = (temp.textContent || '').substring(0, 200) || '';
   }
 
-  // Imagem: tentar enclosure > media > og via proxy
+  // Imagem: tentar enclosure > media; só substitui o placeholder após confirmar que carregou
   const imgUrl = (item.enclosure && item.enclosure.link) || '';
   if (imgUrl && phEl) {
-    const img = document.createElement('img');
-    img.src = imgUrl;
-    img.style.width = '158px';
-    img.style.height = '118px';
-    img.style.objectFit = 'cover';
-    img.style.display = 'block';
-    img.onerror = function() {}; // mantém placeholder se falhar
-    phEl.parentNode.replaceChild(img, phEl);
+    const preload = new Image();
+    preload.onload = function () {
+      const phAtual = document.getElementById('destaque-ph');
+      if (!phAtual) return; // já não existe (chamada anterior já trocou) — nada a fazer
+      const img = document.createElement('img');
+      img.src = imgUrl;
+      img.alt = item.title || '';
+      img.style.width = '158px';
+      img.style.height = '118px';
+      img.style.objectFit = 'cover';
+      img.style.display = 'block';
+      phAtual.parentNode.replaceChild(img, phAtual);
+    };
+    preload.onerror = function () { /* mantém o placeholder — nunca ícone de imagem quebrada */ };
+    preload.src = imgUrl;
   }
 }
 
 /* ──────────────────────────────────────────────────
-   9. TICKER
+   9. TICKER — scroll via CSS (sem <marquee>, pausa no hover)
    ────────────────────────────────────────────────── */
 function populaTicker(items) {
-  if (!items || items.length === 0) return;
-  const m = document.getElementById('ticker-marquee');
-  if (m) {
-    m.textContent = items.map(function(i){ return '■ ' + (i.title || ''); }).join('   ');
+  const track = document.getElementById('ticker-track');
+  if (!track) return;
+  if (!items || items.length === 0) {
+    track.classList.remove('rolando');
+    track.innerHTML = '<span>Notícias indisponíveis no momento — <a href="https://g1.globo.com" target="_blank" style="color:#8b1a1a;font-weight:bold;">ver G1 diretamente »</a></span>';
+    return;
   }
+  const texto = items.map(function (i) { return '\u25A0 ' + (i.title || ''); }).join('     ');
+  const seguro = sanitize(texto);
+  track.innerHTML = '<span>' + seguro + '</span><span aria-hidden="true">' + seguro + '</span>';
+  track.classList.add('rolando');
+  // velocidade constante independente do tamanho do conteúdo (~70px/s)
+  requestAnimationFrame(function () {
+    const largura = track.scrollWidth / 2;
+    const duracao = Math.max(18, Math.round(largura / 70));
+    track.style.animationDuration = duracao + 's';
+  });
 }
 
 /* ──────────────────────────────────────────────────
-   10. NOTÍCIAS — carregamento sequencial via RSS
+   10. NOTÍCIAS — arquitetura em camadas (ver 6b)
    ────────────────────────────────────────────────── */
-const _rssCache = {};
+const NEWS_SPECS = [
+  { key: 'brasil',   url: 'https://g1.globo.com/rss/g1/brasil/',        listId: 'lista-brasil',   limit: 8, fbUrl: 'https://g1.globo.com',                 fbLabel: 'Ver G1',      destaque: true,  badge: 'fonte-brasil' },
+  { key: 'rj',       url: 'https://g1.globo.com/rss/g1/rio-de-janeiro/', listId: 'lista-rj',       limit: 7, fbUrl: 'https://g1.globo.com/rj/rio-de-janeiro/', fbLabel: 'Ver G1 RJ', badge: 'fonte-rj' },
+  { key: 'mundo',    url: 'https://g1.globo.com/rss/g1/mundo/',         listId: 'lista-mundo',    limit: 6, fbUrl: 'https://g1.globo.com/mundo/',           fbLabel: 'Ver G1 Mundo', badge: 'fonte-mundo' },
+  { key: 'economia', url: 'https://g1.globo.com/rss/g1/economia/',     listId: 'lista-economia', limit: 6, fbUrl: 'https://g1.globo.com/economia/',        fbLabel: 'Ver G1 Eco',   badge: 'fonte-economia' },
+  { key: 'tech',     url: 'https://g1.globo.com/rss/g1/tecnologia/',   listId: 'lista-tech',     limit: 6, fbUrl: 'https://g1.globo.com/tecnologia/',      fbLabel: 'Ver G1 Tech',  badge: 'fonte-tech' },
+  { key: 'pop',      url: 'https://g1.globo.com/rss/g1/pop-arte/',     listId: 'lista-pop',      limit: 6, fbUrl: 'https://g1.globo.com/pop-arte/',        fbLabel: 'Ver G1 Pop',   badge: 'fonte-pop' }
+];
 
 async function initNoticias() {
-  // Brasil
-  const brasil = await fetchRSS('https://g1.globo.com/rss/g1/brasil/', 8);
-  _rssCache.brasil = brasil;
-  if (brasil && brasil.length > 0) {
-    renderDestaque(brasil[0]);
-    renderNewsList(brasil.slice(1), 'lista-brasil', 'https://g1.globo.com', 'Ver G1');
-    populaTicker(brasil);
-  } else {
-    renderNewsList(null, 'lista-brasil', 'https://g1.globo.com', 'Ver G1');
-    renderDestaque({ title: 'Carregamento falhou — clique para ver G1', link: 'https://g1.globo.com', description: '', enclosure: {} });
+  let paraTicker = [];
+
+  for (const spec of NEWS_SPECS) {
+    const res = await obterCategoria(spec.key, spec.url, spec.limit);
+    if (res && res.items.length) {
+      if (spec.destaque) {
+        renderDestaque(res.items[0]);
+        renderNewsList(res.items.slice(1), spec.listId, spec.fbUrl, spec.fbLabel);
+      } else {
+        renderNewsList(res.items, spec.listId, spec.fbUrl, spec.fbLabel);
+      }
+      marcarFonte(spec.badge, res.fonte, res.ts);
+      paraTicker = paraTicker.concat(res.items);
+    } else {
+      renderNewsList(null, spec.listId, spec.fbUrl, spec.fbLabel);
+      if (spec.destaque) renderDestaque({ title: 'Carregamento indisponível — clique para ver G1', link: spec.fbUrl, description: '', enclosure: {} });
+      marcarFonte(spec.badge, 'fail', null);
+    }
   }
 
-  // RJ
-  const rj = await fetchRSS('https://g1.globo.com/rss/g1/rio-de-janeiro/', 7);
-  renderNewsList(rj, 'lista-rj', 'https://g1.globo.com/rj/rio-de-janeiro/', 'Ver G1 RJ');
-
-  // Mundo
-  const mundo = await fetchRSS('https://g1.globo.com/rss/g1/mundo/', 6);
-  renderNewsList(mundo, 'lista-mundo', 'https://g1.globo.com/mundo/', 'Ver G1 Mundo');
-  renderRSSPanel(mundo ? mundo.slice(0,6) : null, 'rss-mundo-inner', 'https://g1.globo.com/mundo/');
-
-  // Economia
-  const eco = await fetchRSS('https://g1.globo.com/rss/g1/economia/', 6);
-  renderNewsList(eco, 'lista-economia', 'https://g1.globo.com/economia/', 'Ver G1 Eco');
-
-  // Tecnologia
-  const tech = await fetchRSS('https://g1.globo.com/rss/g1/tecnologia/', 6);
-  _rssCache.tech = tech;
-  renderNewsList(tech, 'lista-tech', 'https://g1.globo.com/tecnologia/', 'Ver G1 Tech');
-  renderRSSPanel(tech ? tech.slice(0,6) : null, 'rss-tech-inner', 'https://g1.globo.com/tecnologia/');
-
-  // Pop/Arte
-  const pop = await fetchRSS('https://g1.globo.com/rss/g1/pop-arte/', 6);
-  renderNewsList(pop, 'lista-pop', 'https://g1.globo.com/pop-arte/', 'Ver G1 Pop');
-
-  // RSS Brasil (coluna direita)
-  renderRSSPanel(brasil ? brasil.slice(0,7) : null, 'rss-br-inner', 'https://g1.globo.com/');
-
-  // Ticker com todas as manchetes
-  const allItems = [].concat(brasil||[], rj||[], mundo||[]).slice(0,20);
-  if (allItems.length > 0) populaTicker(allItems);
+  populaTicker(paraTicker.slice(0, 20));
 }
 
 /* ──────────────────────────────────────────────────
-   11. ESPORTES — TheSportsDB + Jolpi/Ergast
+   10b. RSS · OUTRAS FONTES — CNN Brasil (diversifica
+   em relação ao G1, já coberto na coluna central)
+   ────────────────────────────────────────────────── */
+const RSS_SPECS = [
+  { key: 'rss-geral',  url: 'https://www.cnnbrasil.com.br/feed/',                elId: 'rss-geral-inner' },
+  { key: 'rss-mundo2', url: 'https://www.cnnbrasil.com.br/internacional/feed/',  elId: 'rss-mundo2-inner' },
+  { key: 'rss-tech2',  url: 'https://www.cnnbrasil.com.br/tecnologia/feed/',     elId: 'rss-tech2-inner' }
+];
+
+async function initRSSModule() {
+  for (const spec of RSS_SPECS) {
+    const res = await obterCategoria(spec.key, spec.url, 7);
+    renderRSSPanel(res ? res.items : null, spec.elId, 'https://www.cnnbrasil.com.br');
+  }
+}
+
+/* ──────────────────────────────────────────────────
+   11. ESPORTES — TheSportsDB + Jolpi/Ergast, com cache
+   persistente (sobrevive a falha de API / reload)
    ────────────────────────────────────────────────── */
 let _f1Loaded = false;
-let _geLoaded = false;
 
-// Tabela de futebol via TheSportsDB
-async function carregarTabelaFutebol(leagueId, season, tbodyId, notaId, leagueUrl) {
+function renderLinhasFutebol(tbodyId, linhas) {
+  const tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
+  tbody.innerHTML = linhas.map(function (r) {
+    const sg = (parseInt(r.intGoalsFor || 0) - parseInt(r.intGoalsAgainst || 0));
+    const sgStr = sg > 0 ? '+' + sg : String(sg);
+    return '<tr>' +
+      '<td class="tc-pos">' + (r.intRank || '') + '</td>' +
+      '<td>' + sanitize(r.strTeam || '') + '</td>' +
+      '<td class="tc-pts">' + (r.intPoints || '') + '</td>' +
+      '<td class="tc-pts">' + (r.intPlayed || '') + '</td>' +
+      '<td class="tc-pts">' + sgStr + '</td>' +
+      '</tr>';
+  }).join('');
+}
+
+// Tabela de futebol via TheSportsDB (com cache local de contingência)
+async function carregarTabelaFutebol(leagueId, season, tbodyId, notaId, leagueUrl, cacheKey) {
   const url = 'https://www.thesportsdb.com/api/v1/json/3/lookuptable.php?l=' + leagueId + '&s=' + season;
   try {
     const res = await fetchTimeout(url, 9000);
@@ -1230,36 +1476,71 @@ async function carregarTabelaFutebol(leagueId, season, tbodyId, notaId, leagueUr
       const d = await res.json();
       if (d.table && d.table.length > 0) {
         const top = d.table.slice(0, 12);
-        const tbody = document.getElementById(tbodyId);
-        if (tbody) {
-          tbody.innerHTML = top.map(function(r) {
-            const sg = (parseInt(r.intGoalsFor||0) - parseInt(r.intGoalsAgainst||0));
-            const sgStr = sg > 0 ? '+' + sg : String(sg);
-            return '<tr>' +
-              '<td class="tc-pos">' + (r.intRank||'') + '</td>' +
-              '<td>' + sanitize(r.strTeam||'') + '</td>' +
-              '<td class="tc-pts">' + (r.intPoints||'') + '</td>' +
-              '<td class="tc-pts">' + (r.intPlayed||'') + '</td>' +
-              '<td class="tc-pts">' + sgStr + '</td>' +
-              '</tr>';
-          }).join('');
-        }
+        renderLinhasFutebol(tbodyId, top);
+        cacheSet(cacheKey, top);
         const nota = document.getElementById(notaId);
-        if (nota) nota.textContent = 'Temporada ' + season + ' — TheSportsDB — atualizado';
+        if (nota) nota.textContent = 'Temporada ' + season + ' — TheSportsDB · ao vivo';
         return;
       }
     }
-  } catch(e) {}
-  // Fallback: mensagem com link
-  const tbody = document.getElementById(tbodyId);
-  if (tbody) {
-    tbody.innerHTML = '<tr><td colspan="5" style="color:#aaa;padding:4px 0;">Dados indispon&iacute;veis. <a href="' + leagueUrl + '" target="_blank">Ver tabela &raquo;</a></td></tr>';
+    throw new Error('payload vazio');
+  } catch (e) {
+    // Cache local — última tabela válida conhecida
+    const cached = cacheGet(cacheKey);
+    if (cached && cached.d && cached.d.length) {
+      renderLinhasFutebol(tbodyId, cached.d);
+      const nota = document.getElementById(notaId);
+      if (nota) nota.textContent = 'Temporada ' + season + ' — dados em cache (' + fmtRelTime(cached.t) + ')';
+      return;
+    }
+    // Sem cache e sem API: link de saída
+    const tbody = document.getElementById(tbodyId);
+    if (tbody) {
+      tbody.innerHTML = '<tr><td colspan="5" style="color:#aaa;padding:4px 0;">Dados indispon&iacute;veis. <a href="' + leagueUrl + '" target="_blank">Ver tabela &raquo;</a></td></tr>';
+    }
+    const nota = document.getElementById(notaId);
+    if (nota) nota.textContent = 'TheSportsDB indispon\xEDvel — tente mais tarde';
   }
-  const nota = document.getElementById(notaId);
-  if (nota) nota.textContent = 'TheSportsDB indispon\xEDvel — tente mais tarde';
 }
 
-// F1: Jolpi / Ergast mirror
+// Últimos resultados (placares recentes) — complementa a tabela com contexto
+async function carregarUltimosResultados(leagueId, wrapId, listId, cacheKey) {
+  const url = 'https://www.thesportsdb.com/api/v1/json/3/eventspastleague.php?id=' + leagueId;
+  function render(eventos) {
+    const wrap = document.getElementById(wrapId);
+    const lista = document.getElementById(listId);
+    if (!wrap || !lista || !eventos || !eventos.length) return;
+    lista.innerHTML = eventos.slice(0, 5).map(function (ev) {
+      const data = (ev.dateEvent || '').slice(5).replace('-', '/');
+      const casa = sanitize(ev.strHomeTeam || '');
+      const fora = sanitize(ev.strAwayTeam || '');
+      const golsCasa = ev.intHomeScore != null ? ev.intHomeScore : '-';
+      const golsFora = ev.intAwayScore != null ? ev.intAwayScore : '-';
+      return '<div class="ur-item"><span class="ur-data">' + data + '</span>' +
+        '<span class="ur-times">' + casa + ' x ' + fora + '</span>' +
+        '<span class="ur-placar">' + golsCasa + '&ndash;' + golsFora + '</span></div>';
+    }).join('');
+    wrap.style.display = 'block';
+  }
+  try {
+    const res = await fetchTimeout(url, 9000);
+    if (!res.ok) throw new Error('http');
+    const d = await res.json();
+    const eventos = d && d.events;
+    if (eventos && eventos.length) {
+      cacheSet(cacheKey, eventos);
+      render(eventos);
+      return;
+    }
+    throw new Error('vazio');
+  } catch (e) {
+    const cached = cacheGet(cacheKey);
+    if (cached && cached.d && cached.d.length) render(cached.d);
+    // se não houver cache, simplesmente mantemos o bloco oculto — sem "bonito mas falso"
+  }
+}
+
+// F1: Jolpi / Ergast mirror (com cache local de contingência)
 async function carregarF1() {
   if (_f1Loaded) return;
   const tbody = document.getElementById('tbody-f1');
@@ -1268,6 +1549,22 @@ async function carregarF1() {
 
   const season = new Date().getFullYear();
   const url = 'https://api.jolpi.ca/ergast/f1/' + season + '/driverstandings.json';
+
+  function renderF1(standings) {
+    tbody.innerHTML = standings.slice(0, 12).map(function (s) {
+      const drv = s.Driver || {};
+      const cns = (s.Constructors && s.Constructors[0]) || {};
+      const nome = (drv.givenName || '').charAt(0) + '. ' + (drv.familyName || '');
+      return '<tr>' +
+        '<td class="tc-pos">' + (s.position || '') + '</td>' +
+        '<td>' + sanitize(nome) + '</td>' +
+        '<td>' + sanitize(cns.name || '') + '</td>' +
+        '<td class="tc-pts">' + (s.points || '') + '</td>' +
+        '<td class="tc-pts">' + (s.wins || '') + '</td>' +
+        '</tr>';
+    }).join('');
+  }
+
   try {
     const res = await fetchTimeout(url, 9000);
     if (res.ok) {
@@ -1275,47 +1572,62 @@ async function carregarF1() {
       const lists = d && d.MRData && d.MRData.StandingsTable && d.MRData.StandingsTable.StandingsLists;
       const standings = (lists && lists.length > 0) ? lists[0].DriverStandings : null;
       if (standings && standings.length > 0) {
-        tbody.innerHTML = standings.slice(0,12).map(function(s) {
-          const drv = s.Driver || {};
-          const cns = (s.Constructors && s.Constructors[0]) || {};
-          const nome = (drv.givenName || '').charAt(0) + '. ' + (drv.familyName || '');
-          return '<tr>' +
-            '<td class="tc-pos">' + (s.position||'') + '</td>' +
-            '<td>' + sanitize(nome) + '</td>' +
-            '<td>' + sanitize(cns.name||'') + '</td>' +
-            '<td class="tc-pts">' + (s.points||'') + '</td>' +
-            '<td class="tc-pts">' + (s.wins||'') + '</td>' +
-            '</tr>';
-        }).join('');
+        renderF1(standings);
+        cacheSet('f1-standings', standings);
         const nota = document.getElementById('nota-f1');
-        if (nota) nota.textContent = 'F1 ' + season + ' — Jolpi/Ergast — atualizado';
+        if (nota) nota.textContent = 'F1 ' + season + ' — Jolpica/Ergast · ao vivo';
         _f1Loaded = true;
         return;
       }
     }
-  } catch(e) {}
-
-  // Fallback F1: link externo
-  tbody.innerHTML = '<tr><td colspan="5" style="color:#aaa;padding:4px 0;">Dados F1 indispon&iacute;veis. <a href="https://www.formula1.com/en/results.html" target="_blank">Ver em Formula1.com &raquo;</a></td></tr>';
-  const nota = document.getElementById('nota-f1');
-  if (nota) nota.textContent = 'Jolpi/Ergast indispon\xEDvel';
+    throw new Error('payload vazio');
+  } catch (e) {
+    const cached = cacheGet('f1-standings');
+    if (cached && cached.d && cached.d.length) {
+      renderF1(cached.d);
+      const nota = document.getElementById('nota-f1');
+      if (nota) nota.textContent = 'F1 ' + season + ' — dados em cache (' + fmtRelTime(cached.t) + ')';
+      _f1Loaded = true;
+      return;
+    }
+    tbody.innerHTML = '<tr><td colspan="5" style="color:#aaa;padding:4px 0;">Dados F1 indispon&iacute;veis. <a href="https://www.formula1.com/en/results.html" target="_blank">Ver em Formula1.com &raquo;</a></td></tr>';
+    const nota = document.getElementById('nota-f1');
+    if (nota) nota.textContent = 'Jolpica/Ergast indispon\xEDvel';
+  }
 }
 
-// GE RSS (carrega on-demand)
+// GE RSS (carrega on-demand, reaproveita a mesma arquitetura em camadas)
 let _geRssLoaded = false;
 async function carregarGeRSS() {
   if (_geRssLoaded) return;
   const el = document.getElementById('lista-ge');
   if (el) el.innerHTML = '<li style="color:#aaa;">Carregando feed GE...</li>';
-  const items = await fetchRSS('https://ge.globo.com/rss/futebol/brasileirao-serie-a/', 8);
-  renderNewsList(items, 'lista-ge', 'https://ge.globo.com', 'Ver GE');
-  if (items && items.length > 0) _geRssLoaded = true;
+  const res = await obterCategoria('ge-futebol', 'https://ge.globo.com/rss/futebol/brasileirao-serie-a/', 8);
+  renderNewsList(res ? res.items : null, 'lista-ge', 'https://ge.globo.com', 'Ver GE');
+  if (res && res.items.length > 0) _geRssLoaded = true;
 }
 
 /* ──────────────────────────────────────────────────
    12. COTAÇÕES — AwesomeAPI (gratuita, sem chave)
    ────────────────────────────────────────────────── */
 async function initCotacoes() {
+  function renderCot(d, elId, key, moeda) {
+    const obj = d[key];
+    if (!obj) return;
+    const val = parseFloat(obj.bid);
+    const pct = parseFloat(obj.pctChange || 0);
+    const cls = pct >= 0 ? 'cot-up' : 'cot-down';
+    const sinal = pct >= 0 ? '+' : '';
+    let valStr = '';
+    if (moeda === 'BTC') {
+      valStr = 'R$ ' + val.toLocaleString('pt-BR', {maximumFractionDigits: 0});
+    } else {
+      valStr = 'R$ ' + val.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+    const el = document.getElementById(elId);
+    if (el) el.innerHTML = moeda + ' <strong>' + valStr + '</strong> <span class="' + cls + '">(' + sinal + pct.toFixed(2) + '%)</span>';
+  }
+
   try {
     const res = await fetchTimeout(
       'https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,BTC-BRL',
@@ -1324,36 +1636,26 @@ async function initCotacoes() {
     if (!res.ok) throw new Error('http');
     const d = await res.json();
 
-    function renderCot(key, elId, moeda) {
-      const obj = d[key];
-      if (!obj) return;
-      const val = parseFloat(obj.bid);
-      const pct = parseFloat(obj.pctChange || 0);
-      const cls = pct >= 0 ? 'cot-up' : 'cot-down';
-      const sinal = pct >= 0 ? '+' : '';
-      let valStr = '';
-      if (moeda === 'BTC') {
-        valStr = 'R$ ' + val.toLocaleString('pt-BR', {maximumFractionDigits: 0});
-      } else {
-        valStr = 'R$ ' + val.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-      }
-      const el = document.getElementById(elId);
-      if (el) el.innerHTML = moeda + ' <strong>' + valStr + '</strong> <span class="' + cls + '">(' + sinal + pct.toFixed(2) + '%)</span>';
-    }
+    renderCot(d, 'cot-usd', 'USDBRL', 'USD');
+    renderCot(d, 'cot-eur', 'EURBRL', 'EUR');
+    renderCot(d, 'cot-btc', 'BTCBRL', 'BTC');
+    cacheSet('cotacoes', d);
 
-    renderCot('USDBRL', 'cot-usd', 'USD');
-    renderCot('EURBRL', 'cot-eur', 'EUR');
-    renderCot('BTCBRL', 'cot-btc', 'BTC');
-
-    const now = new Date();
-    const h = now.getHours(), m = String(now.getMinutes()).padStart(2,'0');
     const horaEl = document.getElementById('cot-hora');
-    if (horaEl) horaEl.textContent = 'atualizado ' + h + ':' + m;
+    if (horaEl) horaEl.textContent = 'atualizado agora mesmo';
 
   } catch(e) {
-    // Falha silenciosa — barra fica vazia, sem quebrar a página
+    // Cache local — última cotação válida conhecida, rotulada
+    const cached = cacheGet('cotacoes');
     const horaEl = document.getElementById('cot-hora');
-    if (horaEl) horaEl.textContent = 'cotações indisponíveis';
+    if (cached && cached.d) {
+      renderCot(cached.d, 'cot-usd', 'USDBRL', 'USD');
+      renderCot(cached.d, 'cot-eur', 'EURBRL', 'EUR');
+      renderCot(cached.d, 'cot-btc', 'BTCBRL', 'BTC');
+      if (horaEl) horaEl.textContent = 'cache de ' + fmtRelTime(cached.t);
+    } else if (horaEl) {
+      horaEl.textContent = 'cotações indisponíveis';
+    }
   }
 }
 
@@ -1382,15 +1684,8 @@ const WX_CODES = {
 async function initClima() {
   const el = document.getElementById('clima-render');
   if (!el) return;
-  try {
-    const url = 'https://api.open-meteo.com/v1/forecast' +
-      '?latitude=-22.9068&longitude=-43.1729' +
-      '&current=temperature_2m,weather_code,relative_humidity_2m,wind_speed_10m' +
-      '&daily=temperature_2m_max,temperature_2m_min,weather_code' +
-      '&timezone=America%2FSao_Paulo&forecast_days=4';
-    const res = await fetchTimeout(url, 9000);
-    if (!res.ok) throw new Error('http');
-    const d = await res.json();
+
+  function renderClima(d, rotulo) {
     const cur = d.current, daily = d.daily;
     const temp = Math.round(cur.temperature_2m);
     const wx   = WX_CODES[cur.weather_code] || ['&#127777;','Estável'];
@@ -1410,17 +1705,74 @@ async function initClima() {
       '<div class="clima-atual">' +
         '<div class="clima-icone">' + wx[0] + '</div>' +
         '<div class="clima-temp">' + temp + '°C</div>' +
-        '<div class="clima-info"><strong>Rio de Janeiro</strong><br>' + wx[1] + '<br>Umidade: ' + hum + '% &middot; Vento: ' + wind + ' km/h</div>' +
+        '<div class="clima-info"><strong>Rio de Janeiro</strong><br>' + wx[1] + '<br>Umidade: ' + hum + '% &middot; Vento: ' + wind + ' km/h' + (rotulo ? '<br><span style="color:#bbb;">' + rotulo + '</span>' : '') + '</div>' +
       '</div>' +
       '<div class="clima-prev">' + prev + '</div>';
+  }
+
+  try {
+    const url = 'https://api.open-meteo.com/v1/forecast' +
+      '?latitude=-22.9068&longitude=-43.1729' +
+      '&current=temperature_2m,weather_code,relative_humidity_2m,wind_speed_10m' +
+      '&daily=temperature_2m_max,temperature_2m_min,weather_code' +
+      '&timezone=America%2FSao_Paulo&forecast_days=4';
+    const res = await fetchTimeout(url, 9000);
+    if (!res.ok) throw new Error('http');
+    const d = await res.json();
+    renderClima(d, null);
+    cacheSet('clima', d);
   } catch(e) {
-    el.innerHTML = '<div style="color:#aaa;font-size:10px;">Previs&atilde;o indispon&iacute;vel.<br><a href="https://weather.com/pt-BR/tempo/hoje/l/-22.91,-43.17" target="_blank">Ver previs&atilde;o &raquo;</a></div>';
+    const cached = cacheGet('clima');
+    if (cached && cached.d) {
+      renderClima(cached.d, 'previsão em cache (' + fmtRelTime(cached.t) + ')');
+    } else {
+      el.innerHTML = '<div style="color:#aaa;font-size:10px;">Previs&atilde;o indispon&iacute;vel.<br><a href="https://weather.com/pt-BR/tempo/hoje/l/-22.91,-43.17" target="_blank">Ver previs&atilde;o &raquo;</a></div>';
+    }
   }
 }
 
 /* ──────────────────────────────────────────────────
-   14. NOTAS (localStorage)
+   13b. SPOTIFY — embed oficial com URL configurável
+   (playlist, álbum, artista, faixa ou episódio),
+   persistida em localStorage. Nunca finge tocar algo
+   que não existe: link inválido => mensagem explícita,
+   player anterior permanece intacto.
    ────────────────────────────────────────────────── */
+const SPOTIFY_KEY = 'vivaz-spotify-embed-v1';
+const SPOTIFY_DEFAULT = 'https://open.spotify.com/embed/playlist/37i9dQZEVXbMXbN3EUUhlg?utm_source=generator&theme=0';
+
+function spotifyUrlToEmbed(url) {
+  const m = url.match(/open\.spotify\.com\/(?:intl-[a-z]{2}\/)?(?:embed\/)?(playlist|album|artist|track|episode|show)\/([a-zA-Z0-9]+)/i);
+  if (!m) return null;
+  return 'https://open.spotify.com/embed/' + m[1].toLowerCase() + '/' + m[2] + '?utm_source=generator&theme=0';
+}
+
+function trocarSpotify() {
+  const input = document.getElementById('spotify-url-input');
+  const msg = document.getElementById('spotify-msg');
+  const url = (input && input.value || '').trim();
+  if (!url) return;
+  const embed = spotifyUrlToEmbed(url);
+  if (!embed) {
+    if (msg) { msg.textContent = 'Link inválido — cole uma URL de open.spotify.com'; msg.className = 'spotify-msg erro'; }
+    return;
+  }
+  const frame = document.getElementById('spotify-iframe');
+  if (frame) frame.src = embed;
+  try { localStorage.setItem(SPOTIFY_KEY, embed); } catch (e) {}
+  if (msg) { msg.textContent = 'Player atualizado.'; msg.className = 'spotify-msg ok'; }
+  if (input) input.value = '';
+}
+
+function initSpotify() {
+  const frame = document.getElementById('spotify-iframe');
+  if (!frame) return;
+  let salvo = null;
+  try { salvo = localStorage.getItem(SPOTIFY_KEY); } catch (e) {}
+  frame.src = salvo || SPOTIFY_DEFAULT;
+}
+
+
 const NOTAS_KEY = 'vivaz-notas-v1';
 let _notasTimer = null;
 
@@ -1507,11 +1859,37 @@ function toggleBkForm() {
 }
 
 /* ──────────────────────────────────────────────────
+   16b. SOBRE / PRIVACIDADE — conteúdo real, sem placeholder
+   ────────────────────────────────────────────────── */
+function mostrarSobre() {
+  alert(
+    'VIVAZ — startpage pessoal\n\n' +
+    'Notícias: G1 RSS (camada principal) + JSON pré-processado opcional via GitHub Action.\n' +
+    'RSS de outras fontes: CNN Brasil.\n' +
+    'Esportes: TheSportsDB (tabelas e resultados) + Jolpica/Ergast (F1).\n' +
+    'Clima: Open-Meteo. Câmbio: AwesomeAPI. Música: Spotify (embed oficial).\n\n' +
+    'Quando uma fonte falha, a página mostra o último dado válido em cache, ' +
+    'rotulado com a hora — nunca finge estar atualizada.'
+  );
+}
+
+function mostrarPrivacidade() {
+  alert(
+    'Privacidade\n\n' +
+    'Esta página não tem servidor próprio nem coleta dados: é um arquivo estático.\n' +
+    'Favoritos, notas, preferência de tema e o link do Spotify ficam salvos só no ' +
+    'localStorage do seu navegador — nunca saem da sua máquina.\n\n' +
+    'Buscas abrem o site de busca escolhido em nova aba. Os embeds do Spotify e os ' +
+    'links de notícias/esportes seguem a política de privacidade de cada serviço de terceiro.'
+  );
+}
+
+/* ──────────────────────────────────────────────────
    16. RESET
    ────────────────────────────────────────────────── */
 function resetPage() {
   if (confirm('Apagar favoritos, notas e preferências? Esta ação não pode ser desfeita.')) {
-    [BK_KEY, NOTAS_KEY, 'vivaz-modo', 'vivaz-modo-manual'].forEach(function(k) {
+    [BK_KEY, NOTAS_KEY, SPOTIFY_KEY, 'vivaz-modo', 'vivaz-modo-manual'].forEach(function(k) {
       localStorage.removeItem(k);
     });
     location.reload();
@@ -1532,9 +1910,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (el) el.addEventListener('keydown', function(e) { if (e.key === 'Enter') addBookmark(); });
   });
 
-  // Esportes: Série A e B carregam imediatamente
-  carregarTabelaFutebol(4328, 2026, 'tbody-serie-a', 'nota-serie-a', 'https://ge.globo.com/futebol/brasileirao-serie-a/');
-  carregarTabelaFutebol(4333, 2026, 'tbody-serie-b', 'nota-serie-b', 'https://ge.globo.com/futebol/brasileirao-serie-b/');
+  // Spotify: restaura player salvo (ou padrão) e religa o controle
+  initSpotify();
+  const spotInput = document.getElementById('spotify-url-input');
+  if (spotInput) spotInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') trocarSpotify(); });
+
+  // Esportes: Série A e B carregam imediatamente (com cache de contingência)
+  carregarTabelaFutebol(4328, 2026, 'tbody-serie-a', 'nota-serie-a', 'https://ge.globo.com/futebol/brasileirao-serie-a/', 'futebol-serie-a');
+  carregarTabelaFutebol(4333, 2026, 'tbody-serie-b', 'nota-serie-b', 'https://ge.globo.com/futebol/brasileirao-serie-b/', 'futebol-serie-b');
+  carregarUltimosResultados(4328, 'ur-serie-a-wrap', 'ur-serie-a', 'ultimos-serie-a');
+  carregarUltimosResultados(4333, 'ur-serie-b-wrap', 'ur-serie-b', 'ultimos-serie-b');
 
   // F1: carrega na primeira abertura da aba (lazy)
   // GE RSS: carrega na primeira abertura da aba (lazy)
@@ -1545,8 +1930,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // Cotações
   initCotacoes();
 
-  // Notícias (sequencial, não sobrecarrega)
-  initNoticias();
+  // Notícias + RSS · Outras Fontes — buscam UMA vez o JSON pré-processado
+  // (camada 1) antes de iniciar os dois módulos, evitando corrida entre eles.
+  obterNoticiasPreProcessadas().then(function (pre) {
+    _newsJsonPre = pre;
+    initNoticias();
+    initRSSModule();
+  });
 
 });
 </script>
